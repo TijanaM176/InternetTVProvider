@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp", "WinFormsApp\WinFormsApp.csproj", "{1ED95E52-7984-4C6A-8143-8CB16BEE3B34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviderLibrary", "..\InternetTVProviderLibrary\DataProviderLibrary.csproj", "{427E5BEF-963A-44CB-9899-3EFA2C073F72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1ED95E52-7984-4C6A-8143-8CB16BEE3B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1ED95E52-7984-4C6A-8143-8CB16BEE3B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1ED95E52-7984-4C6A-8143-8CB16BEE3B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{427E5BEF-963A-44CB-9899-3EFA2C073F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{427E5BEF-963A-44CB-9899-3EFA2C073F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{427E5BEF-963A-44CB-9899-3EFA2C073F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{427E5BEF-963A-44CB-9899-3EFA2C073F72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
