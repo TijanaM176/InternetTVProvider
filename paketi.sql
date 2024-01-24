@@ -114,7 +114,7 @@ CREATE TABLE aktiviraniPaketi (
     id_paket INT,
     aktiviran BOOLEAN,
     FOREIGN KEY (id_klijenta) REFERENCES klijent(id),
-    FOREIGN KEY (id_tipa) REFERENCES tipoviPaketa(id),
+    FOREIGN KEY (id_tipa) REFERENCES tipoviPaketa(id)
 
 );
 -- Ubacivanje podataka u tabelu aktiviraniPaket
