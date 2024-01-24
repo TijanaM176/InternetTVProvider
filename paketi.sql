@@ -42,10 +42,10 @@ CREATE TABLE IF NOT EXISTS tipoviPaketa (
 );
 
 -- Ubacivanje podataka u tabelu tipoviPaketa
-INSERT INTO tipoviPaketa (id, naziv) VALUES
-    (1, 'TV paket'),
-    (2, 'Internet paket'),
-    (3, 'Kombinovani paket');
+INSERT INTO tipoviPaketa (naziv) VALUES
+    ('TV paket'),
+    ('Internet paket'),
+    ('Kombinovani paket');
 
 -- Kreiranje tabele tvpaket
 CREATE TABLE IF NOT EXISTS TVPaket (
@@ -65,7 +65,7 @@ INSERT INTO TVPaket (naziv, cena, broj_kanala, id_tipa) VALUES
     ('Porodični paket', 2499.0, 200, 1);
 
 -- Kreiranje tabele internetpaket
-CREATE TABLE InternetPaket (
+CREATE TABLE IF NOT EXISTS InternetPaket (
     id INT AUTO_INCREMENT PRIMARY KEY,
     naziv VARCHAR(255),
     cena DECIMAL(10, 2),
@@ -82,7 +82,7 @@ INSERT INTO InternetPaket (naziv, cena, brzina_interneta, id_tipa) VALUES
     ('Poslovni internet', 3499.0, 500, 2);
 
 -- Kreiranje tabele kombinovanipaket
-CREATE TABLE KombinovaniPaket (
+CREATE TABLE IF NOT EXISTS KombinovaniPaket (
     id INT AUTO_INCREMENT PRIMARY KEY,
     naziv VARCHAR(255),
     cena DECIMAL(10, 2),
@@ -108,7 +108,7 @@ INSERT INTO KombinovaniPaket (naziv, cena, id_tv, id_net, id_tipa) VALUES
 
 
 -- Kreiranje tabele aktiviraniPaket
-CREATE TABLE aktiviraniPaketi (
+CREATE TABLE IF NOT EXISTS aktiviraniPaketi (
     id_klijenta INT,
     id_tipa INT,
     id_paket INT,
