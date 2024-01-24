@@ -52,8 +52,16 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="InternetPaket.cs" />
+    <Compile Include="InternetPaketDb.cs" />
+    <Compile Include="KombinovaniPaket.cs" />
+    <Compile Include="KombinovaniPaketDb.cs" />
+    <Compile Include="Paket.cs" />
+    <Compile Include="PaketDb.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TVPaket.cs" />
+    <Compile Include="TVPaketDb.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
