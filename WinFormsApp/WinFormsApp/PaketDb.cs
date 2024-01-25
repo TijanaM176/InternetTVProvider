@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace WinFormsApp
 {
     internal abstract class PaketDb
-    {
+    { /*
         protected SqlConnection _connection = DatabaseMenager.Instance.Connection;
 
         public List<Paket> getPackages()
@@ -22,7 +22,7 @@ namespace WinFormsApp
         }
 
         public abstract String setSelectAllQuery();
-        public abstract List<Paket> executeSelectAllQuery(String query);
+        public abstract List<Paket> executeSelectAllQuery(String query);*/
 
       /*  public void insertPackages(Paket noviPaket)
         {

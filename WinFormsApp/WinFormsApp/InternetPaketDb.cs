@@ -10,6 +10,7 @@ namespace WinFormsApp
 {
     internal class InternetPaketDb : PaketDb
     {
+        /*
         public override string setSelectAllQuery()
         {
             String query = @"select *
@@ -27,16 +28,16 @@ namespace WinFormsApp
 
             while (reader.Read())
             {
-                paketi.Add(new InternetPaket());
+                paketi.Add(new InternetPaket());*/
                 /*    paketi.Add(new InternetPaket(
                                                    int.Parse(reader["id"].ToString()),
                                                    int.Parse(reader["naziv"].ToString()),
                                                    int.Parse(reader["cena"].ToString()),
                                                    int.Parse(reader["brzina_interneta"].ToString())
                        ));*/
-            }
-
+         //   }
+    /*
             return paketi;
-        }
+        }*/
     }
 }

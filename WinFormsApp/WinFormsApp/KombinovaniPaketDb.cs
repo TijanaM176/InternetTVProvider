@@ -11,6 +11,7 @@ namespace WinFormsApp
 {
     internal class KombinovaniPaketDb : PaketDb
     {
+        /*
         public override string setSelectAllQuery()
         {
             String query = @"SELECT *
@@ -28,7 +29,7 @@ namespace WinFormsApp
 
             while(reader.Read())
             {
-                paketi.Add(new KombinovaniPaket());
+                paketi.Add(new KombinovaniPaket()); */
             /*    paketi.Add(new KombinovaniPaket(
                                                int.Parse(reader["id"].ToString()),
                                                int.Parse(reader["naziv"].ToString()),
@@ -36,10 +37,10 @@ namespace WinFormsApp
                                                int.Parse(reader["tv_paket_id"].ToString()),
                                                int.Parse(reader["internet_paket_id"].ToString())
                    ));*/ 
-            }
+       /*     }
 
             return paketi;
         }
-
+       */
     }
 }
