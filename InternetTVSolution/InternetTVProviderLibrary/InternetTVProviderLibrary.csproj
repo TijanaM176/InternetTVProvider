@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.3.0" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
-  </ItemGroup>
-
 </Project>
