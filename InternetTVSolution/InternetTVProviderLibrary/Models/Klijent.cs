@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace InternetTVProviderLibrary.Models
 {
-    internal class Klijent
+    public class Klijent
     {
+        public int Id { get; set; }
+        public string Username {  get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public Klijent(string username, string ime, string prezime, int id)
+        {
+            Username = username;
+            FirstName = ime;
+            LastName = prezime;
+            Id = id;
+        }
+
     }
 }
