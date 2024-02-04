@@ -12,16 +12,20 @@ namespace InternetTVProviderLibrary
 
             static void Main()
             {
-                DatabaseMenager databaseMenager = DatabaseMenager.Instance;
+                DatabaseManager databaseManager = DatabaseManager.Instance;
 
                 //MYSQL
                 string connectionString = "server=localhost;user=root;password=;database=InternetTVProvider";
-                databaseMenager.ConnectToDatabase("mysql", connectionString);
+                databaseManager.ConnectToDatabase("mysql", connectionString);
+           
 
                 //SQLite
                 string databasePath = @"C:\Users\risti\OneDrive\Desktop\database\InternetTVProvider.db";
                 string sqliteConnectionString = "Data Source="+databasePath+";Version=3;";
-                databaseMenager.ConnectToDatabase("sqlite", sqliteConnectionString);
+                databaseManager.ConnectToDatabase("sqlite", sqliteConnectionString);
+
+            
+
 
 
         }
