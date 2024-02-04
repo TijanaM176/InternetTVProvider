@@ -1,4 +1,5 @@
 ﻿using InternetTVProviderLibrary;
+using InternetTVProviderLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,9 +40,16 @@ namespace InternetTVProviderLibrary.BuilderPattern
             return this;
         }
 
+
         public Client Build()
         {
             return new Client(Username, FirstName, LastName, Id);
         }
+
+        Client IClientBuilder.Build()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
