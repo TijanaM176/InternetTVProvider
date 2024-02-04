@@ -11,8 +11,11 @@ namespace InternetTVProviderLibrary
 {
     internal class Queries
     {
-        private DbConnection _connection = DatabaseMenager.Instance.Connection;    
+        private DbConnection connection;
 
-       
+        public Queries(DbConnection connection)
+        {
+            this.connection = connection;
+        }
     }
 }
