@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InternetTVProviderLibrary
+namespace InternetTVProviderLibrary.Models
 {
     public class Package
     {
