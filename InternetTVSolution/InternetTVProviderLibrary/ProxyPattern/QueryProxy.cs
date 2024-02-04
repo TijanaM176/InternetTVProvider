@@ -27,7 +27,6 @@ namespace InternetTVProviderLibrary.ProxyPattern
             clients = null;
             //queries.addNewClient(newClient);
         }
-
         public void addNewPackage(Package newPackage)
         {
             packages = null;
@@ -52,27 +51,37 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public Client getClientByUsername(string username)
         {
-            throw new NotImplementedException();
+            return null;//queries.getClientByUsername(username);
+            
         }
 
         public Package getPackageByPackageID(int paketID)
         {
-            throw new NotImplementedException();
+            return null;// queries.getPackageByPackageId(paketId);
         }
 
         public PackageType getPackageTypeByID(int id)
         {
-            throw new NotImplementedException();
+            return null;// queries.getPackageTypeById(id);
+        }
+
+        public List<Package> getSubscribedPackagesByClientId(int clientId, bool activated)
+        {
+            return null;// queries.getSubscribedPackagesByClientId(clientId,activated);
         }
 
         public int getTypeID(string typeName)
         {
-            throw new NotImplementedException();
+            return 0;// queries.getTypeID(typeName);
         }
 
         public void removePackage(int paketID)
         {
-            throw new NotImplementedException();
+            packages = null;
+            //queries.removePackage(paketID);
         }
+
+
+     
     }
 }
