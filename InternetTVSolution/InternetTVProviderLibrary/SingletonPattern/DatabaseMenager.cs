@@ -1,6 +1,8 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using System.Data.SQLite;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace InternetTVProviderLibrary.SingletonPattern
 {
@@ -11,8 +13,9 @@ namespace InternetTVProviderLibrary.SingletonPattern
             private static DatabaseMenager _instance;
             private static readonly object _lockObject = new object();
             private string _connectionString;
+            public DbConnection Connection { get; set; }
 
-            private DatabaseMenager()
+        private DatabaseMenager()
             {
 
             }
@@ -57,6 +60,7 @@ namespace InternetTVProviderLibrary.SingletonPattern
                     using (MySqlConnection connection = new MySqlConnection(_connectionString))
                     {
                         connection.Open();
+                        Connection = connection;
                         Console.WriteLine("Connected to MySQL database.");
                         InitializeMySQLTables();
                     }
@@ -74,6 +78,7 @@ namespace InternetTVProviderLibrary.SingletonPattern
                     using (SQLiteConnection connection = new SQLiteConnection(_connectionString))
                     {
                         connection.Open();
+                        Connection = connection;
                         Console.WriteLine("Connected to SQLite database.");
                         InitializeSQLiteTables();
                     }
