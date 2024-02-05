@@ -8,19 +8,9 @@ namespace InternetTVProviderLibrary.StrategyPattern
 {
     internal class ScanConfiguration : IStrategy
     {
-        private string configurationPath;
-        private string providerName;
+        public static string configurationPath;
+        public static string providerName;
         private string[] fileData;
-
-        public string getConfigurationPath()
-        {
-            return configurationPath;
-        }
-
-        public string getProviderName()
-        {
-            return providerName;
-        }
 
         public void connectSQL()
         {

@@ -10,6 +10,11 @@ namespace InternetTVProviderLibrary.StrategyPattern
     {
         private IStrategy iStrategy;
 
+        public StrategyContext()
+        {
+
+        }
+
         public StrategyContext(IStrategy iStrategy)
         {
             this.iStrategy = iStrategy;

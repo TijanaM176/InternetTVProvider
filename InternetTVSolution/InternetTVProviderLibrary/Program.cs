@@ -1,4 +1,5 @@
 ﻿using InternetTVProviderLibrary.SingletonPattern;
+using InternetTVProviderLibrary.StrategyPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace InternetTVProviderLibrary
 
             static void Main()
             {
+/*
                 DatabaseManager databaseManager = DatabaseManager.Instance;
 
                 //MYSQL
@@ -23,11 +25,18 @@ namespace InternetTVProviderLibrary
                 string databasePath = @"C:\Users\risti\OneDrive\Desktop\database\InternetTVProvider.db";
                 string sqliteConnectionString = "Data Source="+databasePath+";Version=3;";
                 databaseManager.ConnectToDatabase("sqlite", sqliteConnectionString);
+*/
+                
+                StrategyContext context = new StrategyContext();
 
-            
+                ScanConfiguration scanConfig = new ScanConfiguration();
+                context.setStrategy(scanConfig);    
+                context.ExecuteStrategy();    
 
-
-
+                StrategyMySQL csMySQL = new StrategyMySQL(ScanConfiguration.configurationPath);
+                context.setStrategy(csMySQL);
+                context.ExecuteStrategy();
+                
         }
 
 

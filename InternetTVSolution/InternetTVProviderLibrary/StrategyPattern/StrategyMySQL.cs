@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace InternetTVProviderLibrary.StrategyPattern
 {
-    public class ConcreteStrategyMySQL : IStrategy
+    public class StrategyMySQL : IStrategy
     {
         private DatabaseManager databaseMenager;
         private string connectionString;
 
-        public ConcreteStrategyMySQL(String connectionPath)
+        public StrategyMySQL(String connectionPath)
         {
             connectionString = connectionPath;
             databaseMenager = DatabaseManager.Instance;

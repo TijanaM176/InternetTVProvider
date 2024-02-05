@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace InternetTVProviderLibrary.StrategyPattern
 {
-    public class ConcreteStrategySQLite : IStrategy
+    public class StrategySQLite : IStrategy
     {
         private DatabaseManager databaseMenager;
         private string connectionString;
 
-        public ConcreteStrategySQLite(String connectionPath)
+        public StrategySQLite(String connectionPath)
         {
             connectionString = "Data Source=" + connectionPath + ";Version=3;";
             databaseMenager = DatabaseManager.Instance;
