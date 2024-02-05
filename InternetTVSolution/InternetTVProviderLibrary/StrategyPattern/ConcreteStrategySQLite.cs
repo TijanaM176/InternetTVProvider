@@ -9,13 +9,13 @@ namespace InternetTVProviderLibrary.StrategyPattern
 {
     public class ConcreteStrategySQLite : IStrategy
     {
-        private DatabaseMenager databaseMenager;
+        private DatabaseManager databaseMenager;
         private string connectionString;
 
         public ConcreteStrategySQLite(String connectionPath)
         {
             connectionString = "Data Source=" + connectionPath + ";Version=3;";
-            databaseMenager = DatabaseMenager.Instance;
+            databaseMenager = DatabaseManager.Instance;
         }
 
         public void setConnectionString(String connectionPath)

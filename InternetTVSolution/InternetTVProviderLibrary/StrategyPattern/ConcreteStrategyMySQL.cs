@@ -9,13 +9,13 @@ namespace InternetTVProviderLibrary.StrategyPattern
 {
     public class ConcreteStrategyMySQL : IStrategy
     {
-        private DatabaseMenager databaseMenager;
+        private DatabaseManager databaseMenager;
         private string connectionString;
 
         public ConcreteStrategyMySQL(String connectionPath)
         {
             connectionString = connectionPath;
-            databaseMenager = DatabaseMenager.Instance;
+            databaseMenager = DatabaseManager.Instance;
         }
 
         public void setConnectionString(String connectionPath)
