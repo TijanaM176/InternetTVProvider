@@ -90,64 +90,58 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public CombinedPackage getCombinedPackageByPackageID(int packageID)
         {
-            throw null; //queries.getCombinedPackageByPackageID(packageID);
+            return queries.getCombinedPackageByPackageID(packageID);
         }
 
         public InternetPackage getInternetPackageByPackageID(int packageID)
         {
-            return null; //queries.getInternetPackageByPackageID(packageID);
+            return queries.getInternetPackageByPackageID(packageID);
         }
 
         public PackageType getPackageTypeByID(int id)
         {
-            return null;// queries.getPackageTypeByID(id);
+            return queries.getPackageTypeByID(id);
         }
 
-        public List<Package> getSubscribedPackagesByClientId(int clientId, bool activated)
+        public List<Package> getSubscribedPackagesByClientId(int clientId)
         {
-            return null;// queries.getSubscribedPackagesByClientId(clientId,activated);
+            return queries.getSubscribedPackagesByClientId(clientId);
         }
 
 
         public TVPackage getTVPackageByPackageID(int packageID)
         {
-            throw null; //queries.getTVPackageByPackageID(packageID);
+            return queries.getTVPackageByPackageID(packageID);
         }
 
         public int getTypeID(string typeName)
         {
-            return 0;// queries.getTypeID(typeName);
+            return queries.getTypeID(typeName);
         }
 
         public void removeTVPackage(int packageID)
         {
             tvPackages = null;
-            //queries.removeTVPackage(packageID);
+            queries.removeTVPackage(packageID);
         }
         public void removeInternetPackage(int packageID)
         {
             internetPackages = null;
-            //queries.removeTVPackage(packageID);
+            queries.removeInternetPackage(packageID);
         }
         public void removeCombinedPackage(int packageID)
         {
             combinedPackages = null;
-            //queries.removeCombinedPackage(packageID);
+            queries.removeCombinedPackage(packageID);
         }
-
-        public List<Package> getSubscribedPackagesByClientId(int clientId)
-        {
-            throw new NotImplementedException();
-        }
-
         public void updateSubscribedPackageByClientID(Subscriptions subscription)
         {
-            throw new NotImplementedException();
+            queries.updateSubscribedPackageByClientID(subscription);
         }
 
         public void insertNewSubscriptionForClientID(Subscriptions subscription)
         {
-            throw new NotImplementedException();
+            queries.insertNewSubscriptionForClientID(subscription);
         }
 
         public int getPriceTVPackage(int packageID)

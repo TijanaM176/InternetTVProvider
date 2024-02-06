@@ -513,7 +513,7 @@ namespace InternetTVProviderLibrary
             return priceInternetPackage;
         }
 
-        int getTypeID(string typeName)
+        public int getTypeID(string typeName)
         {
             int typeID = 0;
 
@@ -536,7 +536,7 @@ namespace InternetTVProviderLibrary
             return typeID;
         }
 
-        void removeTVPackage(int packageID)
+        public void removeTVPackage(int packageID)
         {
             connection.Open();
 
@@ -564,7 +564,7 @@ namespace InternetTVProviderLibrary
             connection.Close();
         }
 
-        void removeInternetPackage(int packageID)
+        public void removeInternetPackage(int packageID)
         {
             connection.Open();
 
@@ -593,7 +593,7 @@ namespace InternetTVProviderLibrary
             connection.Close();
         }
 
-        void removeCombinedPackage(int packageID)
+        public void removeCombinedPackage(int packageID)
         {
             connection.Open();
 
@@ -622,7 +622,7 @@ namespace InternetTVProviderLibrary
             connection.Close();
         }
 
-        void insertNewSubscriptionForClientID(Subscriptions subscription)
+        public void insertNewSubscriptionForClientID(Subscriptions subscription)
         {
             connection.Open();
 
