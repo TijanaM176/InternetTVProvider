@@ -10,14 +10,22 @@ namespace InternetTVProviderLibrary.ProxyPattern
     public interface IQuery
     {
         List<Client> getAllClients();
-        List<Package> getAllPackages();
+        List<TVPackage> getAllTVPackages();
+        List<InternetPackage> getAllInternetPackages();
+        List<CombinedPackage> getAllCombinedPackages();
         void addNewClient(Client newClient);
-        void addNewPackage(Package newPackage);
-        Package getPackageByPackageID(int paketID);
+        void addNewTVPackage(TVPackage newPackage);
+        void addNewInternetPackage(InternetPackage newPackage);
+        void addNewCombinedPackage(CombinedPackage newPackage);
+        TVPackage getTVPackageByPackageID(int packageID);
+        InternetPackage getInternetPackageByPackageID(int packageID); 
+        CombinedPackage getCombinedPackageByPackageID(int packageID); 
         int getTypeID(string typeName);
-        void removePackage(int paketID);
+        void removeTVPackage(int packageID);
+        void removeInternetPackage(int packageID);
+        void removeCombinedPackage(int packageID);
         PackageType getPackageTypeByID(int id);
         Client getClientByUsername(string username);
-        List<Package> getSubscribedPackagesByClientId(int clientId,bool activated);
+        List<Package> getSubscribedPackagesByClientId(int clientId, bool activated);
     }
 }
