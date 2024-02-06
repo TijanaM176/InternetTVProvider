@@ -64,6 +64,7 @@ namespace InternetTVProviderLibrary.SingletonPattern
                     Connection = connection;
                     Console.WriteLine($"Connected to {_factory.GetType().Name} database.");
                     _factory.InitializeTables();
+                    _factory.InsertDataInTables();
                 }
             }
             catch (Exception ex)

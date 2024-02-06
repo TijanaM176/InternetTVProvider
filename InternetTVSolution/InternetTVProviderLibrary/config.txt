@@ -1,2 +1,2 @@
 SBB
-server=localhost;user=root;password=;database=InternetTVProvider
+Data Source=C:\Users\risti\OneDrive\Desktop\database\InternetTVProvider.db;Version=3

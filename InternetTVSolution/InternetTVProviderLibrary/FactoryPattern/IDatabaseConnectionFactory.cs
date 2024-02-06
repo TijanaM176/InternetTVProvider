@@ -11,5 +11,7 @@ namespace InternetTVProviderLibrary.FactoryPattern
     {
         DbConnection CreateConnection();
         void InitializeTables();
+        void InsertDataInTables();
+
     }
 }

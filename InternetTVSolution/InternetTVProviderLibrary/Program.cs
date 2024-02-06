@@ -70,15 +70,12 @@ namespace InternetTVProviderLibrary
             {
                 Console.WriteLine("Naziv provajdera: " + providerName);
                 Console.WriteLine("Konekcioni string: " + connectionString);
-                // Provera konekcionog stringa za određivanje tipa baze podataka
                 if (connectionString.StartsWith("Data Source=", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Povezivanje sa SQLite bazom podataka
                     DatabaseManager.Instance.ConnectToDatabase("sqlite", connectionString);
                 }
                 else if (connectionString.StartsWith("server=", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Povezivanje sa MySQL bazom podataka
                     DatabaseManager.Instance.ConnectToDatabase("mysql", connectionString);
                 }
                 else
