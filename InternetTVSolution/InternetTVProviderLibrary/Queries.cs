@@ -338,68 +338,381 @@ namespace InternetTVProviderLibrary
 
             connection.Close();
         }
-        /*
-        Package getPackageByPackageID(int packID)
+
+        public TVPackage getTVPackageByPackageID(int packageID)
         {
-            Package foundPackage = null;
+            TVPackage package = null;
 
             connection.Open();
 
-            String query = @"select * from Packages 
-                                where Id = @packID";
+            String query = @"SELECT * from TVPackage WHERE Id = @packageID";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
-
-            DbParameter packetId;
-            packetId = dbCommand.CreateParameter();
-            packetId.ParameterName = "@packID";
-            packetId.Value = packID;
-
-            dbCommand.Parameters.Add(packetId);
 
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
             {
+                TVPackageBuilder packageBuilder = new TVPackageBuilder();
 
-                foundPackage = new PackageBuilder()
-                                 .SetID(reader.GetInt32(0))
-                                 .SetName(reader.GetString(1))
-                                 .SetPrice(reader.GetDouble(2))
-                                 .SetInternetSpeed(reader.GetInt32(3))
-                                 .SetNumberOfChannels(reader.GetInt32(4))
-                                 .SetTypeID(reader.GetInt32(3))
-                                 .Build();
+                packageBuilder.SetID(reader.GetInt32(0));
+                packageBuilder.SetName(reader.GetString(1));
+                packageBuilder.SetPrice(reader.GetDouble(2));
+                packageBuilder.SetNumberOfChanels(reader.GetInt32(3));
+                packageBuilder.SetTypeID(reader.GetInt32(4));
+
+                package = packageBuilder.Build();
             }
 
             connection.Close();
-            return foundPackage;
+
+            return package;
         }
 
-        void removePackage(int packID)
+        public InternetPackage getInternetPackageByPackageID(int packageID)
+        {
+            InternetPackage package = null;
+
+            connection.Open();
+
+            String query = @"SELECT * from InternetPackage WHERE Id = @packageID";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                InternetPackageBuilder packageBuilder = new InternetPackageBuilder();
+
+                packageBuilder.SetID(reader.GetInt32(0));
+                packageBuilder.SetName(reader.GetString(1));
+                packageBuilder.SetPrice(reader.GetDouble(2));
+                packageBuilder.SetInternetSpeed(reader.GetInt32(3));
+                packageBuilder.SetTypeID(reader.GetInt32(4));
+
+                package = packageBuilder.Build();
+            }
+
+            connection.Close();
+
+            return package;
+        }
+
+        public CombinedPackage getCombinedPackageByPackageID(int packageID)
+        {
+            CombinedPackage package = null;
+
+            connection.Open();
+
+            String query = @"SELECT * from CombinedPackage WHERE Id = @packageID";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                CombinedPackageBuilder packageBuilder = new CombinedPackageBuilder();
+
+                packageBuilder.SetID(reader.GetInt32(0));
+                packageBuilder.SetName(reader.GetString(1));
+                packageBuilder.SetPrice(reader.GetDouble(2));
+                packageBuilder.SetTvPackageID(reader.GetInt32(3));
+                packageBuilder.SetInternetPackageID(reader.GetInt32(4));
+                packageBuilder.SetTypeID(reader.GetInt32(5));
+
+                package = packageBuilder.Build();
+            }
+
+            connection.Close();
+
+            return package;
+        }
+
+        public PackageType getPackageTypeByID(int id)
+        {
+            PackageType package = null;
+
+            connection.Open();
+
+            String query = @"SELECT * from PackageType WHERE Id = @id";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                package = new PackageType(int.Parse(reader["PackageTypeID"].ToString()), reader["Name"].ToString());
+            }
+
+            connection.Close();
+
+            return package;
+        }
+
+        public List<Package> getSubscribedPackagesByClientId(int clientId)
+        {
+            List<Package> allPackages = null;
+
+            /*	TODO */
+
+            return allPackages;
+        }
+
+        public int getPriceTVPackage(int packageID)
+        {
+            int priceTVPackage = 0;
+
+            connection.Open();
+
+            /* TODO - dodati cenu u svakoj tabeli paketa */
+            String query = @"SELECT Price from TVPackage
+                             WHERE Id = @packageID";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                priceTVPackage = int.Parse(reader["Price"].ToString());
+	        }
+
+            connection.Close();
+
+            return priceTVPackage;
+        }
+
+        public int getPriceInternetPackage(int packageID)
+        {
+            int priceInternetPackage = 0;
+
+            connection.Open();
+
+            String query = @"SELECT Price from InternetPackage WHERE Id = @packageID";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                priceInternetPackage = int.Parse(reader["Price"].ToString());
+            }
+
+            connection.Close();
+
+            return priceInternetPackage;
+        }
+
+        int getTypeID(string typeName)
+        {
+            int typeID = 0;
+
+            connection.Open();
+
+            String query = @"SELECT Id from Package WHERE Name = @typeName";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                typeID =  int.Parse(reader["Id"].ToString());
+            }
+
+            connection.Close();
+
+            return typeID;
+        }
+
+        void removeTVPackage(int packageID)
         {
             connection.Open();
 
-            String query = @"delete from Packages 
-                                where Id = @packID";
+            String query = @"DELETE FROM TVPackage WHERE Id = @packageID";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
             DbParameter packetId;
             packetId = dbCommand.CreateParameter();
-            packetId.ParameterName = "@packID";
-            packetId.Value = packID;
+            packetId.ParameterName = "@packageID";
+            packetId.Value = packageID;
 
             dbCommand.Parameters.Add(packetId);
             int succes = dbCommand.ExecuteNonQuery();
 
-            if (succes > 0) { Console.WriteLine("Paket je izbrisan iz baze"); }
-            else { Console.WriteLine("Greska prilikom brisanja paketa!"); }
+            if (succes > 0)
+            {
+                Console.WriteLine("TV Paket je izbrisan iz baze");
+            }
+            else
+            {
+                Console.WriteLine("Greska prilikom brisanja TV paketa!");
+            }
+            connection.Close();
+        }
+
+        void removeInternetPackage(int packageID)
+        {
+            connection.Open();
+
+            String query = @"DELETE FROM internetPackage WHERE Id = @packageID";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbParameter packetId;
+            packetId = dbCommand.CreateParameter();
+            packetId.ParameterName = "@packageID";
+            packetId.Value = packageID;
+
+            dbCommand.Parameters.Add(packetId);
+            int succes = dbCommand.ExecuteNonQuery();
+
+            if (succes > 0)
+            {
+                Console.WriteLine("Internet paket je izbrisan iz baze");
+            }
+            else
+            {
+                Console.WriteLine("Greska prilikom brisanja internet paketa!");
+            }
 
             connection.Close();
         }
-    }*/
+
+        void removeCombinedPackage(int packageID)
+        {
+            connection.Open();
+
+            String query = @"DELETE FROM CombinedPackage WHERE Id = @packageID";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbParameter packetId;
+            packetId = dbCommand.CreateParameter();
+            packetId.ParameterName = "@packageID";
+            packetId.Value = packageID;
+
+            dbCommand.Parameters.Add(packetId);
+            int succes = dbCommand.ExecuteNonQuery();
+
+            if (succes > 0) 
+            { 
+                Console.WriteLine("Kombinovan paket je izbrisan iz baze");
+            }
+            else
+            {
+                Console.WriteLine("Greska prilikom brisanja kombinovanog paketa!");
+            }
+
+            connection.Close();
+        }
+
+        void insertNewSubscriptionForClientID(Subscriptions subscription)
+        {
+            connection.Open();
+
+            String query = @"INSERT into Subscriptions (clientId, packageId, type, activated) values (@clientID, @packageID, @typePackage, @isActivated)";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbParameter idClient, idPackage, typeOfPackage, activatedPackage;
+
+            idClient = dbCommand.CreateParameter();
+            idClient.ParameterName = "@clientID";
+            idClient.Value = subscription.clientId;
+
+            idPackage = dbCommand.CreateParameter();
+            idPackage.ParameterName = "@packageID";
+            idPackage.Value = subscription.packageId;
+
+            typeOfPackage = dbCommand.CreateParameter();
+            typeOfPackage.ParameterName = "@typePackage";
+            //            typeOfPackage.Value = subscription.type;
+
+            activatedPackage = dbCommand.CreateParameter();
+            activatedPackage.ParameterName = "@isActivated";
+            activatedPackage.Value = subscription.activated;
+
+
+            dbCommand.Parameters.Add(idClient);
+            dbCommand.Parameters.Add(idPackage);
+            dbCommand.Parameters.Add(typeOfPackage);
+            dbCommand.Parameters.Add(activatedPackage);
+
+            int succes = dbCommand.ExecuteNonQuery();
+
+            if (succes > 0)
+            {
+                Console.WriteLine("Nova supskripcija dodata u bazu");
+            }
+            else
+            { 
+                Console.WriteLine("Greska prilikom dodavanja supskripcije u bazu!");
+            }
+
+            connection.Close();
+        }
+
+        public void updateSubscribedPackageByClientID(Subscriptions subscription)
+        {
+            connection.Open();
+
+            String query = @"UPDATE Subscriptions
+                             SET activated = @isActivated
+                             WHERE ClientId = @clientID AND
+                                   PackageId = @packageID";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbParameter idClient, idPackage, typeOfPackage, activatedPackage;
+
+            idClient = dbCommand.CreateParameter();
+            idClient.ParameterName = "@clientID";
+            idClient.Value = subscription.clientId;
+
+            idPackage = dbCommand.CreateParameter();
+            idPackage.ParameterName = "@packageID";
+            idPackage.Value = subscription.packageId;
+
+            activatedPackage = dbCommand.CreateParameter();
+            activatedPackage.ParameterName = "@isActivated";
+            activatedPackage.Value = subscription.activated;
+
+            dbCommand.Parameters.Add(idClient);
+            dbCommand.Parameters.Add(idPackage);
+            dbCommand.Parameters.Add(activatedPackage);
+
+            int succes = dbCommand.ExecuteNonQuery();
+
+            if (succes > 0)
+            {
+                Console.WriteLine("Supskripcija paketa je azurirana.");
+            }
+            else
+            {
+                Console.WriteLine("Greska prilikom azuriranja supskripcije u bazi!");
+            }
+
+            connection.Close();
+        }
+
+    }
 }
 

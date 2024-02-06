@@ -135,7 +135,29 @@ namespace InternetTVProviderLibrary.ProxyPattern
             //queries.removeCombinedPackage(packageID);
         }
 
+        public List<Package> getSubscribedPackagesByClientId(int clientId)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void updateSubscribedPackageByClientID(Subscriptions subscription)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void insertNewSubscriptionForClientID(Subscriptions subscription)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int getPriceTVPackage(int packageID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int getPriceInternetPackage(int packageID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

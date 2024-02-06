@@ -26,6 +26,10 @@ namespace InternetTVProviderLibrary.ProxyPattern
         void removeCombinedPackage(int packageID);
         PackageType getPackageTypeByID(int id);
         Client getClientByUsername(string username);
-        List<Package> getSubscribedPackagesByClientId(int clientId, bool activated);
+        List<Package> getSubscribedPackagesByClientId(int clientId);
+        void updateSubscribedPackageByClientID(Subscriptions subscription);
+        void insertNewSubscriptionForClientID(Subscriptions subscription);
+        int getPriceTVPackage(int packageID);
+        int getPriceInternetPackage(int packageID);
     }
 }
