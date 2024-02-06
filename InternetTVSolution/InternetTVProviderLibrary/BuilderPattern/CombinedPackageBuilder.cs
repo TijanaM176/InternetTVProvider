@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace InternetTVProviderLibrary.BuilderPattern
 {
-    public class PackageBuilder : IPackageBuilder
+    public class CombinedPackageBuilder : IPackageBuilder
     {
         private int id;
         private string name;
         private double price;
-        private int internetSpeed;
-        private int numberOfChannels;
+        private int tvPackageID;
+        private int internetPackageID;
         private int typeID;
 
         public IPackageBuilder SetID(int id)
@@ -34,15 +34,15 @@ namespace InternetTVProviderLibrary.BuilderPattern
             return this;
         }
 
-        public IPackageBuilder SetInternetSpeed(int internetSpeed)
+        public IPackageBuilder SetTvPackageID(int tvPackageID)
         {
-            this.internetSpeed = internetSpeed;
+            this.tvPackageID = tvPackageID;
             return this;
         }
 
-        public IPackageBuilder SetNumberOfChannels(int numberOfChannels)
+        public IPackageBuilder SetInternetPackageID(int internetPackageID)
         {
-            this.numberOfChannels = numberOfChannels;
+            this.internetPackageID = internetPackageID;
             return this;
         }
 
@@ -54,7 +54,7 @@ namespace InternetTVProviderLibrary.BuilderPattern
 
         public Package Build()
         {
-            return new Package(id, name, price, numberOfChannels, internetSpeed, typeID);
+            return new CombinedPackage(id, name, price, tvPackageID, internetPackageID, typeID);
         }
     }
 }
