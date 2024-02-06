@@ -33,62 +33,94 @@ namespace InternetTVProviderLibrary.FactoryPattern
                     connection.Open();
                     Console.WriteLine($"Connected to SQLite database for table initialization.");
 
-                    string createPackagesTableQuery = @"
-                    CREATE TABLE IF NOT EXISTS Packages (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Name TEXT NOT NULL,
-                        Price DECIMAL(10, 2) NOT NULL,
-                        InternetSpeed INT NOT NULL,
-                        NumberOfChannels INT NOT NULL,
-                        TypeID INT NOT NULL,
-                        CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                        UpdatedAt DATETIME DEFAULT NULL
-                    );
-                ";
-
                     string createClientsTableQuery = @"
                     CREATE TABLE IF NOT EXISTS Clients (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
                         Username TEXT NOT NULL,
                         FirstName TEXT NOT NULL,
-                        LastName TEXT NOT NULL,
-                        CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                        UpdatedAt DATETIME DEFAULT NULL
+                        LastName TEXT NOT NULL
                     );
                 ";
 
-                    string createTypeTableQuery = @"
-                    CREATE TABLE IF NOT EXISTS Type (
+                    string createPackagesTableQuery = @"
+                    CREATE TABLE IF NOT EXISTS Packages (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        TypeName TEXT NOT NULL
+                        Name TEXT NOT NULL,
+                        Price DECIMAL(10, 2) NOT NULL
                     );
                 ";
 
-                    string createSubscriptionsTableQuery = @"
-                CREATE TABLE IF NOT EXISTS Subscriptions (
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT
+                   string createTVPackageTableQuery = @"
+                    CREATE TABLE IF NOT EXISTS TVPackage (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        PackageId INT NOT NULL,
+                        NumberOfChannels INT NOT NULL,
+                        FOREIGN KEY (PackageId) REFERENCES Package(Id)
+                    );
+                ";
+
+                    string createInternetPackageTableQuery = @"
+                    CREATE TABLE IF NOT EXISTS InternetPackage (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        PackageId INT NOT NULL,
+                        InternetSpeed VARCHAR(50) NOT NULL,
+                        FOREIGN KEY (PackageId) REFERENCES Package(Id)
+                    );
+                ";
+
+                    string createCombinePackageTableQuery = @"
+                    CREATE TABLE IF NOT EXISTS CombinePackage (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        PackageId INT NOT NULL,
+                        TVPackageId INT NOT NULL,
+                        InternetPackageId INT NOT NULL,
+                        FOREIGN KEY (PackageId) REFERENCES Package(Id),
+                        FOREIGN KEY (TVPackageId) REFERENCES TVPackage(Id),
+                        FOREIGN KEY (InternetPackageId) REFERENCES InternetPackage(Id)
+                    );
+                ";
+
+
+                    string createProviderTableQuery = @"
+                    CREATE TABLE IF NOT EXISTS Provider (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        ClientId INT NOT NULL,
+                        PackageId INT NOT NULL,
+                        FOREIGN KEY (ClientId) REFERENCES Client(Id),
+                        FOREIGN KEY (PackageId) REFERENCES Package(Id)
                 );
             ";
-
-                    using (SQLiteCommand command = new SQLiteCommand(createPackagesTableQuery, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
 
                     using (SQLiteCommand command = new SQLiteCommand(createClientsTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
-                    using (SQLiteCommand command = new SQLiteCommand(createTypeTableQuery, connection))
+                    using (SQLiteCommand command = new SQLiteCommand(createPackagesTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
-                    using (SQLiteCommand command = new SQLiteCommand(createSubscriptionsTableQuery, connection))
+                    using (SQLiteCommand command = new SQLiteCommand(createTVPackageTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
+
+                    using (SQLiteCommand command = new SQLiteCommand(createInternetPackageTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (SQLiteCommand command = new SQLiteCommand(createCombinePackageTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (SQLiteCommand command = new SQLiteCommand(createProviderTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
 
                     Console.WriteLine("SQLite tables initialized.");
                 }

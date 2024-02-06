@@ -32,59 +32,90 @@ namespace InternetTVProviderLibrary.FactoryPattern
                     connection.Open();
                     Console.WriteLine($"Connected to MySQL database for table initialization.");
 
-                    string createPackagesTableQuery = @"
-                CREATE TABLE IF NOT EXISTS Packages (
-                    Id INT PRIMARY KEY AUTO_INCREMENT,
-                    Name VARCHAR(255) NOT NULL,
-                    Price DECIMAL(10, 2) NOT NULL,
-                    InternetSpeed INT NOT NULL,
-                    NumberOfChannels INT NOT NULL,
-                    TypeID INT NOT NULL,
-                    CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    UpdatedAt DATETIME DEFAULT NULL
-                );
-            ";
-
                     string createClientsTableQuery = @"
-                CREATE TABLE IF NOT EXISTS Clients (
-                    Id INT PRIMARY KEY AUTO_INCREMENT,
-                    Username VARCHAR(255) NOT NULL,
-                    FirstName VARCHAR(255) NOT NULL,
-                    LastName VARCHAR(255) NOT NULL,
-                    CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    UpdatedAt DATETIME DEFAULT NULL
-                );
-            ";
+                        CREATE TABLE IF NOT EXISTS Clients (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            Username VARCHAR(255) NOT NULL,
+                            FirstName VARCHAR(255) NOT NULL,
+                            LastName VARCHAR(255) NOT NULL
+                        );
+                    ";
 
-                    string createTypeTableQuery = @"
-                CREATE TABLE IF NOT EXISTS Type (
-                    Id INT PRIMARY KEY AUTO_INCREMENT,
-                    TypeName VARCHAR(50) NOT NULL
-                );
-            ";
+                    string createPackagesTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS Packages (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            Name VARCHAR(255) NOT NULL,
+                            Price DECIMAL(10, 2) NOT NULL
+                        );
+                    ";
 
-                    string createSubscriptionsTableQuery = @"
-                CREATE TABLE IF NOT EXISTS Subscriptions (
-                    Id INT PRIMARY KEY AUTO_INCREMENT
-                );
-            ";
+                     string createTVPackageTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS TVPackage (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            PackageId INT NOT NULL,
+                            NumberOfChannels INT NOT NULL,
+                            FOREIGN KEY (PackageId) REFERENCES Packages(Id)
+                        );
+                    ";
 
-                    using (MySqlCommand command = new MySqlCommand(createPackagesTableQuery, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
+                     string createInternetPackageTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS InternetPackage (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            PackageId INT NOT NULL,
+                            InternetSpeed VARCHAR(50) NOT NULL,
+                            FOREIGN KEY (PackageId) REFERENCES Packages(Id)
+                        );
+                    ";
+
+                     string createCombinePackageTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS CombinePackage (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            PackageId INT NOT NULL,
+                            TVPackageId INT NOT NULL,
+                            InternetPackageId INT NOT NULL,
+                            FOREIGN KEY (PackageId) REFERENCES Packages(Id),
+                            FOREIGN KEY (TVPackageId) REFERENCES TVPackage(Id),
+                            FOREIGN KEY (InternetPackageId) REFERENCES InternetPackage(Id)
+                        );
+                    ";
+
+                      string createProviderTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS Provider (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            ClientId INT NOT NULL,
+                            PackageId INT NOT NULL,
+                            FOREIGN KEY (ClientId) REFERENCES Clients(Id),
+                            FOREIGN KEY (PackageId) REFERENCES Packages(Id)
+                        );
+                    ";
+
 
                     using (MySqlCommand command = new MySqlCommand(createClientsTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
-                    using (MySqlCommand command = new MySqlCommand(createTypeTableQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(createPackagesTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
-                    using (MySqlCommand command = new MySqlCommand(createSubscriptionsTableQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(createTVPackageTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (MySqlCommand command = new MySqlCommand(createInternetPackageTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (MySqlCommand command = new MySqlCommand(createCombinePackageTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (MySqlCommand command = new MySqlCommand(createProviderTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }

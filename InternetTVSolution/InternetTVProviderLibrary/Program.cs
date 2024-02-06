@@ -13,7 +13,7 @@ namespace InternetTVProviderLibrary
 
             static void Main()
             {
-/*
+
                 DatabaseManager databaseManager = DatabaseManager.Instance;
 
                 //MYSQL
@@ -25,8 +25,8 @@ namespace InternetTVProviderLibrary
                 string databasePath = @"C:\Users\risti\OneDrive\Desktop\database\InternetTVProvider.db";
                 string sqliteConnectionString = "Data Source="+databasePath+";Version=3;";
                 databaseManager.ConnectToDatabase("sqlite", sqliteConnectionString);
-*/
-                
+
+                /*
                 StrategyContext context = new StrategyContext();
 
                 ScanConfiguration scanConfig = new ScanConfiguration();
@@ -36,7 +36,7 @@ namespace InternetTVProviderLibrary
                 StrategyMySQL csMySQL = new StrategyMySQL(ScanConfiguration.configurationPath);
                 context.setStrategy(csMySQL);
                 context.ExecuteStrategy();
-                
+                */
         }
 
 
