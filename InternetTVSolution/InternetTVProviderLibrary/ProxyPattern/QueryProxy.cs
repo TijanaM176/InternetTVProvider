@@ -26,65 +26,65 @@ namespace InternetTVProviderLibrary.ProxyPattern
             combinedPackages = null;
         }
 
-        public void addNewClient(Client newClient)
+        public void insertNewClient(Client newClient)
         {
             clients = null;
-            //queries.addNewClient(newClient);
+            queries.insertNewClient(newClient);
         }
 
         public void addNewCombinedPackage(CombinedPackage newPackage)
         {
             combinedPackages = null;
-            //queries.addNewCombinedPackage(newPackage);
+            queries.addNewCombinedPackage(newPackage);
         }
 
         public void addNewInternetPackage(InternetPackage newPackage)
         {
             internetPackages = null;
-            //queries.addNewInternetPackage(newPackage);
+            queries.addNewInternetPackage(newPackage);
         }
 
         public void addNewTVPackage(TVPackage newPackage)
         {
             tvPackages = null;
-            //queries.addNewTVPackage(newPackage);
+            queries.addNewTVPackage(newPackage);
         }
 
         public List<Client> getAllClients()
         {
-            //if (clients == null)
-                //clients = queries.getAllClients();
+            if (clients == null)
+                clients = queries.getAllClients();
 
             return clients;
         }
 
         public List<CombinedPackage> getAllCombinedPackages()
         {
-            //if (combinedPackages == null)
-            //  combinedPackages = queries.getAllCombinedPackages();
+            if (combinedPackages == null)
+               combinedPackages = queries.getAllCombinedPackages();
 
             return combinedPackages;
         }
 
         public List<InternetPackage> getAllInternetPackages()
         {
-            //if (internetPackages == null)
-            //  internetPackages = queries.getAllInternetPackages();
+            if (internetPackages == null)
+                internetPackages = queries.getAllInternetPackages();
 
             return internetPackages;
         }
 
         public List<TVPackage> getAllTVPackages()
         {
-            //if (tvPackages == null)
-            //  tvPackages = queries.getAllTVPackages();
+            if (tvPackages == null)
+              tvPackages = queries.getAllTVPackages();
 
             return tvPackages;
         }
 
         public Client getClientByUsername(string username)
         {
-            return null;//queries.getClientByUsername(username);
+            return queries.getClientByUsername(username);
             
         }
 
@@ -146,12 +146,13 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public int getPriceTVPackage(int packageID)
         {
-            throw new NotImplementedException();
+            return queries.getPriceTVPackage(packageID);
         }
 
         public int getPriceInternetPackage(int packageID)
         {
-            throw new NotImplementedException();
+            return queries.getPriceInternetPackage(packageID);
         }
+
     }
 }

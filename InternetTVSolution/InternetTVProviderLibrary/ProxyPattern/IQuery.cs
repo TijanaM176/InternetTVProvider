@@ -13,7 +13,7 @@ namespace InternetTVProviderLibrary.ProxyPattern
         List<TVPackage> getAllTVPackages();
         List<InternetPackage> getAllInternetPackages();
         List<CombinedPackage> getAllCombinedPackages();
-        void addNewClient(Client newClient);
+        void insertNewClient(Client newClient);
         void addNewTVPackage(TVPackage newPackage);
         void addNewInternetPackage(InternetPackage newPackage);
         void addNewCombinedPackage(CombinedPackage newPackage);
