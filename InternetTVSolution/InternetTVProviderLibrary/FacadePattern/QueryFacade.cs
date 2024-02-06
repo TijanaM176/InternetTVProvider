@@ -62,7 +62,7 @@ namespace InternetTVProviderLibrary.FacadePattern
         {
             Client cl = new ClientBuilder().SetUsername(username).SetIme(firstname).SetPrezime(lastname).Build();
 
-            queries.addNewClient(cl);
+            queries.insertNewClient(cl);
         }
 
         public void addNewTVPackage(string name, double price, int numberOfChannels, int packageTypeId)
