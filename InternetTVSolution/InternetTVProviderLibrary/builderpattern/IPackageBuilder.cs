@@ -13,6 +13,6 @@ namespace InternetTVProviderLibrary.BuilderPattern
         void SetName(string name);
         void SetPrice(double price);
         void SetTypeID(int typeId);
-        Package Build();
+        //Package Build();
     }
 }

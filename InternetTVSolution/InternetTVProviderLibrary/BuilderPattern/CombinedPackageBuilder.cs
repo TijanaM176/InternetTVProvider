@@ -46,7 +46,7 @@ namespace InternetTVProviderLibrary.BuilderPattern
             this.typeID = typeID;
         }
 
-        public Package Build()
+        public CombinedPackage Build()
         {
             return new CombinedPackage(id, name, price, tvPackageID, internetPackageID, typeID);
         }

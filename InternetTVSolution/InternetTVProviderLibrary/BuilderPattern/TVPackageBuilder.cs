@@ -38,7 +38,7 @@ namespace InternetTVProviderLibrary.BuilderPattern
             this.numOfChanels = numOfChanels;
         }
 
-        public Package Build()
+        public TVPackage Build()
         {
             return new TVPackage(id, name, price,numOfChanels,typeID);
         }

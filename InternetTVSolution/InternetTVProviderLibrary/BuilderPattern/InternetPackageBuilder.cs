@@ -40,7 +40,7 @@ namespace InternetTVProviderLibrary.BuilderPattern
             this.typeID = typeID;
         }
 
-        public Package Build()
+        public InternetPackage Build()
         {
             return new InternetPackage(id, name, price, internetSpeed, typeID);
         }
