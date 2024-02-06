@@ -40,12 +40,14 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public void addNewInternetPackage(InternetPackage newPackage)
         {
-            
+            internetPackages = null;
+            //queries.addNewInternetPackage(newPackage);
         }
 
         public void addNewTVPackage(TVPackage newPackage)
         {
-            
+            tvPackages = null;
+            //queries.addNewTVPackage(newPackage);
         }
 
         public List<Client> getAllClients()
@@ -58,7 +60,10 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public List<CombinedPackage> getAllCombinedPackages()
         {
-            throw new NotImplementedException();
+            //if (combinedPackages == null)
+            //  combinedPackages = queries.getAllCombinedPackages();
+
+            return combinedPackages;
         }
 
         public List<InternetPackage> getAllInternetPackages()
@@ -71,7 +76,10 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public List<TVPackage> getAllTVPackages()
         {
-            throw new NotImplementedException();
+            //if (tvPackages == null)
+            //  tvPackages = queries.getAllTVPackages();
+
+            return tvPackages;
         }
 
         public Client getClientByUsername(string username)
@@ -82,23 +90,19 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public CombinedPackage getCombinedPackageByPackageID(int packageID)
         {
-            throw new NotImplementedException();
+            throw null; //queries.getCombinedPackageByPackageID(packageID);
         }
 
         public InternetPackage getInternetPackageByPackageID(int packageID)
         {
-            throw new NotImplementedException();
-        }
-
-        public Package getPackageByPackageID(int paketID)
-        {
-            return null;// queries.getPackageByPackageId(paketId);
+            return null; //queries.getInternetPackageByPackageID(packageID);
         }
 
         public PackageType getPackageTypeByID(int id)
         {
-            return null;// queries.getPackageTypeById(id);
+            return null;// queries.getPackageTypeByID(id);
         }
+
         public List<Package> getSubscribedPackagesByClientId(int clientId, bool activated)
         {
             return null;// queries.getSubscribedPackagesByClientId(clientId,activated);
@@ -107,7 +111,7 @@ namespace InternetTVProviderLibrary.ProxyPattern
 
         public TVPackage getTVPackageByPackageID(int packageID)
         {
-            throw new NotImplementedException();
+            throw null; //queries.getTVPackageByPackageID(packageID);
         }
 
         public int getTypeID(string typeName)
@@ -115,21 +119,23 @@ namespace InternetTVProviderLibrary.ProxyPattern
             return 0;// queries.getTypeID(typeName);
         }
 
-        public void removeTVPackage(int paketID)
+        public void removeTVPackage(int packageID)
         {
             tvPackages = null;
-            //queries.removeTVPackage(paketID);
+            //queries.removeTVPackage(packageID);
         }
-        public void removeInternetPackage(int paketID)
+        public void removeInternetPackage(int packageID)
         {
-            
+            internetPackages = null;
+            //queries.removeTVPackage(packageID);
         }
-        public void removeCombinedPackage(int paketID)
+        public void removeCombinedPackage(int packageID)
         {
-            
+            combinedPackages = null;
+            //queries.removeCombinedPackage(packageID);
         }
 
-        
+
 
     }
 }
