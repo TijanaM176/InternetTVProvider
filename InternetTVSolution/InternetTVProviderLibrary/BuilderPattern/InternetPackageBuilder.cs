@@ -15,34 +15,29 @@ namespace InternetTVProviderLibrary.BuilderPattern
         private int internetSpeed;
         private int typeID;
 
-        public IPackageBuilder SetID(int id)
+        public void SetID(int id)
         {
             this.id = id;
-            return this;
         }
 
-        public IPackageBuilder SetName(string name)
+        public void SetName(string name)
         {
             this.name = name;
-            return this;
         }
 
-        public IPackageBuilder SetPrice(double price)
+        public void SetPrice(double price)
         {
             this.price = price;
-            return this;
         }
 
-        public IPackageBuilder SetInternetSpeed(int internetSpeed)
+        public void SetInternetSpeed(int internetSpeed)
         {
             this.internetSpeed = internetSpeed;
-            return this;
         }
 
-        public IPackageBuilder SetTypeID(int typeID)
+        public void SetTypeID(int typeID)
         {
             this.typeID = typeID;
-            return this;
         }
 
         public Package Build()

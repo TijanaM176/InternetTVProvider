@@ -9,10 +9,10 @@ namespace InternetTVProviderLibrary.BuilderPattern
 {
     public interface IPackageBuilder
     {
-        IPackageBuilder SetID(int id);
-        IPackageBuilder SetName(string name);
-        IPackageBuilder SetPrice(double price);
-        IPackageBuilder SetTypeID(int typeId);
+        void SetID(int id);
+        void SetName(string name);
+        void SetPrice(double price);
+        void SetTypeID(int typeId);
         Package Build();
     }
 }

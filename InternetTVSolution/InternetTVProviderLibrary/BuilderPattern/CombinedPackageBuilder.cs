@@ -16,40 +16,34 @@ namespace InternetTVProviderLibrary.BuilderPattern
         private int internetPackageID;
         private int typeID;
 
-        public IPackageBuilder SetID(int id)
+        public void SetID(int id)
         {
             this.id = id;
-            return this;
         }
 
-        public IPackageBuilder SetName(string name)
+        public void SetName(string name)
         {
             this.name = name;
-            return this;
         }
 
-        public IPackageBuilder SetPrice(double price)
+        public void SetPrice(double price)
         {
             this.price = price;
-            return this;
         }
 
-        public IPackageBuilder SetTvPackageID(int tvPackageID)
+        public void SetTvPackageID(int tvPackageID)
         {
             this.tvPackageID = tvPackageID;
-            return this;
         }
 
-        public IPackageBuilder SetInternetPackageID(int internetPackageID)
+        public void SetInternetPackageID(int internetPackageID)
         {
             this.internetPackageID = internetPackageID;
-            return this;
         }
 
-        public IPackageBuilder SetTypeID(int typeID)
+        public void SetTypeID(int typeID)
         {
             this.typeID = typeID;
-            return this;
         }
 
         public Package Build()
