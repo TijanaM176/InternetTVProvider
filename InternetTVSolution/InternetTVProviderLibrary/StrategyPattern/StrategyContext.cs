@@ -27,7 +27,7 @@ namespace InternetTVProviderLibrary.StrategyPattern
 
         public void ExecuteStrategy()
         {
-            iStrategy.connectSQL();
+            iStrategy.execute();
         }
 
     }

@@ -8,22 +8,32 @@ namespace InternetTVProviderLibrary.StrategyPattern
 {
     internal class ScanConfiguration : IStrategy
     {
-        public static string configurationPath;
+        public static string configurationString;
         public static string providerName;
         private string[] fileData;
 
-        public void connectSQL()
+        public void execute()
         {
             try
             {
                 fileData = File.ReadAllLines("C:\\GIT projekti\\DS\\tim-13\\InternetTVSolution\\InternetTVProviderLibrary\\StrategyPattern\\configurationSQL.txt");
-                providerName = fileData[0];
-                configurationPath = fileData[1];
+
+                if (fileData.Length < 2)
+                {
+                    providerName = "";
+                    configurationString = "";
+                }
+                else
+                {
+                    providerName = fileData[0].Trim();
+                    configurationString = fileData[1].Trim();
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Greška pri čitanju fajla: " + ex.Message);
             }
         }
+
     }
 }

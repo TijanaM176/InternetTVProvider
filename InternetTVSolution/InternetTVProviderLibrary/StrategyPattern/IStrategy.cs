@@ -8,6 +8,6 @@ namespace InternetTVProviderLibrary.StrategyPattern
 {
     public interface IStrategy
     {
-        public void connectSQL();
+        public void execute();
     }
 }
