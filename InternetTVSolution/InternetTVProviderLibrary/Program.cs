@@ -41,8 +41,9 @@ namespace InternetTVProviderLibrary
 
             static bool ReadConfigFile(out string providerName, out string connectionString)
             {
-                string configFilePath = "C:\\Users\\risti\\OneDrive\\Desktop\\ds\\tim-13\\InternetTVSolution\\InternetTVProviderLibrary\\config.txt";
-
+                //string configFilePath = "C:\\Users\\risti\\OneDrive\\Desktop\\ds\\tim-13\\InternetTVSolution\\InternetTVProviderLibrary\\config.txt";
+                string configFilePath = "C:\\Users\\PC\\Desktop\\ds\\tim-13\\InternetTVSolution\\InternetTVProviderLibrary\\StrategyPattern\\configurationSQL.txt";
+                
                 if (!File.Exists(configFilePath))
                 {
                     providerName = null;

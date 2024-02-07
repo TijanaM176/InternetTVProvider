@@ -1,2 +1,2 @@
 SBB
-Data Source=C:\Users\risti\OneDrive\Desktop\database\InternetTVProvider.db;Version=3
+Data Source=C:\Users\PC\Desktop\InternetTVProvider.db;Version=3

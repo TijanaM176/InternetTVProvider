@@ -48,14 +48,21 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         );
                     ";
 
-                     string createTVPackageTableQuery = @"
+                    string createPackageTypeTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS PackageType (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            Name VARCHAR(255) NOT NULL
+                        );
+                    ";
+
+                    string createTVPackageTableQuery = @"
                         CREATE TABLE IF NOT EXISTS TVPackage (
                             Id INT PRIMARY KEY AUTO_INCREMENT,
                             Name VARCHAR(255) NOT NULL,
-                            PackageId INT NOT NULL,
-                            NumberOfChannels INT NOT NULL,
                             Price DECIMAL(10, 2) NOT NULL,
-                            FOREIGN KEY (PackageId) REFERENCES Packages(Id)
+                            NumberOfChannels INT NOT NULL,
+                            TypeID INT NOT NULL,
+                            FOREIGN KEY (TypeID) REFERENCES PackageType(Id)
                         );
                     ";
 
@@ -63,10 +70,10 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         CREATE TABLE IF NOT EXISTS InternetPackage (
                             Id INT PRIMARY KEY AUTO_INCREMENT,
                             Name VARCHAR(255) NOT NULL,
-                            PackageId INT NOT NULL,
-                            InternetSpeed VARCHAR(50) NOT NULL,
                             Price DECIMAL(10, 2) NOT NULL,
-                            FOREIGN KEY (PackageId) REFERENCES Packages(Id)
+                            InternetSpeed VARCHAR(50) NOT NULL,
+                            TypeID INT NOT NULL,
+                            FOREIGN KEY (TypeID) REFERENCES PackageType(Id)
                         );
                     ";
 
@@ -74,11 +81,11 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         CREATE TABLE IF NOT EXISTS CombinePackage (
                             Id INT PRIMARY KEY AUTO_INCREMENT,
                             Name VARCHAR(255) NOT NULL,
-                            PackageId INT NOT NULL,
+                            Price DECIMAL(10, 2) NOT NULL,
                             TVPackageId INT NOT NULL,
                             InternetPackageId INT NOT NULL,
-                            Price DECIMAL(10, 2) NOT NULL,
-                            FOREIGN KEY (PackageId) REFERENCES Packages(Id),
+                            TypeID INT NOT NULL,
+                            FOREIGN KEY (TypeID) REFERENCES PackageType(Id),
                             FOREIGN KEY (TVPackageId) REFERENCES TVPackage(Id),
                             FOREIGN KEY (InternetPackageId) REFERENCES InternetPackage(Id)
                         );
@@ -94,8 +101,19 @@ namespace InternetTVProviderLibrary.FactoryPattern
                             FOREIGN KEY (PackageId) REFERENCES Packages(Id)
                         );
                     ";
-                        
 
+                      string createSubscriptionsTableQuery = @"
+                        CREATE TABLE IF NOT EXISTS Subscriptions (
+                            Id INT PRIMARY KEY AUTO_INCREMENT,
+                            Client_ID INT NOT NULL,
+                            Packet_ID INT NOT NULL,
+                            TypeID INT NOT NULL,
+                            Activated BOOL NOT NULL,
+                            FOREIGN KEY (Client_ID) REFERENCES Clients(Id),
+                            FOREIGN KEY (Packet_ID) REFERENCES Packages(Id),
+                            FOREIGN KEY (TypeID) REFERENCES PackageType(Id)
+                );
+            ";
 
 
                     using (MySqlCommand command = new MySqlCommand(createClientsTableQuery, connection))
@@ -104,6 +122,11 @@ namespace InternetTVProviderLibrary.FactoryPattern
                     }
 
                     using (MySqlCommand command = new MySqlCommand(createPackagesTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (MySqlCommand command = new MySqlCommand(createPackageTypeTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -127,6 +150,12 @@ namespace InternetTVProviderLibrary.FactoryPattern
                     {
                         command.ExecuteNonQuery();
                     }
+
+                    using (MySqlCommand command = new MySqlCommand(createSubscriptionsTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
 
                     Console.WriteLine("MySQL tables initialized.");
                 }
@@ -165,26 +194,33 @@ namespace InternetTVProviderLibrary.FactoryPattern
                             ('Combine package');
                         ";
 
-                        string insertTVPackageQuery = @"
-                        INSERT INTO TVPackage (Name, PackageId, NumberOfChannels, Price) VALUES
-                        ('Basic TV Package', 1, 100, 29.99),
-                        ('Standard TV Package', 1, 150, 39.99),
-                        ('Premium TV Package', 1, 250, 49.99);
+                        string insertPackageTypeQuery = @"
+                            INSERT INTO PackageType (Name) VALUES
+                            ('TV package'),
+                            ('Internet package'),
+                            ('Combine package');
+                        ";
+
+                    string insertTVPackageQuery = @"
+                        INSERT INTO TVPackage (Name, Price, NumberOfChannels, TypeID) VALUES
+                        ('Basic TV Package', 29.99, 100, 1),
+                        ('Standard TV Package', 39.99, 150, 1),
+                        ('Premium TV Package', 49.99, 250, 1);
                     ";
 
                         string insertInternetPackageQuery = @"
-                        INSERT INTO InternetPackage (Name, PackageId, InternetSpeed, Price) VALUES
-                        ('Basic Internet Package ', 2, '100 Mbps', 49.99),
-                        ('Standard Internet Package ', 2, '200 Mbps', 59.99),
-                        ('Premium Internet Package ', 2, '300 Mbps', 69.99);
+                        INSERT INTO InternetPackage (Name, Price, InternetSpeed, TypeID) VALUES
+                        ('Basic Internet Package ', 49.99, '100 Mbps', 2),
+                        ('Standard Internet Package ', 59.99, '200 Mbps', 2),
+                        ('Premium Internet Package ', 69.99, '300 Mbps', 2);
                     ";
 
                         string insertCombinePackageQuery = @"
-                        INSERT INTO CombinePackage (Name, PackageId, TVPackageId, InternetPackageId, Price) VALUES
-                        ('Basic Combine Package ', 3, 1, 1, 69.99),
-                        ('Standard Combine Package ', 3, 2, 2, 79.99),
-                        ('Preminum Combine Package ', 3, 2, 3, 89.99),
-                        ('Super Preminum Combine Package ', 3, 3, 3, 99.99);
+                        INSERT INTO CombinePackage (Name, Price, TVPackageId, InternetPackageId, TypeID) VALUES
+                        ('Basic Combine Package ', 69.99, 1, 1, 3),
+                        ('Standard Combine Package ', 79.99, 2, 2, 3),
+                        ('Preminum Combine Package ', 89.99, 2, 3, 3),
+                        ('Super Preminum Combine Package ', 99.99, 3, 3, 3);
                     ";
 
                         string insertProviderQuery = @"
@@ -204,7 +240,12 @@ namespace InternetTVProviderLibrary.FactoryPattern
                             command.ExecuteNonQuery();
                         }
 
-                        using (MySqlCommand command = new MySqlCommand(insertTVPackageQuery, connection))
+                        using (MySqlCommand command = new MySqlCommand(insertPackageTypeQuery, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+
+                    using (MySqlCommand command = new MySqlCommand(insertTVPackageQuery, connection))
                         {
                             command.ExecuteNonQuery();
                         }
