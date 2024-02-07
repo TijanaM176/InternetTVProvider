@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace InternetTVProviderLibrary.FacadePattern
 {
-    internal class QueryFacade
+    public class QueryFacade
     {
         protected IQuery queries;
 
