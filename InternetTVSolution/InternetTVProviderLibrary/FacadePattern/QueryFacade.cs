@@ -168,5 +168,15 @@ namespace InternetTVProviderLibrary.FacadePattern
             return sum; 
 
         }
+
+        public int getTVPackageIdByNumOfChannels(int numOfChannels)
+        {
+            return queries.getTVPackageIdByNumOfChannels(numOfChannels);
+        }
+
+        public int getInternetPackageIdByInternetSpeed(string internetSpeed)
+        {
+            return queries.getInternetPackageIdByInternetSpeed(internetSpeed);
+        }
     }
 }

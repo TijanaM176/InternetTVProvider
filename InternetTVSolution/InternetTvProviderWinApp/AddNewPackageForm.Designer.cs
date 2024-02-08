@@ -109,6 +109,7 @@
             // packageTypeComboBox
             // 
             packageTypeComboBox.FormattingEnabled = true;
+            packageTypeComboBox.Items.AddRange(new object[] { "TV package", "Internet package", "Combined package" });
             packageTypeComboBox.Location = new Point(85, 290);
             packageTypeComboBox.Name = "packageTypeComboBox";
             packageTypeComboBox.Size = new Size(347, 28);

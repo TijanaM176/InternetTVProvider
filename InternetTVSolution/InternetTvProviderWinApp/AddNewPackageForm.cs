@@ -81,6 +81,7 @@ namespace InternetTvProviderWinApp
             {
                 numberOfChannels = Convert.ToInt32(numberOfChannelsNumericUpDown.Value);
                 internetSpeed = Convert.ToString(internetSpeedNumericUpDown.Value);
+
                 // facade.addNewCombinedPackage(name, price, , packageType);   
             }
 
