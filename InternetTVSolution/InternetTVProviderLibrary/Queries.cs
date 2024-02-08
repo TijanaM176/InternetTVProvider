@@ -414,6 +414,14 @@ namespace InternetTVProviderLibrary
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
+            DbParameter packageId;
+
+            packageId = dbCommand.CreateParameter();
+            packageId.ParameterName = "@packageID";
+            packageId.Value = packageID;
+
+            dbCommand.Parameters.Add(packageId);
+
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
@@ -451,6 +459,14 @@ namespace InternetTVProviderLibrary
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
+            DbParameter packageId;
+
+            packageId = dbCommand.CreateParameter();
+            packageId.ParameterName = "@packageID";
+            packageId.Value = packageID;
+
+            dbCommand.Parameters.Add(packageId);
+
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
@@ -487,6 +503,14 @@ namespace InternetTVProviderLibrary
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
+
+            DbParameter packageId;
+
+            packageId = dbCommand.CreateParameter();
+            packageId.ParameterName = "@packageID";
+            packageId.Value = packageID;
+
+            dbCommand.Parameters.Add(packageId);
 
             DbDataReader reader = dbCommand.ExecuteReader();
 
@@ -526,11 +550,19 @@ namespace InternetTVProviderLibrary
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
+            DbParameter typeID;
+
+            typeID = dbCommand.CreateParameter();
+            typeID.ParameterName = "@id";
+            typeID.Value = id;
+
+            dbCommand.Parameters.Add(typeID);
+
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
             {
-                package = new PackageType(int.Parse(reader["PackageTypeID"].ToString()), reader["Name"].ToString());
+                package = new PackageType(reader.GetInt32(0), reader.GetString(1));
             }
 
             if (connection.State == ConnectionState.Open)
@@ -698,18 +730,25 @@ namespace InternetTVProviderLibrary
                 connection.Open();
             }
 
-            /* TODO - dodati cenu u svakoj tabeli paketa */
             String query = @"SELECT Price from TVPackage
                              WHERE Id = @packageID";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
+            DbParameter packageId;
+
+            packageId = dbCommand.CreateParameter();
+            packageId.ParameterName = "@packageID";
+            packageId.Value = packageID;
+
+            dbCommand.Parameters.Add(packageId);
+
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
             {
-                priceTVPackage = int.Parse(reader["Price"].ToString());
+                priceTVPackage = reader.GetInt32(0);
 	        }
 
             if (connection.State == ConnectionState.Open)
@@ -734,11 +773,19 @@ namespace InternetTVProviderLibrary
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
+            DbParameter packageId;
+
+            packageId = dbCommand.CreateParameter();
+            packageId.ParameterName = "@packageID";
+            packageId.Value = packageID;
+
+            dbCommand.Parameters.Add(packageId);
+
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
             {
-                priceInternetPackage = int.Parse(reader["Price"].ToString());
+                priceInternetPackage = reader.GetInt32(0);
             }
 
             if (connection.State == ConnectionState.Open)
@@ -763,11 +810,19 @@ namespace InternetTVProviderLibrary
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
+            DbParameter type;
+
+            type = dbCommand.CreateParameter();
+            type.ParameterName = "@typeName";
+            type.Value = typeName;
+
+            dbCommand.Parameters.Add(type);
+
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
             {
-                typeID =  int.Parse(reader["Id"].ToString());
+                typeID = reader.GetInt32(0);
             }
 
             if (connection.State == ConnectionState.Open)
