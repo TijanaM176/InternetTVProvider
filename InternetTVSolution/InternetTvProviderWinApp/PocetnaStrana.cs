@@ -7,18 +7,25 @@ namespace InternetTvProviderWinApp
     public partial class PocetnaStrana : Form
     {
         DbConnection connection;
-        QueryFacade facade; //= new QueryFacade(connection);
+        QueryFacade facade;
 
         Button addNewPackageButton = new Button();
         Button addNewClientButton = new Button();
         Button deletePackageButton = new Button();
 
-        public PocetnaStrana()
+        public PocetnaStrana(DbConnection connection)
         {
+            this.connection = connection;
             InitializeComponent();
+            facade = new QueryFacade(connection);
+
+            showAllClientsInList();
+            showAllTVPackagesTable();
+            showAllInternetPackagesTable();
+            showAllCombinedPackagesTable();
         }
 
-    
+
         public void showAllClientsInList()
         {
             showAllClientsListBox.Items.Clear();
@@ -42,7 +49,7 @@ namespace InternetTvProviderWinApp
 
             foreach (Package package in tvPackages)
             {
-                tvPackage = (TVPackage) package;
+                tvPackage = (TVPackage)package;
                 int rowIndex = showAllTvPacketsGrid.Rows.Add();
 
                 showAllTvPacketsGrid.Rows[rowIndex].Cells["nameTV"].Value = tvPackage.Name;
@@ -67,13 +74,13 @@ namespace InternetTvProviderWinApp
 
             foreach (Package package in internetPackages)
             {
-                internetPackage = (InternetPackage) package;
-                int rowIndex = showAllTvPacketsGrid.Rows.Add();
+                internetPackage = (InternetPackage)package;
+                int rowIndex = showAllInternetPacketsGrid.Rows.Add();
 
-                showAllTvPacketsGrid.Rows[rowIndex].Cells["nameInternet"].Value = internetPackage.Name;
-                showAllTvPacketsGrid.Rows[rowIndex].Cells["descriptionInternet"].Value = "opis";
-                showAllTvPacketsGrid.Rows[rowIndex].Cells["priceInternet"].Value = internetPackage.Price;
-                showAllTvPacketsGrid.Rows[rowIndex].Cells["internetSpeed"].Value = internetPackage.InternetSpeed;
+                showAllInternetPacketsGrid.Rows[rowIndex].Cells["nameInternet"].Value = internetPackage.Name;
+                showAllInternetPacketsGrid.Rows[rowIndex].Cells["descriptionInternet"].Value = "opis";
+                showAllInternetPacketsGrid.Rows[rowIndex].Cells["priceInternet"].Value = internetPackage.Price;
+                showAllInternetPacketsGrid.Rows[rowIndex].Cells["internetSpeed"].Value = internetPackage.InternetSpeed;
             }
 
             // ako treba obeleziti neko polje
@@ -85,25 +92,25 @@ namespace InternetTvProviderWinApp
 
         public void showAllCombinedPackagesTable()
         {
-            showAllInternetPacketsGrid.Rows.Clear();
+            showAllCombinedPacketsGrid.Rows.Clear();
 
-            List<Package> combinedPackages = facade.getAllPackages(2);
+            List<Package> combinedPackages = facade.getAllPackages(3);
             CombinedPackage combinedPackage;
 
             foreach (Package package in combinedPackages)
             {
-                combinedPackage = (CombinedPackage) package;
-                int rowIndex = showAllTvPacketsGrid.Rows.Add();
+                combinedPackage = (CombinedPackage)package;
+                int rowIndex = showAllCombinedPacketsGrid.Rows.Add();
 
-                showAllTvPacketsGrid.Rows[rowIndex].Cells["nameCombined"].Value = combinedPackage.Name;
-                showAllTvPacketsGrid.Rows[rowIndex].Cells["descriptionCombined"].Value = "opis";
-                showAllTvPacketsGrid.Rows[rowIndex].Cells["priceCombined"].Value = combinedPackage.Price;
+                showAllCombinedPacketsGrid.Rows[rowIndex].Cells["nameCombined"].Value = combinedPackage.Name;
+                showAllCombinedPacketsGrid.Rows[rowIndex].Cells["descriptionCombined"].Value = "opis";
+                showAllCombinedPacketsGrid.Rows[rowIndex].Cells["priceCombined"].Value = combinedPackage.Price;
             }
 
             // ako treba obeleziti neko polje
-            if (showAllInternetPacketsGrid.Rows.Count > 0)
+            if (showAllCombinedPacketsGrid.Rows.Count > 0)
             {
-                showAllInternetPacketsGrid.Rows[0].Selected = true;
+                showAllCombinedPacketsGrid.Rows[0].Selected = true;
             }
         }
 
@@ -122,6 +129,11 @@ namespace InternetTvProviderWinApp
         private void deletePackageButton_Click(object sender, EventArgs e)
         {
             /* TODO */
+        }
+
+        private void packetsPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

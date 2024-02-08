@@ -68,9 +68,10 @@ namespace InternetTvProviderWinApp
             // 
             providerPanel.BackColor = SystemColors.ControlLightLight;
             providerPanel.Controls.Add(providerName);
-            providerPanel.Location = new Point(7, 5);
+            providerPanel.Location = new Point(6, 4);
+            providerPanel.Margin = new Padding(3, 2, 3, 2);
             providerPanel.Name = "providerPanel";
-            providerPanel.Size = new Size(1110, 50);
+            providerPanel.Size = new Size(971, 38);
             providerPanel.TabIndex = 0;
             // 
             // providerName
@@ -81,9 +82,9 @@ namespace InternetTvProviderWinApp
             providerName.BackColor = SystemColors.ControlLight;
             providerName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             providerName.ForeColor = SystemColors.Highlight;
-            providerName.Location = new Point(512, 13);
+            providerName.Location = new Point(448, 10);
             providerName.Name = "providerName";
-            providerName.Size = new Size(114, 20);
+            providerName.Size = new Size(91, 15);
             providerName.TabIndex = 0;
             providerName.Text = "provider Name";
             providerName.TextAlign = ContentAlignment.TopCenter;
@@ -93,18 +94,20 @@ namespace InternetTvProviderWinApp
             clientsPanel.BackColor = SystemColors.ControlLightLight;
             clientsPanel.Controls.Add(showAllClientsListBox);
             clientsPanel.Controls.Add(clientsLabel);
-            clientsPanel.Location = new Point(7, 53);
+            clientsPanel.Location = new Point(6, 40);
+            clientsPanel.Margin = new Padding(3, 2, 3, 2);
             clientsPanel.Name = "clientsPanel";
-            clientsPanel.Size = new Size(183, 575);
+            clientsPanel.Size = new Size(160, 431);
             clientsPanel.TabIndex = 2;
             // 
             // showAllClientsListBox
             // 
             showAllClientsListBox.FormattingEnabled = true;
-            showAllClientsListBox.ItemHeight = 20;
-            showAllClientsListBox.Location = new Point(18, 54);
+            showAllClientsListBox.ItemHeight = 15;
+            showAllClientsListBox.Location = new Point(16, 40);
+            showAllClientsListBox.Margin = new Padding(3, 2, 3, 2);
             showAllClientsListBox.Name = "showAllClientsListBox";
-            showAllClientsListBox.Size = new Size(140, 504);
+            showAllClientsListBox.Size = new Size(123, 379);
             showAllClientsListBox.TabIndex = 1;
             // 
             // clientsLabel
@@ -112,9 +115,9 @@ namespace InternetTvProviderWinApp
             clientsLabel.AutoSize = true;
             clientsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             clientsLabel.ForeColor = Color.Navy;
-            clientsLabel.Location = new Point(18, 23);
+            clientsLabel.Location = new Point(16, 17);
             clientsLabel.Name = "clientsLabel";
-            clientsLabel.Size = new Size(56, 20);
+            clientsLabel.Size = new Size(44, 15);
             clientsLabel.TabIndex = 0;
             clientsLabel.Text = "Clients";
             // 
@@ -130,18 +133,21 @@ namespace InternetTvProviderWinApp
             packetsPanel.Controls.Add(combinePacketsLabel);
             packetsPanel.Controls.Add(internetPacketsLabel);
             packetsPanel.Controls.Add(tvPacketsLabel);
-            packetsPanel.Location = new Point(189, 53);
+            packetsPanel.Location = new Point(165, 40);
+            packetsPanel.Margin = new Padding(3, 2, 3, 2);
             packetsPanel.Name = "packetsPanel";
-            packetsPanel.Size = new Size(928, 575);
+            packetsPanel.Size = new Size(812, 431);
             packetsPanel.TabIndex = 3;
+            packetsPanel.Paint += packetsPanel_Paint;
             // 
             // deletePackageButton
             // 
             deletePackageButton.BackColor = SystemColors.GradientActiveCaption;
             deletePackageButton.ForeColor = SystemColors.HotTrack;
-            deletePackageButton.Location = new Point(568, 473);
+            deletePackageButton.Location = new Point(497, 355);
+            deletePackageButton.Margin = new Padding(3, 2, 3, 2);
             deletePackageButton.Name = "deletePackageButton";
-            deletePackageButton.Size = new Size(241, 29);
+            deletePackageButton.Size = new Size(211, 22);
             deletePackageButton.TabIndex = 8;
             deletePackageButton.Text = "Delete Package";
             deletePackageButton.UseVisualStyleBackColor = false;
@@ -151,9 +157,10 @@ namespace InternetTvProviderWinApp
             // 
             addNewPackageButton.BackColor = SystemColors.GradientActiveCaption;
             addNewPackageButton.ForeColor = SystemColors.HotTrack;
-            addNewPackageButton.Location = new Point(568, 420);
+            addNewPackageButton.Location = new Point(497, 315);
+            addNewPackageButton.Margin = new Padding(3, 2, 3, 2);
             addNewPackageButton.Name = "addNewPackageButton";
-            addNewPackageButton.Size = new Size(241, 29);
+            addNewPackageButton.Size = new Size(211, 22);
             addNewPackageButton.TabIndex = 7;
             addNewPackageButton.Text = "Add new Package";
             addNewPackageButton.UseVisualStyleBackColor = false;
@@ -163,9 +170,10 @@ namespace InternetTvProviderWinApp
             // 
             addNewClientButton.BackColor = SystemColors.GradientActiveCaption;
             addNewClientButton.ForeColor = SystemColors.HotTrack;
-            addNewClientButton.Location = new Point(568, 367);
+            addNewClientButton.Location = new Point(497, 275);
+            addNewClientButton.Margin = new Padding(3, 2, 3, 2);
             addNewClientButton.Name = "addNewClientButton";
-            addNewClientButton.Size = new Size(241, 29);
+            addNewClientButton.Size = new Size(211, 22);
             addNewClientButton.TabIndex = 6;
             addNewClientButton.Text = "Add new Client";
             addNewClientButton.UseVisualStyleBackColor = false;
@@ -175,11 +183,12 @@ namespace InternetTvProviderWinApp
             // 
             showAllInternetPacketsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             showAllInternetPacketsGrid.Columns.AddRange(new DataGridViewColumn[] { nameInternet, descriptionInternet, priceInternet, internetSpeed });
-            showAllInternetPacketsGrid.Location = new Point(18, 342);
+            showAllInternetPacketsGrid.Location = new Point(16, 256);
+            showAllInternetPacketsGrid.Margin = new Padding(3, 2, 3, 2);
             showAllInternetPacketsGrid.Name = "showAllInternetPacketsGrid";
             showAllInternetPacketsGrid.RowHeadersWidth = 51;
             showAllInternetPacketsGrid.RowTemplate.Height = 29;
-            showAllInternetPacketsGrid.Size = new Size(421, 216);
+            showAllInternetPacketsGrid.Size = new Size(368, 162);
             showAllInternetPacketsGrid.TabIndex = 5;
             // 
             // nameInternet
@@ -214,11 +223,12 @@ namespace InternetTvProviderWinApp
             // 
             showAllCombinedPacketsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             showAllCombinedPacketsGrid.Columns.AddRange(new DataGridViewColumn[] { nameCombined, priceCombined, descriptionCombined });
-            showAllCombinedPacketsGrid.Location = new Point(472, 61);
+            showAllCombinedPacketsGrid.Location = new Point(413, 46);
+            showAllCombinedPacketsGrid.Margin = new Padding(3, 2, 3, 2);
             showAllCombinedPacketsGrid.Name = "showAllCombinedPacketsGrid";
             showAllCombinedPacketsGrid.RowHeadersWidth = 51;
             showAllCombinedPacketsGrid.RowTemplate.Height = 29;
-            showAllCombinedPacketsGrid.Size = new Size(441, 216);
+            showAllCombinedPacketsGrid.Size = new Size(386, 162);
             showAllCombinedPacketsGrid.TabIndex = 4;
             // 
             // nameCombined
@@ -246,11 +256,12 @@ namespace InternetTvProviderWinApp
             // 
             showAllTvPacketsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             showAllTvPacketsGrid.Columns.AddRange(new DataGridViewColumn[] { nameTV, descriptionTV, priceTV, numberOfChannelsTV });
-            showAllTvPacketsGrid.Location = new Point(18, 61);
+            showAllTvPacketsGrid.Location = new Point(16, 46);
+            showAllTvPacketsGrid.Margin = new Padding(3, 2, 3, 2);
             showAllTvPacketsGrid.Name = "showAllTvPacketsGrid";
             showAllTvPacketsGrid.RowHeadersWidth = 51;
             showAllTvPacketsGrid.RowTemplate.Height = 29;
-            showAllTvPacketsGrid.Size = new Size(421, 216);
+            showAllTvPacketsGrid.Size = new Size(368, 162);
             showAllTvPacketsGrid.TabIndex = 3;
             // 
             // nameTV
@@ -286,9 +297,9 @@ namespace InternetTvProviderWinApp
             combinePacketsLabel.AutoSize = true;
             combinePacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             combinePacketsLabel.ForeColor = Color.IndianRed;
-            combinePacketsLabel.Location = new Point(472, 23);
+            combinePacketsLabel.Location = new Point(413, 17);
             combinePacketsLabel.Name = "combinePacketsLabel";
-            combinePacketsLabel.Size = new Size(128, 20);
+            combinePacketsLabel.Size = new Size(102, 15);
             combinePacketsLabel.TabIndex = 2;
             combinePacketsLabel.Text = "Combine packets";
             // 
@@ -297,9 +308,9 @@ namespace InternetTvProviderWinApp
             internetPacketsLabel.AutoSize = true;
             internetPacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             internetPacketsLabel.ForeColor = Color.IndianRed;
-            internetPacketsLabel.Location = new Point(18, 301);
+            internetPacketsLabel.Location = new Point(16, 226);
             internetPacketsLabel.Name = "internetPacketsLabel";
-            internetPacketsLabel.Size = new Size(123, 20);
+            internetPacketsLabel.Size = new Size(100, 15);
             internetPacketsLabel.TabIndex = 1;
             internetPacketsLabel.Text = "Internet packets";
             // 
@@ -308,20 +319,21 @@ namespace InternetTvProviderWinApp
             tvPacketsLabel.AutoSize = true;
             tvPacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             tvPacketsLabel.ForeColor = Color.IndianRed;
-            tvPacketsLabel.Location = new Point(18, 23);
+            tvPacketsLabel.Location = new Point(16, 17);
             tvPacketsLabel.Name = "tvPacketsLabel";
-            tvPacketsLabel.Size = new Size(85, 20);
+            tvPacketsLabel.Size = new Size(68, 15);
             tvPacketsLabel.TabIndex = 0;
             tvPacketsLabel.Text = "TV packets";
             // 
             // PocetnaStrana
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1129, 629);
+            ClientSize = new Size(988, 472);
             Controls.Add(packetsPanel);
             Controls.Add(clientsPanel);
             Controls.Add(providerPanel);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "PocetnaStrana";
             Text = "PocetnaStrana";
             providerPanel.ResumeLayout(false);

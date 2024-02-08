@@ -9,7 +9,7 @@ namespace InternetTVProviderLibrary.SingletonPattern
 {
 
 
-    internal class DatabaseManager
+    public class DatabaseManager
     {
         private static DatabaseManager _instance;
         private static readonly object _lockObject = new object();
