@@ -58,6 +58,12 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getAllClients();
         }
 
+        public Client getClientByUsername(String username)
+        {
+            return queries.getClientByUsername(username);
+        }
+
+
         public Client addNewClient(string username, string firstname, string lastname)
         {
             Client cl = new ClientBuilder().SetUsername(username).SetIme(firstname).SetPrezime(lastname).Build();
@@ -124,6 +130,11 @@ namespace InternetTVProviderLibrary.FacadePattern
         public CombinedPackage getCombinedPackageByPackageID(int id)
         {
             return queries.getCombinedPackageByPackageID(id);
+        }
+
+        public List<Package> getSubscribedPackagesByClientId(int id)
+        {
+            return queries.getSubscribedPackagesByClientId(id);
         }
 
         public double getAllSubscriptionsPriceByClient(int clientId)
