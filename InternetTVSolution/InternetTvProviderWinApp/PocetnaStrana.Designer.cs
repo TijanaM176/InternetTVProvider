@@ -1,4 +1,5 @@
 ﻿using InternetTVProviderLibrary.Models;
+using InternetTVProviderLibrary.StrategyPattern;
 namespace InternetTvProviderWinApp
 {
     partial class PocetnaStrana
@@ -31,36 +32,45 @@ namespace InternetTvProviderWinApp
         {
             providerPanel = new Panel();
             providerName = new Label();
-            customerRegisterPanel = new Panel();
-            reqisterClientLabel = new Label();
-            registerButton = new Button();
-            lastName = new TextBox();
-            firstName = new TextBox();
-            usernameBox = new TextBox();
             clientsPanel = new Panel();
-            clientsListBox = new ListBox();
+            showAllClientsListBox = new ListBox();
             clientsLabel = new Label();
             packetsPanel = new Panel();
-            dataGridView1 = new DataGridView();
-            nameColumn = new DataGridViewTextBoxColumn();
-            description = new DataGridViewTextBoxColumn();
-            price = new DataGridViewTextBoxColumn();
+            deletePackageButton = new Button();
+            addNewPackageButton = new Button();
+            addNewClientButton = new Button();
+            showAllInternetPacketsGrid = new DataGridView();
+            nameInternet = new DataGridViewTextBoxColumn();
+            descriptionInternet = new DataGridViewTextBoxColumn();
+            priceInternet = new DataGridViewTextBoxColumn();
+            internetSpeed = new DataGridViewTextBoxColumn();
+            showAllCombinedPacketsGrid = new DataGridView();
+            nameCombined = new DataGridViewTextBoxColumn();
+            priceCombined = new DataGridViewTextBoxColumn();
+            descriptionCombined = new DataGridViewTextBoxColumn();
+            showAllTvPacketsGrid = new DataGridView();
+            nameTV = new DataGridViewTextBoxColumn();
+            descriptionTV = new DataGridViewTextBoxColumn();
+            priceTV = new DataGridViewTextBoxColumn();
+            numberOfChannelsTV = new DataGridViewTextBoxColumn();
             combinePacketsLabel = new Label();
             internetPacketsLabel = new Label();
             tvPacketsLabel = new Label();
             providerPanel.SuspendLayout();
-            customerRegisterPanel.SuspendLayout();
             clientsPanel.SuspendLayout();
             packetsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)showAllInternetPacketsGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)showAllCombinedPacketsGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)showAllTvPacketsGrid).BeginInit();
             SuspendLayout();
             // 
             // providerPanel
             // 
+            providerPanel.BackColor = SystemColors.ControlLightLight;
             providerPanel.Controls.Add(providerName);
             providerPanel.Location = new Point(7, 5);
             providerPanel.Name = "providerPanel";
-            providerPanel.Size = new Size(1110, 34);
+            providerPanel.Size = new Size(1110, 50);
             providerPanel.TabIndex = 0;
             // 
             // providerName
@@ -68,158 +78,239 @@ namespace InternetTvProviderWinApp
             providerName.AccessibleDescription = "";
             providerName.AccessibleName = "";
             providerName.AutoSize = true;
-            providerName.Location = new Point(345, 4);
+            providerName.BackColor = SystemColors.ControlLight;
+            providerName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            providerName.ForeColor = SystemColors.Highlight;
+            providerName.Location = new Point(512, 13);
             providerName.Name = "providerName";
-            providerName.Size = new Size(105, 20);
+            providerName.Size = new Size(114, 20);
             providerName.TabIndex = 0;
-            providerName.Text = "providerName";
+            providerName.Text = "provider Name";
             providerName.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // customerRegisterPanel
-            // 
-            customerRegisterPanel.Controls.Add(reqisterClientLabel);
-            customerRegisterPanel.Controls.Add(registerButton);
-            customerRegisterPanel.Controls.Add(lastName);
-            customerRegisterPanel.Controls.Add(firstName);
-            customerRegisterPanel.Controls.Add(usernameBox);
-            customerRegisterPanel.Location = new Point(7, 35);
-            customerRegisterPanel.Name = "customerRegisterPanel";
-            customerRegisterPanel.Size = new Size(1110, 66);
-            customerRegisterPanel.TabIndex = 1;
-            // 
-            // reqisterClientLabel
-            // 
-            reqisterClientLabel.AutoSize = true;
-            reqisterClientLabel.Location = new Point(21, 7);
-            reqisterClientLabel.Name = "reqisterClientLabel";
-            reqisterClientLabel.Size = new Size(134, 20);
-            reqisterClientLabel.TabIndex = 0;
-            reqisterClientLabel.Text = "Register new client";
-            // 
-            // registerButton
-            // 
-            registerButton.Location = new Point(565, 31);
-            registerButton.Name = "registerButton";
-            registerButton.Size = new Size(94, 28);
-            registerButton.TabIndex = 3;
-            registerButton.Text = "Register";
-            registerButton.UseVisualStyleBackColor = true;
-            // 
-            // lastName
-            // 
-            lastName.Location = new Point(389, 32);
-            lastName.Name = "lastName";
-            lastName.Size = new Size(170, 27);
-            lastName.TabIndex = 2;
-            // 
-            // firstName
-            // 
-            firstName.Location = new Point(209, 31);
-            firstName.Name = "firstName";
-            firstName.Size = new Size(172, 27);
-            firstName.TabIndex = 1;
-            // 
-            // usernameBox
-            // 
-            usernameBox.Location = new Point(21, 30);
-            usernameBox.Name = "usernameBox";
-            usernameBox.Size = new Size(182, 27);
-            usernameBox.TabIndex = 0;
             // 
             // clientsPanel
             // 
-            clientsPanel.Controls.Add(clientsListBox);
+            clientsPanel.BackColor = SystemColors.ControlLightLight;
+            clientsPanel.Controls.Add(showAllClientsListBox);
             clientsPanel.Controls.Add(clientsLabel);
-            clientsPanel.Location = new Point(7, 100);
+            clientsPanel.Location = new Point(7, 53);
             clientsPanel.Name = "clientsPanel";
-            clientsPanel.Size = new Size(183, 514);
+            clientsPanel.Size = new Size(183, 575);
             clientsPanel.TabIndex = 2;
             // 
-            // clientsListBox
+            // showAllClientsListBox
             // 
-            clientsListBox.FormattingEnabled = true;
-            clientsListBox.ItemHeight = 20;
-            clientsListBox.Location = new Point(21, 46);
-            clientsListBox.Name = "clientsListBox";
-            clientsListBox.Size = new Size(140, 444);
-            clientsListBox.TabIndex = 1;
+            showAllClientsListBox.FormattingEnabled = true;
+            showAllClientsListBox.ItemHeight = 20;
+            showAllClientsListBox.Location = new Point(18, 54);
+            showAllClientsListBox.Name = "showAllClientsListBox";
+            showAllClientsListBox.Size = new Size(140, 504);
+            showAllClientsListBox.TabIndex = 1;
             // 
             // clientsLabel
             // 
             clientsLabel.AutoSize = true;
+            clientsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            clientsLabel.ForeColor = Color.Navy;
             clientsLabel.Location = new Point(18, 23);
             clientsLabel.Name = "clientsLabel";
-            clientsLabel.Size = new Size(53, 20);
+            clientsLabel.Size = new Size(56, 20);
             clientsLabel.TabIndex = 0;
             clientsLabel.Text = "Clients";
             // 
             // packetsPanel
             // 
-            packetsPanel.Controls.Add(dataGridView1);
+            packetsPanel.BackColor = SystemColors.ControlLightLight;
+            packetsPanel.Controls.Add(deletePackageButton);
+            packetsPanel.Controls.Add(addNewPackageButton);
+            packetsPanel.Controls.Add(addNewClientButton);
+            packetsPanel.Controls.Add(showAllInternetPacketsGrid);
+            packetsPanel.Controls.Add(showAllCombinedPacketsGrid);
+            packetsPanel.Controls.Add(showAllTvPacketsGrid);
             packetsPanel.Controls.Add(combinePacketsLabel);
             packetsPanel.Controls.Add(internetPacketsLabel);
             packetsPanel.Controls.Add(tvPacketsLabel);
-            packetsPanel.Location = new Point(189, 100);
+            packetsPanel.Location = new Point(189, 53);
             packetsPanel.Name = "packetsPanel";
-            packetsPanel.Size = new Size(928, 517);
+            packetsPanel.Size = new Size(928, 575);
             packetsPanel.TabIndex = 3;
             // 
-            // dataGridView1
+            // deletePackageButton
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameColumn, description, price });
-            dataGridView1.Location = new Point(18, 61);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(421, 165);
-            dataGridView1.TabIndex = 3;
+            deletePackageButton.BackColor = SystemColors.GradientActiveCaption;
+            deletePackageButton.ForeColor = SystemColors.HotTrack;
+            deletePackageButton.Location = new Point(568, 473);
+            deletePackageButton.Name = "deletePackageButton";
+            deletePackageButton.Size = new Size(241, 29);
+            deletePackageButton.TabIndex = 8;
+            deletePackageButton.Text = "Delete Package";
+            deletePackageButton.UseVisualStyleBackColor = false;
+            deletePackageButton.Click += deletePackageButton_Click;
             // 
-            // nameColumn
+            // addNewPackageButton
             // 
-            nameColumn.HeaderText = "name";
-            nameColumn.MinimumWidth = 6;
-            nameColumn.Name = "nameColumn";
-            nameColumn.Width = 125;
+            addNewPackageButton.BackColor = SystemColors.GradientActiveCaption;
+            addNewPackageButton.ForeColor = SystemColors.HotTrack;
+            addNewPackageButton.Location = new Point(568, 420);
+            addNewPackageButton.Name = "addNewPackageButton";
+            addNewPackageButton.Size = new Size(241, 29);
+            addNewPackageButton.TabIndex = 7;
+            addNewPackageButton.Text = "Add new Package";
+            addNewPackageButton.UseVisualStyleBackColor = false;
+            addNewPackageButton.Click += addNewPackageButton_Click;
             // 
-            // description
+            // addNewClientButton
             // 
-            description.HeaderText = "descriptionColumn";
-            description.MinimumWidth = 6;
-            description.Name = "description";
-            description.Width = 120;
+            addNewClientButton.BackColor = SystemColors.GradientActiveCaption;
+            addNewClientButton.ForeColor = SystemColors.HotTrack;
+            addNewClientButton.Location = new Point(568, 367);
+            addNewClientButton.Name = "addNewClientButton";
+            addNewClientButton.Size = new Size(241, 29);
+            addNewClientButton.TabIndex = 6;
+            addNewClientButton.Text = "Add new Client";
+            addNewClientButton.UseVisualStyleBackColor = false;
+            addNewClientButton.Click += addNewClientButton_Click;
             // 
-            // price
+            // showAllInternetPacketsGrid
             // 
-            price.HeaderText = "priceColumn";
-            price.MinimumWidth = 6;
-            price.Name = "price";
-            price.Width = 125;
+            showAllInternetPacketsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            showAllInternetPacketsGrid.Columns.AddRange(new DataGridViewColumn[] { nameInternet, descriptionInternet, priceInternet, internetSpeed });
+            showAllInternetPacketsGrid.Location = new Point(18, 342);
+            showAllInternetPacketsGrid.Name = "showAllInternetPacketsGrid";
+            showAllInternetPacketsGrid.RowHeadersWidth = 51;
+            showAllInternetPacketsGrid.RowTemplate.Height = 29;
+            showAllInternetPacketsGrid.Size = new Size(421, 216);
+            showAllInternetPacketsGrid.TabIndex = 5;
+            // 
+            // nameInternet
+            // 
+            nameInternet.HeaderText = "name";
+            nameInternet.MinimumWidth = 6;
+            nameInternet.Name = "nameInternet";
+            nameInternet.Width = 125;
+            // 
+            // descriptionInternet
+            // 
+            descriptionInternet.HeaderText = "description";
+            descriptionInternet.MinimumWidth = 6;
+            descriptionInternet.Name = "descriptionInternet";
+            descriptionInternet.Width = 125;
+            // 
+            // priceInternet
+            // 
+            priceInternet.HeaderText = "price";
+            priceInternet.MinimumWidth = 6;
+            priceInternet.Name = "priceInternet";
+            priceInternet.Width = 125;
+            // 
+            // internetSpeed
+            // 
+            internetSpeed.HeaderText = "internet speed";
+            internetSpeed.MinimumWidth = 6;
+            internetSpeed.Name = "internetSpeed";
+            internetSpeed.Width = 125;
+            // 
+            // showAllCombinedPacketsGrid
+            // 
+            showAllCombinedPacketsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            showAllCombinedPacketsGrid.Columns.AddRange(new DataGridViewColumn[] { nameCombined, priceCombined, descriptionCombined });
+            showAllCombinedPacketsGrid.Location = new Point(472, 61);
+            showAllCombinedPacketsGrid.Name = "showAllCombinedPacketsGrid";
+            showAllCombinedPacketsGrid.RowHeadersWidth = 51;
+            showAllCombinedPacketsGrid.RowTemplate.Height = 29;
+            showAllCombinedPacketsGrid.Size = new Size(441, 216);
+            showAllCombinedPacketsGrid.TabIndex = 4;
+            // 
+            // nameCombined
+            // 
+            nameCombined.HeaderText = "name";
+            nameCombined.MinimumWidth = 6;
+            nameCombined.Name = "nameCombined";
+            nameCombined.Width = 125;
+            // 
+            // priceCombined
+            // 
+            priceCombined.HeaderText = "price";
+            priceCombined.MinimumWidth = 6;
+            priceCombined.Name = "priceCombined";
+            priceCombined.Width = 125;
+            // 
+            // descriptionCombined
+            // 
+            descriptionCombined.HeaderText = "description";
+            descriptionCombined.MinimumWidth = 6;
+            descriptionCombined.Name = "descriptionCombined";
+            descriptionCombined.Width = 125;
+            // 
+            // showAllTvPacketsGrid
+            // 
+            showAllTvPacketsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            showAllTvPacketsGrid.Columns.AddRange(new DataGridViewColumn[] { nameTV, descriptionTV, priceTV, numberOfChannelsTV });
+            showAllTvPacketsGrid.Location = new Point(18, 61);
+            showAllTvPacketsGrid.Name = "showAllTvPacketsGrid";
+            showAllTvPacketsGrid.RowHeadersWidth = 51;
+            showAllTvPacketsGrid.RowTemplate.Height = 29;
+            showAllTvPacketsGrid.Size = new Size(421, 216);
+            showAllTvPacketsGrid.TabIndex = 3;
+            // 
+            // nameTV
+            // 
+            nameTV.HeaderText = "name";
+            nameTV.MinimumWidth = 6;
+            nameTV.Name = "nameTV";
+            nameTV.Width = 125;
+            // 
+            // descriptionTV
+            // 
+            descriptionTV.HeaderText = "description";
+            descriptionTV.MinimumWidth = 6;
+            descriptionTV.Name = "descriptionTV";
+            descriptionTV.Width = 120;
+            // 
+            // priceTV
+            // 
+            priceTV.HeaderText = "price";
+            priceTV.MinimumWidth = 6;
+            priceTV.Name = "priceTV";
+            priceTV.Width = 125;
+            // 
+            // numberOfChannelsTV
+            // 
+            numberOfChannelsTV.HeaderText = "number of channels";
+            numberOfChannelsTV.MinimumWidth = 6;
+            numberOfChannelsTV.Name = "numberOfChannelsTV";
+            numberOfChannelsTV.Width = 125;
             // 
             // combinePacketsLabel
             // 
             combinePacketsLabel.AutoSize = true;
-            combinePacketsLabel.Location = new Point(452, 23);
+            combinePacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            combinePacketsLabel.ForeColor = Color.IndianRed;
+            combinePacketsLabel.Location = new Point(472, 23);
             combinePacketsLabel.Name = "combinePacketsLabel";
-            combinePacketsLabel.Size = new Size(123, 20);
+            combinePacketsLabel.Size = new Size(128, 20);
             combinePacketsLabel.TabIndex = 2;
             combinePacketsLabel.Text = "Combine packets";
             // 
             // internetPacketsLabel
             // 
             internetPacketsLabel.AutoSize = true;
-            internetPacketsLabel.Location = new Point(18, 248);
+            internetPacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            internetPacketsLabel.ForeColor = Color.IndianRed;
+            internetPacketsLabel.Location = new Point(18, 301);
             internetPacketsLabel.Name = "internetPacketsLabel";
-            internetPacketsLabel.Size = new Size(114, 20);
+            internetPacketsLabel.Size = new Size(123, 20);
             internetPacketsLabel.TabIndex = 1;
             internetPacketsLabel.Text = "Internet packets";
             // 
             // tvPacketsLabel
             // 
             tvPacketsLabel.AutoSize = true;
+            tvPacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            tvPacketsLabel.ForeColor = Color.IndianRed;
             tvPacketsLabel.Location = new Point(18, 23);
             tvPacketsLabel.Name = "tvPacketsLabel";
-            tvPacketsLabel.Size = new Size(80, 20);
+            tvPacketsLabel.Size = new Size(85, 20);
             tvPacketsLabel.TabIndex = 0;
             tvPacketsLabel.Text = "TV packets";
             // 
@@ -230,62 +321,53 @@ namespace InternetTvProviderWinApp
             ClientSize = new Size(1129, 629);
             Controls.Add(packetsPanel);
             Controls.Add(clientsPanel);
-            Controls.Add(customerRegisterPanel);
             Controls.Add(providerPanel);
             Name = "PocetnaStrana";
             Text = "PocetnaStrana";
             providerPanel.ResumeLayout(false);
             providerPanel.PerformLayout();
-            customerRegisterPanel.ResumeLayout(false);
-            customerRegisterPanel.PerformLayout();
             clientsPanel.ResumeLayout(false);
             clientsPanel.PerformLayout();
             packetsPanel.ResumeLayout(false);
             packetsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)showAllInternetPacketsGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)showAllCombinedPacketsGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)showAllTvPacketsGrid).EndInit();
             ResumeLayout(false);
+        }
+
+        private void LoadAllTables(object sender, EventArgs e)
+        {
+            showAllClientsInList();
+            showAllTVPackagesTable();
+            showAllInternetPackagesTable();
+            showAllCombinedPackagesTable();
         }
 
         #endregion
 
         private Panel providerPanel;
-        private Panel customerRegisterPanel;
         private Panel clientsPanel;
         private Label providerName;
         private Panel packetsPanel;
-        private TextBox usernameBox;
-
-
-        private void usernameBox_Enter(object sender, EventArgs e)
-        {
-            if (usernameBox.Text == "Username")
-            {
-                usernameBox.Text = "";
-                usernameBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            }
-        }
-
-        private void usernameBox_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(usernameBox.Text))
-            {
-                usernameBox.Text = "Username";
-                usernameBox.ForeColor = System.Drawing.SystemColors.GrayText;
-            }
-        }
-
-        private Button registerButton;
-        private TextBox lastName;
-        private TextBox firstName;
-        private Label reqisterClientLabel;
         private Label clientsLabel;
         private Label tvPacketsLabel;
-        private ListBox clientsListBox;
+        private ListBox showAllClientsListBox;
         private Label combinePacketsLabel;
         private Label internetPacketsLabel;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn nameColumn;
-        private DataGridViewTextBoxColumn description;
-        private DataGridViewTextBoxColumn price;
+        private DataGridView showAllTvPacketsGrid;
+        private DataGridView showAllInternetPacketsGrid;
+        private DataGridView showAllCombinedPacketsGrid;
+        private DataGridViewTextBoxColumn nameInternet;
+        private DataGridViewTextBoxColumn descriptionInternet;
+        private DataGridViewTextBoxColumn priceInternet;
+        private DataGridViewTextBoxColumn internetSpeed;
+        private DataGridViewTextBoxColumn nameCombined;
+        private DataGridViewTextBoxColumn priceCombined;
+        private DataGridViewTextBoxColumn descriptionCombined;
+        private DataGridViewTextBoxColumn nameTV;
+        private DataGridViewTextBoxColumn descriptionTV;
+        private DataGridViewTextBoxColumn priceTV;
+        private DataGridViewTextBoxColumn numberOfChannelsTV;
     }
 }

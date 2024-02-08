@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InternetTVProviderLibrary.StrategyPattern
 {
-    internal class ScanConfiguration : IStrategy
+    public class ScanConfiguration : IStrategy
     {
         public static string configurationString;
         public static string providerName;
