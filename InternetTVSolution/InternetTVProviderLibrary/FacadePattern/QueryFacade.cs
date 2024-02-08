@@ -82,7 +82,9 @@ namespace InternetTVProviderLibrary.FacadePattern
             packageBuilder.SetNumberOfChanels(numberOfChannels);
             packageBuilder.SetTypeID(packageTypeId);
 
-            TVPackage tvPackage = packageBuilder.Build();  
+            TVPackage tvPackage = packageBuilder.Build();
+
+            queries.addNewTVPackage(tvPackage);
         }
 
         public TVPackage getTVPackageByPackageID(int id)
@@ -125,6 +127,8 @@ namespace InternetTVProviderLibrary.FacadePattern
             packageBuilder.SetTypeID(packageTypeId);
 
             CombinedPackage combinedPackage = packageBuilder.Build();
+
+            queries.addNewCombinedPackage(combinedPackage);
         }
 
         public CombinedPackage getCombinedPackageByPackageID(int id)
@@ -132,9 +136,24 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getCombinedPackageByPackageID(id);
         }
 
-        public List<Package> getSubscribedPackagesByClientId(int id)
+        public PackageType getPackageTypeByID(int id)
         {
-            return queries.getSubscribedPackagesByClientId(id);
+            return queries.getPackageTypeByID(id);
+        }
+
+        public List<Package> getSubscribedPackagesByClientId(int clientId)
+        {
+            List<Package> packages = new List<Package>();
+
+            List<TVPackage> tvPackages = queries.getSubscribedTVPackagesByClientId(clientId);
+            List<InternetPackage> internetPackages = queries.getSubscribedInternetPackagesByClientId(clientId);
+            List<CombinedPackage> combinedPackages = queries.getSubscribedCombinedPackagesByClientId(clientId);
+
+            foreach (TVPackage tvPackage in tvPackages) { packages.Add(tvPackage); }
+            foreach (InternetPackage internetPackage in internetPackages) { packages.Add(internetPackage); }
+            foreach (CombinedPackage combinedPackage in combinedPackages) { packages.Add(combinedPackage); }
+
+            return packages;
         }
 
         public double getAllSubscriptionsPriceByClient(int clientId)
@@ -142,7 +161,7 @@ namespace InternetTVProviderLibrary.FacadePattern
             List<Package> packages = new List<Package>();
             double sum = 0.0;
 
-            packages = queries.getSubscribedPackagesByClientId(clientId);
+            packages = getSubscribedPackagesByClientId(clientId);
 
             foreach(Package package in packages) { sum += package.Price; }
             

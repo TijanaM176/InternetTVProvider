@@ -541,13 +541,152 @@ namespace InternetTVProviderLibrary
             return package;
         }
 
-        public List<Package> getSubscribedPackagesByClientId(int clientId)
+        public List<TVPackage> getSubscribedTVPackagesByClientId(int clientId)
         {
-            List<Package> allPackages = null;
+            List<TVPackage> packages = null;
 
-            /*	TODO */
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
-            return allPackages;
+            String query = @"select tp.*
+                            from Subscriptions as sub
+                            join TVPackage as tp on sub.TypeID = tp.TypeID 
+                            and sub.Packet_ID = tp.Id
+                            where sub.Client_ID = @clientId";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbParameter clientID;
+
+            clientID = dbCommand.CreateParameter();
+            clientID.ParameterName = "@packageID";
+            clientID.Value = clientId;
+
+            dbCommand.Parameters.Add(clientID);
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                TVPackageBuilder package = new TVPackageBuilder();
+
+                package.SetID(reader.GetInt32(0));
+                package.SetName(reader.GetString(1));
+                package.SetPrice(reader.GetDouble(2));
+                package.SetNumberOfChanels(reader.GetInt32(3));
+                package.SetTypeID(reader.GetInt32(4));
+
+                packages.Add(package.Build());
+            }
+
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
+            return packages;
+        }
+
+        public List<InternetPackage> getSubscribedInternetPackagesByClientId(int clientId)
+        {
+            List<InternetPackage> packages = null;
+
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            String query = @"select ip.*
+                            from Subscriptions as sub
+                            join InternetPackage as ip on sub.TypeID = ip.TypeID 
+                            and sub.Packet_ID = ip.Id
+                            where sub.Client_ID = @clientId";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbParameter clientID;
+
+            clientID = dbCommand.CreateParameter();
+            clientID.ParameterName = "@packageID";
+            clientID.Value = clientId;
+
+            dbCommand.Parameters.Add(clientID);
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                InternetPackageBuilder package = new InternetPackageBuilder();
+
+                package.SetID(reader.GetInt32(0));
+                package.SetName(reader.GetString(1));
+                package.SetPrice(reader.GetDouble(2));
+                package.SetInternetSpeed(reader.GetString(3));
+                package.SetTypeID(reader.GetInt32(4));
+
+                packages.Add(package.Build());
+            }
+
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
+            return packages;
+        }
+
+        public List<CombinedPackage> getSubscribedCombinedPackagesByClientId(int clientId)
+        {
+            List<CombinedPackage> packages = null;
+
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            String query = @"select cp.*
+                            from Subscriptions as sub
+                            join CombinePackage as cp on sub.TypeID = cp.TypeID 
+                            and sub.Packet_ID = cp.Id
+                            where sub.Client_ID = @clientId";
+
+            DbCommand dbCommand = connection.CreateCommand();
+            dbCommand.CommandText = query;
+
+            DbParameter clientID;
+
+            clientID = dbCommand.CreateParameter();
+            clientID.ParameterName = "@packageID";
+            clientID.Value = clientId;
+
+            dbCommand.Parameters.Add(clientID);
+
+            DbDataReader reader = dbCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                CombinedPackageBuilder package = new CombinedPackageBuilder();
+
+                package.SetID(reader.GetInt32(0));
+                package.SetName(reader.GetString(1));
+                package.SetPrice(reader.GetDouble(2));
+                package.SetTvPackageID(reader.GetInt32(3));
+                package.SetInternetPackageID(reader.GetInt32(4));
+                package.SetTypeID(reader.GetInt32(5));
+
+                packages.Add(package.Build());
+            }
+
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
+            return packages;
         }
 
         public int getPriceTVPackage(int packageID)

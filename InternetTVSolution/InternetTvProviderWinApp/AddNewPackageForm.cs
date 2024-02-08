@@ -65,7 +65,7 @@ namespace InternetTvProviderWinApp
             double price = Convert.ToDouble(priceNumericUpDown.Value);
             int packageType = packageTypeComboBox.SelectedIndex + 1;
             int numberOfChannels;
-            int internetSpeed;
+            string internetSpeed;
 
             if (packageType == 1)
             {
@@ -74,13 +74,13 @@ namespace InternetTvProviderWinApp
             }
             else if (packageType == 2)
             {
-                internetSpeed = Convert.ToInt32(internetSpeedNumericUpDown.Value);
+                internetSpeed = Convert.ToString(internetSpeedNumericUpDown.Value);
                 facade.addNewInternetPackage(name, price, internetSpeed, packageType);
             }
             else
             {
                 numberOfChannels = Convert.ToInt32(numberOfChannelsNumericUpDown.Value);
-                internetSpeed = Convert.ToInt32(internetSpeedNumericUpDown.Value);
+                internetSpeed = Convert.ToString(internetSpeedNumericUpDown.Value);
                 // facade.addNewCombinedPackage(name, price, , packageType);   
             }
 
