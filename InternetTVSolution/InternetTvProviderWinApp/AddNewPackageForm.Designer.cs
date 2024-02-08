@@ -36,13 +36,12 @@
             label5 = new Label();
             packageTypeComboBox = new ComboBox();
             internetSpeedLabel = new Label();
-            internetSpeedNumericUpDown = new NumericUpDown();
             numberOfChannelsLabel = new Label();
             numberOfChannelsNumericUpDown = new NumericUpDown();
             addPackageButton = new Button();
             cancelButton = new Button();
+            internetSpeedTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)priceNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)internetSpeedNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numberOfChannelsNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -126,13 +125,6 @@
             internetSpeedLabel.TabIndex = 8;
             internetSpeedLabel.Text = "Internet Speed";
             // 
-            // internetSpeedNumericUpDown
-            // 
-            internetSpeedNumericUpDown.Location = new Point(85, 460);
-            internetSpeedNumericUpDown.Name = "internetSpeedNumericUpDown";
-            internetSpeedNumericUpDown.Size = new Size(347, 27);
-            internetSpeedNumericUpDown.TabIndex = 9;
-            // 
             // numberOfChannelsLabel
             // 
             numberOfChannelsLabel.AutoSize = true;
@@ -174,17 +166,24 @@
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
             // 
+            // internetSpeedTextBox
+            // 
+            internetSpeedTextBox.Location = new Point(85, 470);
+            internetSpeedTextBox.Name = "internetSpeedTextBox";
+            internetSpeedTextBox.Size = new Size(347, 27);
+            internetSpeedTextBox.TabIndex = 14;
+            // 
             // AddNewPackageForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(508, 652);
+            Controls.Add(internetSpeedTextBox);
             Controls.Add(cancelButton);
             Controls.Add(addPackageButton);
             Controls.Add(numberOfChannelsNumericUpDown);
             Controls.Add(numberOfChannelsLabel);
-            Controls.Add(internetSpeedNumericUpDown);
             Controls.Add(internetSpeedLabel);
             Controls.Add(packageTypeComboBox);
             Controls.Add(label5);
@@ -197,7 +196,6 @@
             Name = "AddNewPackageForm";
             Text = "Add New Package";
             ((System.ComponentModel.ISupportInitialize)priceNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)internetSpeedNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)numberOfChannelsNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -213,10 +211,10 @@
         private Label label5;
         private ComboBox packageTypeComboBox;
         private Label internetSpeedLabel;
-        private NumericUpDown internetSpeedNumericUpDown;
         private Label numberOfChannelsLabel;
         private NumericUpDown numberOfChannelsNumericUpDown;
         private Button addPackageButton;
         private Button cancelButton;
+        private TextBox internetSpeedTextBox;
     }
 }

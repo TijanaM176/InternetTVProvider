@@ -26,7 +26,7 @@ namespace InternetTvProviderWinApp
             packageTypeComboBox.SelectedIndexChanged += indexChanged;
 
             internetSpeedLabel.Visible = false;
-            internetSpeedNumericUpDown.Visible = false;
+            internetSpeedTextBox.Visible = false;
         }
 
         private void indexChanged(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsNumericUpDown.Visible = true;
 
                 internetSpeedLabel.Visible = false;
-                internetSpeedNumericUpDown.Visible = false;
+                internetSpeedTextBox.Visible = false;
             }
             else if (selectedIndex == 1)
             {
@@ -47,7 +47,7 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsNumericUpDown.Visible = false;
 
                 internetSpeedLabel.Visible = true;
-                internetSpeedNumericUpDown.Visible = true;
+                internetSpeedTextBox.Visible = true;
             }
             else if (selectedIndex == 2)
             {
@@ -55,7 +55,7 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsNumericUpDown.Visible = true;
 
                 internetSpeedLabel.Visible = true;
-                internetSpeedNumericUpDown.Visible = true;
+                internetSpeedTextBox.Visible = true;
             }
         }
 
@@ -74,15 +74,18 @@ namespace InternetTvProviderWinApp
             }
             else if (packageType == 2)
             {
-                internetSpeed = Convert.ToString(internetSpeedNumericUpDown.Value);
+                internetSpeed = internetSpeedTextBox.Text;
                 facade.addNewInternetPackage(name, price, internetSpeed, packageType);
             }
             else
             {
                 numberOfChannels = Convert.ToInt32(numberOfChannelsNumericUpDown.Value);
-                internetSpeed = Convert.ToString(internetSpeedNumericUpDown.Value);
+                internetSpeed = internetSpeedTextBox.Text;
 
-                // facade.addNewCombinedPackage(name, price, , packageType);   
+                int tvPackageID = facade.getTVPackageIdByNumOfChannels(numberOfChannels);
+                int internetPackageID = facade.getInternetPackageIdByInternetSpeed(internetSpeed);
+
+                facade.addNewCombinedPackage(name, tvPackageID, internetPackageID, packageType);   
             }
 
 
