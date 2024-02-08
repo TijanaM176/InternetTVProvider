@@ -8,9 +8,9 @@ namespace InternetTVProviderLibrary.Models
 {
     public class InternetPackage : Package
     {
-        public int InternetSpeed { get; set; }
+        public string InternetSpeed { get; set; }
 
-        public InternetPackage(int id, string name, double price, int internetSpeed, int packageTypeId)
+        public InternetPackage(int id, string name, double price, string internetSpeed, int packageTypeId)
             : base(id, name, price, packageTypeId)
         {
             InternetSpeed = internetSpeed;

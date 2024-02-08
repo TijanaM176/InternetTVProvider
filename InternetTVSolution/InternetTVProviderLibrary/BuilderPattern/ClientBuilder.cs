@@ -46,10 +46,11 @@ namespace InternetTVProviderLibrary.BuilderPattern
             return new Client(Username, FirstName, LastName, Id);
         }
 
+        /*
         Client IClientBuilder.Build()
         {
             throw new NotImplementedException();
-        }
+        }*/
 
     }
 }

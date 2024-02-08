@@ -12,7 +12,7 @@ namespace InternetTVProviderLibrary.BuilderPattern
         private int id;
         private string name;
         private double price;
-        private int internetSpeed;
+        private string internetSpeed;
         private int typeID;
 
         public void SetID(int id)
@@ -30,7 +30,7 @@ namespace InternetTVProviderLibrary.BuilderPattern
             this.price = price;
         }
 
-        public void SetInternetSpeed(int internetSpeed)
+        public void SetInternetSpeed(string internetSpeed)
         {
             this.internetSpeed = internetSpeed;
         }

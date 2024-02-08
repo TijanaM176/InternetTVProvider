@@ -4,6 +4,7 @@ using InternetTVProviderLibrary.SingletonPattern;
 using Org.BouncyCastle.Bcpg;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
@@ -25,7 +26,10 @@ namespace InternetTVProviderLibrary
         {
             List<Client> clients = new List<Client>();
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"select * from Clients";
 
@@ -46,13 +50,20 @@ namespace InternetTVProviderLibrary
                     );
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
             return clients;
         }
 
         public void insertNewClient(Client cl)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"insert into Clients (Username, FirstName, LastName) values (@Username, @FirstName, @LastName)";
 
@@ -82,13 +93,20 @@ namespace InternetTVProviderLibrary
             if (succes > 0) { Console.WriteLine("Korisnik dodat u bazu"); }
             else { Console.WriteLine("Greska prilikom dodavanja korisnika u bazu!"); }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public Client getClientByUsername(String Username)
         {
             Client foundClient = null;
-            connection.Open();
+
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"select * from Clients 
                                 where username = @Username";
@@ -116,7 +134,11 @@ namespace InternetTVProviderLibrary
                              .Build();
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
             return foundClient;
         }
 
@@ -125,7 +147,10 @@ namespace InternetTVProviderLibrary
 
             List<TVPackage> packages = new List<TVPackage>();
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"select * from TVPackage";
 
@@ -147,7 +172,11 @@ namespace InternetTVProviderLibrary
                 packages.Add(package.Build());
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
             return packages;
         }
 
@@ -156,7 +185,10 @@ namespace InternetTVProviderLibrary
 
             List<InternetPackage> packages = new List<InternetPackage>();
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"select * from InternetPackage";
 
@@ -172,13 +204,17 @@ namespace InternetTVProviderLibrary
                 package.SetID(reader.GetInt32(0));
                 package.SetName(reader.GetString(1));
                 package.SetPrice(reader.GetDouble(2));
-                package.SetInternetSpeed(reader.GetInt32(3));
+                package.SetInternetSpeed(reader.GetString(3));
                 package.SetTypeID(reader.GetInt32(4));
 
                 packages.Add(package.Build());
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
             return packages;
         }
 
@@ -187,9 +223,12 @@ namespace InternetTVProviderLibrary
 
             List<CombinedPackage> packages = new List<CombinedPackage>();
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
-            String query = @"select * from CombinedPackage";
+            String query = @"select * from CombinePackage";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
@@ -210,13 +249,20 @@ namespace InternetTVProviderLibrary
                 packages.Add(package.Build());
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+
             return packages;
         }
 
         public void addNewTVPackage(TVPackage pack)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"insert into TVPackage (Name, Price, NumberOfChannels, TypeID) values (@Name, @Price, @NumberOfChannels, @PackageTypeID)";
 
@@ -251,12 +297,18 @@ namespace InternetTVProviderLibrary
             if (succes > 0) { Console.WriteLine("TVPaket dodat u bazu"); }
             else { Console.WriteLine("Greska prilikom dodavanja TV paketa u bazu!"); }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public void addNewInternetPackage(InternetPackage pack)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"insert into InternetPackage (Name, Price, InternetSpeed, TypeID) values (@Name, @Price, @InternetSpeed, @PackageTypeID)";
 
@@ -291,14 +343,20 @@ namespace InternetTVProviderLibrary
             if (succes > 0) { Console.WriteLine("Internet Paket dodat u bazu"); }
             else { Console.WriteLine("Greska prilikom dodavanja Internet paketa u bazu!"); }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public void addNewCombinedPackage(CombinedPackage pack)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
-            String query = @"insert into InternetPackage (Name, Price, TVPackageId, InternetPackageId, TypeID) values (@Name, @Price, @TVPackageId, @InternetPackageId, @PackageTypeID)";
+            String query = @"insert into CombinePackage (Name, Price, TVPackageId, InternetPackageId, TypeID) values (@Name, @Price, @TVPackageId, @InternetPackageId, @PackageTypeID)";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
@@ -336,14 +394,20 @@ namespace InternetTVProviderLibrary
             if (succes > 0) { Console.WriteLine("Kombinovani Paket dodat u bazu"); }
             else { Console.WriteLine("Greska prilikom dodavanja Kombinovanog paketa u bazu!"); }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public TVPackage getTVPackageByPackageID(int packageID)
         {
             TVPackage package = null;
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"SELECT * from TVPackage WHERE Id = @packageID";
 
@@ -365,7 +429,10 @@ namespace InternetTVProviderLibrary
                 package = packageBuilder.Build();
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             return package;
         }
@@ -374,7 +441,10 @@ namespace InternetTVProviderLibrary
         {
             InternetPackage package = null;
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"SELECT * from InternetPackage WHERE Id = @packageID";
 
@@ -390,13 +460,16 @@ namespace InternetTVProviderLibrary
                 packageBuilder.SetID(reader.GetInt32(0));
                 packageBuilder.SetName(reader.GetString(1));
                 packageBuilder.SetPrice(reader.GetDouble(2));
-                packageBuilder.SetInternetSpeed(reader.GetInt32(3));
+                packageBuilder.SetInternetSpeed(reader.GetString(3));
                 packageBuilder.SetTypeID(reader.GetInt32(4));
 
                 package = packageBuilder.Build();
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             return package;
         }
@@ -405,9 +478,12 @@ namespace InternetTVProviderLibrary
         {
             CombinedPackage package = null;
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
-            String query = @"SELECT * from CombinedPackage WHERE Id = @packageID";
+            String query = @"SELECT * from CombinePackage WHERE Id = @packageID";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
@@ -428,7 +504,10 @@ namespace InternetTVProviderLibrary
                 package = packageBuilder.Build();
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             return package;
         }
@@ -437,7 +516,10 @@ namespace InternetTVProviderLibrary
         {
             PackageType package = null;
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"SELECT * from PackageType WHERE Id = @id";
 
@@ -451,7 +533,10 @@ namespace InternetTVProviderLibrary
                 package = new PackageType(int.Parse(reader["PackageTypeID"].ToString()), reader["Name"].ToString());
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             return package;
         }
@@ -469,7 +554,10 @@ namespace InternetTVProviderLibrary
         {
             int priceTVPackage = 0;
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             /* TODO - dodati cenu u svakoj tabeli paketa */
             String query = @"SELECT Price from TVPackage
@@ -485,7 +573,10 @@ namespace InternetTVProviderLibrary
                 priceTVPackage = int.Parse(reader["Price"].ToString());
 	        }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             return priceTVPackage;
         }
@@ -494,7 +585,10 @@ namespace InternetTVProviderLibrary
         {
             int priceInternetPackage = 0;
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"SELECT Price from InternetPackage WHERE Id = @packageID";
 
@@ -508,7 +602,10 @@ namespace InternetTVProviderLibrary
                 priceInternetPackage = int.Parse(reader["Price"].ToString());
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             return priceInternetPackage;
         }
@@ -517,7 +614,10 @@ namespace InternetTVProviderLibrary
         {
             int typeID = 0;
 
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"SELECT Id from Package WHERE Name = @typeName";
 
@@ -531,14 +631,20 @@ namespace InternetTVProviderLibrary
                 typeID =  int.Parse(reader["Id"].ToString());
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             return typeID;
         }
 
         public void removeTVPackage(int packageID)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"DELETE FROM TVPackage WHERE Id = @packageID";
 
@@ -561,14 +667,21 @@ namespace InternetTVProviderLibrary
             {
                 Console.WriteLine("Greska prilikom brisanja TV paketa!");
             }
-            connection.Close();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public void removeInternetPackage(int packageID)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
-            String query = @"DELETE FROM internetPackage WHERE Id = @packageID";
+            String query = @"DELETE FROM InternetPackage WHERE Id = @packageID";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
@@ -590,14 +703,20 @@ namespace InternetTVProviderLibrary
                 Console.WriteLine("Greska prilikom brisanja internet paketa!");
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public void removeCombinedPackage(int packageID)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
-            String query = @"DELETE FROM CombinedPackage WHERE Id = @packageID";
+            String query = @"DELETE FROM CombinePackage WHERE Id = @packageID";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
@@ -619,12 +738,18 @@ namespace InternetTVProviderLibrary
                 Console.WriteLine("Greska prilikom brisanja kombinovanog paketa!");
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public void insertNewSubscriptionForClientID(Subscriptions subscription)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"INSERT into Subscriptions (clientId, packageId, type, activated) values (@clientID, @packageID, @typePackage, @isActivated)";
 
@@ -666,12 +791,18 @@ namespace InternetTVProviderLibrary
                 Console.WriteLine("Greska prilikom dodavanja supskripcije u bazu!");
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         public void updateSubscribedPackageByClientID(Subscriptions subscription)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             String query = @"UPDATE Subscriptions
                              SET activated = @isActivated
@@ -710,7 +841,10 @@ namespace InternetTVProviderLibrary
                 Console.WriteLine("Greska prilikom azuriranja supskripcije u bazi!");
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
     }

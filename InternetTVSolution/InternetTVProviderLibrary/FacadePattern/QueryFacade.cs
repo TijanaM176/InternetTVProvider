@@ -58,11 +58,13 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getAllClients();
         }
 
-        public void addNewClient(string username, string firstname, string lastname)
+        public Client addNewClient(string username, string firstname, string lastname)
         {
             Client cl = new ClientBuilder().SetUsername(username).SetIme(firstname).SetPrezime(lastname).Build();
 
             queries.insertNewClient(cl);
+
+            return queries.getClientByUsername(username);
         }
 
         public void addNewTVPackage(string name, double price, int numberOfChannels, int packageTypeId)
@@ -74,12 +76,15 @@ namespace InternetTVProviderLibrary.FacadePattern
             packageBuilder.SetNumberOfChanels(numberOfChannels);
             packageBuilder.SetTypeID(packageTypeId);
 
-           TVPackage tvPackage = packageBuilder.Build();
-
-            queries.addNewTVPackage(tvPackage);
+            TVPackage tvPackage = packageBuilder.Build();  
         }
 
-        public void addNewInternetPackage(string name, double price, int internetSpeed, int packageTypeId)
+        public TVPackage getTVPackageByPackageID(int id)
+        {
+            return queries.getTVPackageByPackageID(id);
+        }
+
+        public void addNewInternetPackage(string name, double price, string internetSpeed, int packageTypeId)
         {
             InternetPackageBuilder packageBuilder = new InternetPackageBuilder();
 
@@ -93,9 +98,19 @@ namespace InternetTVProviderLibrary.FacadePattern
             queries.addNewInternetPackage(internetPackage);
         }
 
-        public void addNewCombinedPackage(string name, double price, int tvPackageId, int internetPackageId, int packageTypeId)
+        public InternetPackage getInternetPackageByPackageID(int id)
+        {
+            return queries.getInternetPackageByPackageID(id);
+        }
+
+        public void addNewCombinedPackage(string name, int tvPackageId, int internetPackageId, int packageTypeId)
         {
             CombinedPackageBuilder packageBuilder = new CombinedPackageBuilder();
+
+
+            double price = 0.0;
+            price += queries.getPriceTVPackage(tvPackageId);
+            price += queries.getPriceInternetPackage(internetPackageId);
 
             packageBuilder.SetName(name);
             packageBuilder.SetPrice(price);
@@ -104,6 +119,11 @@ namespace InternetTVProviderLibrary.FacadePattern
             packageBuilder.SetTypeID(packageTypeId);
 
             CombinedPackage combinedPackage = packageBuilder.Build();
+        }
+
+        public CombinedPackage getCombinedPackageByPackageID(int id)
+        {
+            return queries.getCombinedPackageByPackageID(id);
         }
 
         public double getAllSubscriptionsPriceByClient(int clientId)

@@ -16,7 +16,7 @@ namespace InternetTVProviderLibrary.StrategyPattern
         {
             try
             {
-                fileData = File.ReadAllLines("C:\\GIT projekti\\DS\\tim-13\\InternetTVSolution\\InternetTVProviderLibrary\\StrategyPattern\\configurationSQL.txt");
+                fileData = File.ReadAllLines("C:\\Users\\PC\\Desktop\\ds\\tim-13\\InternetTVSolution\\InternetTVProviderLibrary\\StrategyPattern\\configurationSQL.txt");
 
                 if (fileData.Length < 2)
                 {
