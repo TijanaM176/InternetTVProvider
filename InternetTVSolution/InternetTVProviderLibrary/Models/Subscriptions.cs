@@ -18,14 +18,17 @@ namespace InternetTVProviderLibrary.Models
         public int packageId { get; set; }
         [ForeignKey("packageId")]
 
+        public int packageTypeID { get; set; }
         public bool activated { get; set; }
         Package package { get; set; }
+        
 
 
-        public Subscriptions(int clientId, int packageId,bool activated)
+        public Subscriptions(int clientId, int packageId, int packageTypeID, bool activated)
         {
             this.clientId = clientId;
             this.packageId = packageId;
+            this.packageTypeID = packageTypeID; 
             this.activated = activated;
         }
     }

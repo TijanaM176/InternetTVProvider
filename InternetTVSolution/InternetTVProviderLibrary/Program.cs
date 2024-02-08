@@ -23,8 +23,8 @@ namespace InternetTVProviderLibrary
             ConnectToDatabase connection = new ConnectToDatabase();
             context.setStrategy(connection);
             context.ExecuteStrategy();
-         //  QueryFacade facade = new QueryFacade(DatabaseManager.Instance.Connection);
 
+            //QueryFacade facade = new QueryFacade(DatabaseManager.Instance.Connection);
 
             //Console.ReadLine();
         }

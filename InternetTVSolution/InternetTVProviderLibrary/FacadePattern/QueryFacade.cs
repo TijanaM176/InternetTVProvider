@@ -141,13 +141,18 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getPackageTypeByID(id);
         }
 
-        public List<Package> getSubscribedPackagesByClientId(int clientId)
+        public int getTypeID(string typeName)
+        {
+            return queries.getTypeID(typeName);
+        }
+
+        public List<Package> getSubscribedPackagesByClientId(int clientId, bool activated) //ako je activated false onda je potrebno izlistati celu listu
         {
             List<Package> packages = new List<Package>();
 
-            List<TVPackage> tvPackages = queries.getSubscribedTVPackagesByClientId(clientId);
-            List<InternetPackage> internetPackages = queries.getSubscribedInternetPackagesByClientId(clientId);
-            List<CombinedPackage> combinedPackages = queries.getSubscribedCombinedPackagesByClientId(clientId);
+            List<TVPackage> tvPackages = queries.getSubscribedTVPackagesByClientId(clientId, activated);
+            List<InternetPackage> internetPackages = queries.getSubscribedInternetPackagesByClientId(clientId, activated);
+            List<CombinedPackage> combinedPackages = queries.getSubscribedCombinedPackagesByClientId(clientId, activated);
 
             foreach (TVPackage tvPackage in tvPackages) { packages.Add(tvPackage); }
             foreach (InternetPackage internetPackage in internetPackages) { packages.Add(internetPackage); }
@@ -161,12 +166,34 @@ namespace InternetTVProviderLibrary.FacadePattern
             List<Package> packages = new List<Package>();
             double sum = 0.0;
 
-            packages = getSubscribedPackagesByClientId(clientId);
+            packages = getSubscribedPackagesByClientId(clientId, true); //ako je activated true onda je potrebno uzeti samo aktivne pakete
 
-            foreach(Package package in packages) { sum += package.Price; }
+            foreach (Package package in packages) { sum += package.Price; }
             
             return sum; 
 
+        }
+
+        public void removeTVPackage(int packageID)
+        {
+            queries.removeTVPackage(packageID);
+        }
+
+        public void removeInternetPackage(int packageID)
+        {
+            queries.removeInternetPackage(packageID);
+        }
+
+        public void removeCombinedPackage(int packageID)
+        {
+            queries.removeCombinedPackage(packageID);   
+        }
+
+        public void insertNewSubscriptionForClientID(int clientId, int packageId, int packageTypeID, bool activated)
+        {
+            Subscriptions sub = new Subscriptions(clientId, packageId, packageTypeID, activated);
+
+            queries.insertNewSubscriptionForClientID(sub);
         }
 
         public int getTVPackageIdByNumOfChannels(int numOfChannels)
