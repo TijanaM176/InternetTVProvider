@@ -229,41 +229,95 @@ namespace InternetTVProviderLibrary.FactoryPattern
                     ";
 
 
-
-                        using (MySqlCommand command = new MySqlCommand(insertClientsQuery, connection))
+                    string checkClientsQuery = "SELECT COUNT(*) FROM Clients";
+                    using (MySqlCommand command = new MySqlCommand(checkClientsQuery, connection))
+                    {
+                        int clientCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (clientCount == 0)
                         {
-                            command.ExecuteNonQuery();
-                        }
 
-                        using (MySqlCommand command = new MySqlCommand(insertPackagesQuery, connection))
-                        {
-                            command.ExecuteNonQuery();
+                            using (MySqlCommand command1 = new MySqlCommand(insertClientsQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
                         }
+                    }
 
-                        using (MySqlCommand command = new MySqlCommand(insertPackageTypeQuery, connection))
+                    string checkPackagesQuery = "SELECT COUNT(*) FROM Packages";
+                    using (MySqlCommand command = new MySqlCommand(checkPackagesQuery, connection))
+                    {
+                        int packageCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (packageCount == 0)
                         {
-                            command.ExecuteNonQuery();
-                        }
 
-                    using (MySqlCommand command = new MySqlCommand(insertTVPackageQuery, connection))
+                            using (MySqlCommand command1 = new MySqlCommand(insertPackagesQuery, connection))
                         {
-                            command.ExecuteNonQuery();
+                            command1.ExecuteNonQuery();
                         }
+                        }
+                    }
+                    string checkPackagesTypeQuery = "SELECT COUNT(*) FROM PackageType";
+                    using (MySqlCommand command = new MySqlCommand(checkPackagesTypeQuery, connection))
+                    {
+                        int packagetypeCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (packagetypeCount == 0)
+                        {
+                            using (MySqlCommand command1 = new MySqlCommand(insertPackageTypeQuery, connection))
+                        {
+                            command1.ExecuteNonQuery();
+                        }
+                        }
+                    }
 
-                        using (MySqlCommand command = new MySqlCommand(insertInternetPackageQuery, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
 
-                        using (MySqlCommand command = new MySqlCommand(insertCombinePackageQuery, connection))
+                    string checkTVPackagesQuery = "SELECT COUNT(*) FROM TVPackage;";
+                    using (MySqlCommand command = new MySqlCommand(checkTVPackagesQuery, connection))
+                    {
+                        int tvpackCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (tvpackCount == 0)
                         {
-                            command.ExecuteNonQuery();
+                            using (MySqlCommand command1 = new MySqlCommand(insertTVPackageQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
                         }
-
-                        using (MySqlCommand command = new MySqlCommand(insertProviderQuery, connection))
+                    }
+                    string checkInternetPackagesQuery = "SELECT COUNT(*) FROM InternetPackage;";
+                    using (MySqlCommand command = new MySqlCommand(checkInternetPackagesQuery, connection))
+                    {
+                        int internetpackCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (internetpackCount == 0)
                         {
-                            command.ExecuteNonQuery();
+                            using (MySqlCommand command1 = new MySqlCommand(insertInternetPackageQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
                         }
+                    }
+                    string checkCombinedPackagesQuery = "SELECT COUNT(*) FROM CombinePackage;";
+                    using (MySqlCommand command = new MySqlCommand(checkCombinedPackagesQuery, connection))
+                    {
+                        int cominedpackCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (cominedpackCount == 0)
+                        {
+                            using (MySqlCommand command1 = new MySqlCommand(insertCombinePackageQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                    string checkProviderPackagesQuery = "SELECT COUNT(*) FROM Provider;";
+                    using (MySqlCommand command = new MySqlCommand(checkProviderPackagesQuery, connection))
+                    {
+                        int providerCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (providerCount == 0)
+                        {
+                            using (MySqlCommand command1 = new MySqlCommand(insertProviderQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
+                    }
 
 
 

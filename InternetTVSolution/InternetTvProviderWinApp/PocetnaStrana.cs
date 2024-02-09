@@ -25,7 +25,6 @@ namespace InternetTvProviderWinApp
             showAllCombinedPackagesTable();
         }
 
-
         public void showAllClientsInList()
         {
             showAllClientsListBox.Items.Clear();
@@ -36,6 +35,7 @@ namespace InternetTvProviderWinApp
             {
                 showAllClientsListBox.Items.Add(client.Username);
             }
+            
 
             showAllClientsListBox.SelectedIndex = 0;
         }
@@ -116,7 +116,8 @@ namespace InternetTvProviderWinApp
 
         private void addNewClientButton_Click(object sender, EventArgs e)
         {
-            AddNewClient addNewClient = new AddNewClient(connection);
+            AddNewClient addNewClient = new AddNewClient(this,connection);
+            addNewClient.NoviKlijentDodat += AddNewClient_NoviKlijentDodat;
             addNewClient.ShowDialog();
         }
 
@@ -124,6 +125,12 @@ namespace InternetTvProviderWinApp
         {
             AddNewPackageForm addNewPackage = new AddNewPackageForm(connection);
             addNewPackage.ShowDialog();
+        }
+        private void AddNewClient_NoviKlijentDodat(object sender, DodavanjeKlijentaEventArgs e)
+        {
+            // Osvežavanje liste klijenata na osnovu informacija o novom klijentu
+            string noviKlijent = e.NoviKlijent;
+            UpdateUserView(noviKlijent);
         }
 
         private void deletePackageButton_Click(object sender, EventArgs e)
@@ -135,6 +142,18 @@ namespace InternetTvProviderWinApp
         {
 
         }
+        private void UpdateUserView(string noviKlijent)
+        {
+            // Dodaj novog klijenta u listu klijenata na formi
+            // Ako imate ListBox na formi gde prikazujete klijente, dodajte novog klijenta u tu ListBox
+            // Na primer, ako ListBox zove showAllClientsListBox:
+
+            showAllClientsListBox.Items.Add(noviKlijent);
+
+            // Opciono: Postavite novog klijenta kao selektovanog u ListBox-u
+            showAllClientsListBox.SelectedItem = noviKlijent;
+        }
+
     }
 
 }

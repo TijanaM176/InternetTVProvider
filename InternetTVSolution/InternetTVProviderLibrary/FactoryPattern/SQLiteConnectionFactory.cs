@@ -224,40 +224,89 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         INSERT INTO Provider (Name, ClientId, PackageId) VALUES
                         ('SBB', 2, 2);
                     ";
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertClientsQuery, connection))
+                    string checkClientsQuery = "SELECT COUNT(*) FROM Clients;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkClientsQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int clientCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (clientCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertClientsQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertPackagesQuery, connection))
+                    string checkPackagesQuery = "SELECT COUNT(*) FROM Packages;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkPackagesQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int packageCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (packageCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertPackagesQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertPackageTypeQuery, connection))
+                    string checkPackagesTypeQuery = "SELECT COUNT(*) FROM PackageType;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkPackagesTypeQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int packagetypeCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (packagetypeCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertPackageTypeQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertTVPackageQuery, connection))
+                    string checkTVPackagesQuery = "SELECT COUNT(*) FROM TVPackage;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkTVPackagesQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int tvpackCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (tvpackCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertTVPackageQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertInternetPackageQuery, connection))
+                    string checkInternetPackagesQuery = "SELECT COUNT(*) FROM InternetPackage;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkInternetPackagesQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int internetpackCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (internetpackCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertInternetPackageQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertCombinePackageQuery, connection))
+                    string checkCombinedPackagesQuery = "SELECT COUNT(*) FROM CombinePackage;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkCombinedPackagesQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int cominedpackCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (cominedpackCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertCombinePackageQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertProviderQuery, connection))
+                    string checkProviderPackagesQuery = "SELECT COUNT(*) FROM Provider;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkProviderPackagesQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int providerCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (providerCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertProviderQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
 
                     Console.WriteLine("Data inserted into SQLite tables.");
