@@ -1,5 +1,6 @@
 ﻿using InternetTVProviderLibrary.FacadePattern;
 using InternetTVProviderLibrary.Models;
+using InternetTVProviderLibrary.StrategyPattern;
 using System.Data.Common;
 using System.Windows.Forms.VisualStyles;
 
@@ -23,6 +24,7 @@ namespace InternetTvProviderWinApp
             InitializeComponent();
             facade = new QueryFacade(connection);
 
+            providerName.Text = ScanConfiguration.providerName;
             showAllClientsInList();
             showAllTVPackagesTable();
             showAllInternetPackagesTable();
