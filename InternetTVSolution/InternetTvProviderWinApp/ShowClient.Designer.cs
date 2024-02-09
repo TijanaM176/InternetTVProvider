@@ -37,7 +37,7 @@
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             label5 = new Label();
-            button1 = new Button();
+            addNewSubscriptionButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -50,7 +50,6 @@
             label1.Size = new Size(91, 23);
             label1.TabIndex = 0;
             label1.Text = "FirstName:";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -73,7 +72,6 @@
             label3.Size = new Size(91, 23);
             label3.TabIndex = 2;
             label3.Text = "Username:";
-            label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -95,7 +93,6 @@
             listView1.TabIndex = 5;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
-            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
             // 
             // columnHeader1
             // 
@@ -117,28 +114,30 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = Color.Firebrick;
-            label5.Location = new Point(507, 9);
+            label5.Location = new Point(527, 35);
             label5.Name = "label5";
             label5.Size = new Size(58, 28);
             label5.TabIndex = 6;
             label5.Text = "Total:";
             // 
-            // button1
+            // addNewSubscriptionButton
             // 
-            button1.Location = new Point(513, 306);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 7;
-            button1.Text = "Add new";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            addNewSubscriptionButton.BackColor = SystemColors.GradientActiveCaption;
+            addNewSubscriptionButton.ForeColor = SystemColors.HotTrack;
+            addNewSubscriptionButton.Location = new Point(527, 306);
+            addNewSubscriptionButton.Name = "addNewSubscriptionButton";
+            addNewSubscriptionButton.Size = new Size(168, 29);
+            addNewSubscriptionButton.TabIndex = 7;
+            addNewSubscriptionButton.Text = "Add new Subscription";
+            addNewSubscriptionButton.UseVisualStyleBackColor = false;
+            addNewSubscriptionButton.Click += addNewSubscriptionButton_Click;
             // 
             // ShowClient
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(648, 369);
-            Controls.Add(button1);
+            ClientSize = new Size(715, 369);
+            Controls.Add(addNewSubscriptionButton);
             Controls.Add(label5);
             Controls.Add(listView1);
             Controls.Add(label4);
@@ -166,6 +165,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private Label label5;
-        private Button button1;
+        private Button addNewSubscriptionButton;
     }
 }

@@ -5,7 +5,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace InternetTvProviderWinApp
 {
-    public partial class PocetnaStrana : Form
+    public partial class HomePage : Form
     {
         DbConnection connection;
         QueryFacade facade;
@@ -17,7 +17,7 @@ namespace InternetTvProviderWinApp
         private static readonly int INTERNETTypeID = 2;
         private static readonly int COMBINEDTypeID = 3;
 
-        public PocetnaStrana(DbConnection connection)
+        public HomePage(DbConnection connection)
         {
             this.connection = connection;
             InitializeComponent();
@@ -75,7 +75,6 @@ namespace InternetTvProviderWinApp
                 showAllTvPacketsGrid.Rows[rowIndex].Cells["descriptionTV"].Value = "opis";
                 showAllTvPacketsGrid.Rows[rowIndex].Cells["priceTV"].Value = tvPackage.Price;
                 showAllTvPacketsGrid.Rows[rowIndex].Cells["numberOfChannelsTV"].Value = tvPackage.NumberOfChannels;
-
                 showAllTvPacketsGrid.Rows[rowIndex].Cells["nameTV"].Tag = tvPackage.ID;
             }
 
@@ -97,8 +96,7 @@ namespace InternetTvProviderWinApp
                 showAllInternetPacketsGrid.Rows[rowIndex].Cells["descriptionInternet"].Value = "opis";
                 showAllInternetPacketsGrid.Rows[rowIndex].Cells["priceInternet"].Value = internetPackage.Price;
                 showAllInternetPacketsGrid.Rows[rowIndex].Cells["internetSpeed"].Value = internetPackage.InternetSpeed;
-
-                showAllInternetPacketsGrid.Rows[rowIndex].Cells["nameInternet"].Tag = internetPackage.ID; // Pretpostavljamo da je ID dostupan u InternetPackage klasi
+                showAllInternetPacketsGrid.Rows[rowIndex].Cells["nameInternet"].Tag = internetPackage.ID; 
 
             }
 
@@ -119,7 +117,6 @@ namespace InternetTvProviderWinApp
                 showAllCombinedPacketsGrid.Rows[rowIndex].Cells["nameCombined"].Value = combinedPackage.Name;
                 showAllCombinedPacketsGrid.Rows[rowIndex].Cells["descriptionCombined"].Value = "opis";
                 showAllCombinedPacketsGrid.Rows[rowIndex].Cells["priceCombined"].Value = combinedPackage.Price;
-
                 showAllCombinedPacketsGrid.Rows[rowIndex].Cells["nameCombined"].Tag = combinedPackage.ID;
             }
 
@@ -168,11 +165,6 @@ namespace InternetTvProviderWinApp
             string noviPaket = e.NazivPaketa;
             string tipPaketa = e.TipPaketa;
             UpdateCombinedPackageView(noviPaket, tipPaketa);
-        }
-
-        private void packetsPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void UpdateUserView(string noviKlijent)
@@ -283,6 +275,11 @@ namespace InternetTvProviderWinApp
                 return true;
             else
                 return false;
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 

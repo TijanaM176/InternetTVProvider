@@ -179,9 +179,8 @@ namespace InternetTVProviderLibrary.FacadePattern
 
             bool existSub = subscriptions.Any(sub => sub.clientId == clientId && sub.packageId == packageId && sub.name == name && sub.price == price && sub.packageTypeID == packageTypeID);
 
-            if (existSub == null)
+            if (existSub == false)
             {
-
                 queries.insertNewSubscriptionForClientID(newSub);
             }
         }

@@ -2,7 +2,7 @@
 using InternetTVProviderLibrary.StrategyPattern;
 namespace InternetTvProviderWinApp
 {
-    partial class PocetnaStrana
+    partial class HomePage
     {
         /// <summary>
         ///  Required designer variable.
@@ -134,7 +134,6 @@ namespace InternetTvProviderWinApp
             packetsPanel.Name = "packetsPanel";
             packetsPanel.Size = new Size(928, 575);
             packetsPanel.TabIndex = 3;
-            packetsPanel.Paint += packetsPanel_Paint;
             // 
             // deleteSelectedPackage
             // 

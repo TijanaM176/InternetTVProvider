@@ -51,7 +51,7 @@ namespace InternetTvProviderWinApp
         }
 
 
-        private void DisplaySubscriptions()
+        public void DisplaySubscriptions()
         {
             listView1.Items.Clear();
 
@@ -62,10 +62,10 @@ namespace InternetTvProviderWinApp
                 ListViewItem item = new ListViewItem(subscription.name);
                 item.SubItems.Add(subscription.price.ToString());
                 //item.SubItems.Add(subscription.activated.ToString());
-                
+
                 string status = (subscription.activated == 1) ? "Active" : "Inactive";
                 item.SubItems.Add(status);
-                
+
                 listView1.Items.Add(item);
             }
 
@@ -118,27 +118,11 @@ namespace InternetTvProviderWinApp
             this.Close();
         }
 
-
-        private void label1_Click(object sender, EventArgs e)
+        private void addNewSubscriptionButton_Click(object sender, EventArgs e)
         {
-
+            AddNewSubscription addNewSubscription = new AddNewSubscription(connection, client_id, this);
+            addNewSubscription.ShowDialog();
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-
-        }
     }
 }

@@ -36,7 +36,7 @@ namespace InternetTvProviderWinApp
             internetSpeedLabel.Visible = false;
             internetSpeedTextBox.Visible = false;
 
-            PocetnaStrana pocetnaStrana = new PocetnaStrana(connection);
+            HomePage pocetnaStrana = new HomePage(connection);
             facade = new QueryFacade(connection);
         }
         private void OnNoviPaketDodatInternet(string nazivPaketa,string tipPaketa,double price, string internetSpeed )

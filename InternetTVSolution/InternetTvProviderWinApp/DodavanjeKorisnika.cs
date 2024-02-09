@@ -17,9 +17,9 @@ namespace InternetTvProviderWinApp
     public partial class AddNewClient : Form
     {
         QueryFacade userFacade;
-        PocetnaStrana pocetna;
+        HomePage pocetna;
         public event EventHandler<DodavanjeKlijentaEventArgs> NoviKlijentDodat;
-        public AddNewClient(PocetnaStrana pocetna,DbConnection connection)
+        public AddNewClient(HomePage pocetna,DbConnection connection)
         {
             InitializeComponent();
             this.pocetna = pocetna;

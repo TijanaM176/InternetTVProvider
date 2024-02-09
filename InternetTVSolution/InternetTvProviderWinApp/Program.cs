@@ -24,7 +24,7 @@ namespace InternetTvProviderWinApp
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new PocetnaStrana(DatabaseManager.Instance.Connection));
+            Application.Run(new HomePage(DatabaseManager.Instance.Connection));
         }
     }
 }

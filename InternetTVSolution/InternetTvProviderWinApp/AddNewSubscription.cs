@@ -15,27 +15,38 @@ namespace InternetTvProviderWinApp
     public partial class AddNewSubscription : Form
     {
         QueryFacade facade;
+        ShowClient showClient;
+        int clientID;
 
-        public AddNewSubscription(DbConnection connection)
+        public AddNewSubscription(DbConnection connection, int clientID, ShowClient showClient)
         {
             InitializeComponent();
 
+            this.clientID = clientID;
+            this.showClient = showClient;
             cancelButton.Click += closeAddNewSub;
             addSubButton.Click += addNewSub;
 
-            PocetnaStrana pocetnaStrana = new PocetnaStrana(connection);
+            HomePage pocetnaStrana = new HomePage(connection);
             facade = new QueryFacade(connection);
         }
 
         public void addNewSub(object sender, EventArgs e)
         {
-            int clientID = Convert.ToInt32(ClientIDTextBox);
-            int packageID = Convert.ToInt32(PackageIDTextBox);
-            string name = Convert.ToString(NameTextBox);
+            int packageID = Convert.ToInt32(PackageIDTextBox.Text);
+            string name = NameTextBox.Text;
             double price = Convert.ToDouble(priceNumericUpDown.Value);
-            int type = Convert.ToInt32(packageTypeTextBox);
+            int type = Convert.ToInt32(packageTypeTextBox.Text);
 
-            facade.insertNewSubscriptionForClientID(clientID, packageID, name, price, type);
+            if (int.TryParse(PackageIDTextBox.Text, out packageID))
+            {
+                facade.insertNewSubscriptionForClientID(clientID, packageID, name, price, type);
+                showClient.DisplaySubscriptions();
+            }
+            else
+            {
+                MessageBox.Show("Ne postoji paket sa ID = " + PackageIDTextBox + "!");
+            }
 
             this.Close();
         }
@@ -44,6 +55,6 @@ namespace InternetTvProviderWinApp
         {
             this.Close();
         }
-      
+
     }
 }
