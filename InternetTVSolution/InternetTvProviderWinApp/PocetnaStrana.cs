@@ -31,6 +31,7 @@ namespace InternetTvProviderWinApp
         public void showAllClientsInList()
         {
             showAllClientsListBox.Items.Clear();
+            showAllClientsListBox.DoubleClick += ShowSingleClient;
 
             List<Client> clients = facade.getAllClients();
 
@@ -42,6 +43,7 @@ namespace InternetTvProviderWinApp
             showAllClientsListBox.SelectedIndex = 0;
         }
 
+<<<<<<< HEAD
 
         public void showAllClientsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -55,6 +57,23 @@ namespace InternetTvProviderWinApp
         }
 
 
+=======
+        private void ShowSingleClient(object sender, EventArgs e) 
+        { 
+            if(showAllClientsListBox.SelectedItem != null)
+            {
+                string selectedUsername = showAllClientsListBox.SelectedItem.ToString();
+                //Client selectedClient = facade.getAllClients().FirstOrDefault(client => client.Username == selectedUsername);
+                
+              //  if (selectedClient != null) 
+               // {
+                    ShowClient showClient = new ShowClient(selectedUsername, connection);
+                    showClient.ShowDialog();
+               // }
+            }
+        }
+
+>>>>>>> 500e1ab1f40e8a8e2891c513db734b4adae049a4
         public void showAllTVPackagesTable()
         {
             showAllTvPacketsGrid.Rows.Clear();
