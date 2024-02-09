@@ -231,6 +231,7 @@ namespace InternetTVProviderLibrary.FactoryPattern
                     string insertSubscriptionsQuery = @"
                         INSERT INTO Subscriptions (Client_ID, Packet_ID, TypeID, Activated) VALUES
                         (1, 1, 1, 1),
+                        (1, 2, 3, 1),
                         (2, 2, 2, 1),
                         (3, 3, 3, 1);
                     ";

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace InternetTvProviderWinApp
@@ -19,26 +20,26 @@ namespace InternetTvProviderWinApp
     {
         DbConnection connection;
         QueryFacade facade;
+        int client_id;
 
         public ShowClient(string username, DbConnection connection)
         {
             this.connection = connection;
             facade = new QueryFacade(connection);
-            int cliend_id;
+
 
             InitializeComponent();
-            this.facade = facade;
 
             InternetTVProviderLibrary.Models.Client client = facade.getClientByUsername(username);
 
             if (client != null)
             {
-                cliend_id = client.Id;
+                client_id = client.Id;
                 label1.Text = "First Name: " + client.FirstName;
                 label2.Text = "Last Name: " + client.LastName;
                 label3.Text = "Username: " + client.Username;
 
-                //DisplaySubscriptions();
+                DisplaySubscriptions();
             }
             else
             {
@@ -48,15 +49,26 @@ namespace InternetTvProviderWinApp
 
         }
 
-        /*
+
         private void DisplaySubscriptions()
         {
+            listView1.Items.Clear();
 
+            List<Package> packages = facade.getSubscribedPackagesByClientId(client_id, true);
+
+            foreach (Package package in packages)
+            {
+                ListViewItem item = new ListViewItem(package.Name);
+
+                listView1.Items.Add(item);
+            }
         }
-        */
+
+
 
         private void ShowClient_Load(object sender, EventArgs e)
         {
+
 
         }
 
