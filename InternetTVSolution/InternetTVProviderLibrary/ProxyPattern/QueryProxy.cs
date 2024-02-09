@@ -103,19 +103,9 @@ namespace InternetTVProviderLibrary.ProxyPattern
             return queries.getPackageTypeByID(id);
         }
 
-        public List<TVPackage> getSubscribedTVPackagesByClientId(int clientId, bool activated)
-        {
-            return queries.getSubscribedTVPackagesByClientId(clientId, activated);
-        }
-
-        public List<InternetPackage> getSubscribedInternetPackagesByClientId(int clientId, bool activated)
-        {
-            return queries.getSubscribedInternetPackagesByClientId(clientId, activated);
-        }
-
-        public List<CombinedPackage> getSubscribedCombinedPackagesByClientId(int clientId, bool activated)
-        {
-            return queries.getSubscribedCombinedPackagesByClientId(clientId, activated);
+        public List<Subscriptions> getSubscriptionsByClientId(int clientId)
+{
+            return queries.getSubscriptionsByClientId(clientId);
         }
 
         public TVPackage getTVPackageByPackageID(int packageID)

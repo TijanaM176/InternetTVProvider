@@ -146,31 +146,21 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getTypeID(typeName);
         }
 
-        public List<Package> getSubscribedPackagesByClientId(int clientId, bool activated) //ako je activated false onda je potrebno izlistati celu listu
+        public List<Subscriptions> getSubscriptionsByClientId(int clientId)
         {
-            List<Package> packages = new List<Package>();
-
-            List<TVPackage> tvPackages = queries.getSubscribedTVPackagesByClientId(clientId, activated);
-            List<InternetPackage> internetPackages = queries.getSubscribedInternetPackagesByClientId(clientId, activated);
-            List<CombinedPackage> combinedPackages = queries.getSubscribedCombinedPackagesByClientId(clientId, activated);
-
-            foreach (TVPackage tvPackage in tvPackages) { packages.Add(tvPackage); }
-            foreach (InternetPackage internetPackage in internetPackages) { packages.Add(internetPackage); }
-            foreach (CombinedPackage combinedPackage in combinedPackages) { packages.Add(combinedPackage); }
-
-            return packages;
+            return queries.getSubscriptionsByClientId(clientId);
         }
 
         public double getAllSubscriptionsPriceByClient(int clientId)
         {
-            List<Package> packages = new List<Package>();
+            List<Subscriptions> subscriptions = new List<Subscriptions>();
             double sum = 0.0;
 
-            packages = getSubscribedPackagesByClientId(clientId, true); //ako je activated true onda je potrebno uzeti samo aktivne pakete
+            subscriptions = getSubscriptionsByClientId(clientId);
 
-            foreach (Package package in packages) { sum += package.Price; }
-            
-            return sum; 
+            foreach (Subscriptions subscription in subscriptions) { if (subscription.activated) sum += subscription.price; }
+
+            return sum;
 
         }
 
@@ -189,9 +179,9 @@ namespace InternetTVProviderLibrary.FacadePattern
             queries.removeCombinedPackage(packageID);   
         }
 
-        public void insertNewSubscriptionForClientID(int clientId, int packageId, int packageTypeID, bool activated)
+        public void insertNewSubscriptionForClientID(int clientId, int packageId, string name, double price, int packageTypeID, bool activated)
         {
-            Subscriptions sub = new Subscriptions(clientId, packageId, packageTypeID, activated);
+            Subscriptions sub = new Subscriptions(clientId, packageId, name, price, packageTypeID, activated);
 
             queries.insertNewSubscriptionForClientID(sub);
         }

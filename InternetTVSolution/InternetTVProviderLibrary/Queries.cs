@@ -573,75 +573,9 @@ namespace InternetTVProviderLibrary
             return package;
         }
 
-        public List<TVPackage> getSubscribedTVPackagesByClientId(int clientId, bool activated)
+        public List<Subscriptions> getSubscriptionsByClientId(int clientId)
         {
-            List<TVPackage> packages = new List<TVPackage>();
-            String query;
-
-            if (connection.State != ConnectionState.Open)
-            {
-                connection.Open();
-            }
-            if (activated == true)
-            {
-                 query = @"select tp.*
-                            from Subscriptions as sub
-                            join TVPackage as tp on sub.TypeID = tp.TypeID 
-                            and sub.Packet_ID = tp.Id
-                            where sub.Client_ID = @clientId and sub.Activated = @activated";
-
-            }
-            else
-            {
-                 query = @"select tp.*
-                            from Subscriptions as sub
-                            join TVPackage as tp on sub.TypeID = tp.TypeID 
-                            and sub.Packet_ID = tp.Id
-                            where sub.Client_ID = @clientId";
-
-            }
-            DbCommand dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = query;
-
-            DbParameter clientID, Activated;
-
-            clientID = dbCommand.CreateParameter();
-            clientID.ParameterName = "@clientId";
-            clientID.Value = clientId;
-
-            Activated = dbCommand.CreateParameter();
-            Activated.ParameterName = "@activated";
-            Activated.Value = activated;
-
-            dbCommand.Parameters.Add(clientID);
-            dbCommand.Parameters.Add(Activated);
-
-            DbDataReader reader = dbCommand.ExecuteReader();
-
-            while (reader.Read())
-            {
-                TVPackageBuilder package = new TVPackageBuilder();
-
-                package.SetID(reader.GetInt32(0));
-                package.SetName(reader.GetString(1));
-                package.SetPrice(reader.GetDouble(2));
-                package.SetNumberOfChanels(reader.GetInt32(3));
-                package.SetTypeID(reader.GetInt32(4));
-
-                packages.Add(package.Build());
-            }
-
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
-
-            return packages;
-        }
-
-        public List<InternetPackage> getSubscribedInternetPackagesByClientId(int clientId, bool activated)
-        {
-            List<InternetPackage> packages = new List<InternetPackage>();
+            List<Subscriptions> subscriptions = new List<Subscriptions>();
             String query;
 
             if (connection.State != ConnectionState.Open)
@@ -649,52 +583,24 @@ namespace InternetTVProviderLibrary
                 connection.Open();
             }
 
-            if (activated == true)
-            {
-                query = @"select ip.*
-                            from Subscriptions as sub
-                            join InternetPackage as ip on sub.TypeID = ip.TypeID 
-                            and sub.Packet_ID = ip.Id
-                            where sub.Client_ID = @clientId and sub.Activated = @activated";
-            }
-            else
-            {
-                query = @"select ip.*
-                            from Subscriptions as sub
-                            join InternetPackage as ip on sub.TypeID = ip.TypeID 
-                            and sub.Packet_ID = ip.Id
-                            where sub.Client_ID = @clientId";
-            }
+            query = @"select * from Subscriptions where Client_ID = @clientID";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
-            DbParameter clientID, Activated;
+            DbParameter clientID;
 
             clientID = dbCommand.CreateParameter();
-            clientID.ParameterName = "@clientId";
+            clientID.ParameterName = "@id";
             clientID.Value = clientId;
 
-            Activated = dbCommand.CreateParameter();
-            Activated.ParameterName = "@activated";
-            Activated.Value = activated;
-
             dbCommand.Parameters.Add(clientID);
-            dbCommand.Parameters.Add(Activated);
 
             DbDataReader reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
             {
-                InternetPackageBuilder package = new InternetPackageBuilder();
-
-                package.SetID(reader.GetInt32(0));
-                package.SetName(reader.GetString(1));
-                package.SetPrice(reader.GetDouble(2));
-                package.SetInternetSpeed(reader.GetString(3));
-                package.SetTypeID(reader.GetInt32(4));
-
-                packages.Add(package.Build());
+                subscriptions.Add(new Subscriptions(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDouble(3), reader.GetInt32(4), reader.GetBoolean(5)));
             }
 
             if (connection.State == ConnectionState.Open)
@@ -702,74 +608,8 @@ namespace InternetTVProviderLibrary
                 connection.Close();
             }
 
-            return packages;
-        }
+            return subscriptions;
 
-        public List<CombinedPackage> getSubscribedCombinedPackagesByClientId(int clientId, bool activated)
-        {
-            List<CombinedPackage> packages = new List<CombinedPackage>();
-            String query;
-
-            if (connection.State != ConnectionState.Open)
-            {
-                connection.Open();
-            }
-
-            if (activated == true)
-            {
-                 query = @"select cp.*
-                            from Subscriptions as sub
-                            join CombinePackage as cp on sub.TypeID = cp.TypeID 
-                            and sub.Packet_ID = cp.Id
-                            where sub.Client_ID = @clientId and sub.Activated = @activated";
-            }
-            else
-            {
-                query = @"select cp.*
-                            from Subscriptions as sub
-                            join CombinePackage as cp on sub.TypeID = cp.TypeID 
-                            and sub.Packet_ID = cp.Id
-                            where sub.Client_ID = @clientId";
-            }
-
-            DbCommand dbCommand = connection.CreateCommand();
-            dbCommand.CommandText = query;
-
-            DbParameter clientID, Activated;
-
-            clientID = dbCommand.CreateParameter();
-            clientID.ParameterName = "@clientId";
-            clientID.Value = clientId;
-
-            Activated = dbCommand.CreateParameter();
-            Activated.ParameterName = "@activated";
-            Activated.Value = activated;
-
-            dbCommand.Parameters.Add(clientID);
-            dbCommand.Parameters.Add(Activated);
-
-            DbDataReader reader = dbCommand.ExecuteReader();
-
-            while (reader.Read())
-            {
-                CombinedPackageBuilder package = new CombinedPackageBuilder();
-
-                package.SetID(reader.GetInt32(0));
-                package.SetName(reader.GetString(1));
-                package.SetPrice(reader.GetDouble(2));
-                package.SetTvPackageID(reader.GetInt32(3));
-                package.SetInternetPackageID(reader.GetInt32(4));
-                package.SetTypeID(reader.GetInt32(5));
-
-                packages.Add(package.Build());
-            }
-
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
-
-            return packages;
         }
 
         public int getPriceTVPackage(int packageID)
