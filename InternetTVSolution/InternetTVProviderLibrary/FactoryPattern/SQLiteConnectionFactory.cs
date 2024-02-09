@@ -109,6 +109,8 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         CREATE TABLE IF NOT EXISTS Subscriptions (
                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
                             Client_ID INT NOT NULL,
+                            Name VARCHAR(255) NOT NULL,
+                            Price DECIMAL(10, 2) NOT NULL,
                             Packet_ID INT NOT NULL,
                             TypeID INT NOT NULL,
                             Activated BOOL NOT NULL,
@@ -225,11 +227,12 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         ('SBB', 2, 2);
                     ";
                     string insertSubscriptionsQuery = @"
-                        INSERT INTO Subscriptions (Client_ID, Packet_ID, TypeID, Activated) VALUES
-                        (1, 1, 1, 1),
-                        (1, 2, 3, 1),
-                        (2, 2, 2, 1),
-                        (3, 3, 3, 1);
+                        INSERT INTO Subscriptions (Client_ID, Packet_ID, Name, Price, TypeID, Activated) VALUES
+                        (1, 1, 'Basic TV Package', 29.99, 1, 1),
+                        (1, 3, 'Premium Internet Package ', 69.99, 2, 1),
+                        (1, 2, 'Standard Combine Package ', 79.99, 3, 0),
+                        (2, 2, 'Standard Internet Package ', 59.99, 2, 1),
+                        (3, 3,'Preminum Combine Package ', 89.99, 3, 1);
                     ";
                     string checkClientsQuery = "SELECT COUNT(*) FROM Clients;";
                     using (SQLiteCommand command = new SQLiteCommand(checkClientsQuery, connection))
