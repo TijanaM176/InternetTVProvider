@@ -54,14 +54,16 @@ namespace InternetTvProviderWinApp
         {
             listView1.Items.Clear();
 
-            List<Package> packages = facade.getSubscribedPackagesByClientId(client_id, true);
+            List<Subscriptions> subscriptions = facade.getSubscriptionsByClientId(client_id);
 
-            foreach (Package package in packages)
+            foreach (Subscriptions subscription in subscriptions)
             {
-                ListViewItem item = new ListViewItem(package.Name);
+                ListViewItem item = new ListViewItem(subscription.name);
 
                 listView1.Items.Add(item);
             }
+            double sum = facade.getAllSubscriptionsPriceByClient(client_id);
+            label5.Text = "Total: " + sum.ToString("0.00") + "$";
         }
 
 

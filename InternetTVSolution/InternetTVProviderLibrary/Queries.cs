@@ -576,14 +576,14 @@ namespace InternetTVProviderLibrary
         public List<Subscriptions> getSubscriptionsByClientId(int clientId)
         {
             List<Subscriptions> subscriptions = new List<Subscriptions>();
-            String query;
+            string query;
 
             if (connection.State != ConnectionState.Open)
             {
                 connection.Open();
             }
 
-            query = @"select * from Subscriptions where Client_ID = @clientID";
+            query = @"select * from Subscriptions where Client_ID = @clientId";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
@@ -591,7 +591,7 @@ namespace InternetTVProviderLibrary
             DbParameter clientID;
 
             clientID = dbCommand.CreateParameter();
-            clientID.ParameterName = "@id";
+            clientID.ParameterName = "@clientId";
             clientID.Value = clientId;
 
             dbCommand.Parameters.Add(clientID);
