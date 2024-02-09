@@ -29,6 +29,7 @@ namespace InternetTvProviderWinApp
         public void showAllClientsInList()
         {
             showAllClientsListBox.Items.Clear();
+            showAllClientsListBox.DoubleClick += ShowSingleClient;
 
             List<Client> clients = facade.getAllClients();
 
@@ -38,6 +39,21 @@ namespace InternetTvProviderWinApp
             }
 
             showAllClientsListBox.SelectedIndex = 0;
+        }
+
+        private void ShowSingleClient(object sender, EventArgs e) 
+        { 
+            if(showAllClientsListBox.SelectedItem != null)
+            {
+                string selectedUsername = showAllClientsListBox.SelectedItem.ToString();
+                //Client selectedClient = facade.getAllClients().FirstOrDefault(client => client.Username == selectedUsername);
+                
+              //  if (selectedClient != null) 
+               // {
+                    ShowClient showClient = new ShowClient(selectedUsername, connection);
+                    showClient.ShowDialog();
+               // }
+            }
         }
 
         public void showAllTVPackagesTable()

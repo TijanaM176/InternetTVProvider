@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,14 @@ namespace InternetTvProviderWinApp
 {
     public partial class ShowClient : Form
     {
-
+        DbConnection connection;
         QueryFacade facade;
-        public ShowClient(string username)
+
+        public ShowClient(string username, DbConnection connection)
         {
+            this.connection = connection;
+            facade = new QueryFacade(connection);
+
             InitializeComponent();
 
             InternetTVProviderLibrary.Models.Client client = facade.getClientByUsername(username);

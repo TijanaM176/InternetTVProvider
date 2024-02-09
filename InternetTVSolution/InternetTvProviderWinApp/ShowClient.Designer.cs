@@ -43,9 +43,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.MenuHighlight;
-            label1.Location = new Point(53, 35);
+            label1.Location = new Point(46, 26);
             label1.Name = "label1";
-            label1.Size = new Size(91, 23);
+            label1.Size = new Size(74, 19);
             label1.TabIndex = 0;
             label1.Text = "FirstName:";
             label1.Click += label1_Click;
@@ -55,9 +55,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.MenuHighlight;
-            label2.Location = new Point(53, 83);
+            label2.Location = new Point(46, 62);
             label2.Name = "label2";
-            label2.Size = new Size(90, 23);
+            label2.Size = new Size(73, 19);
             label2.TabIndex = 1;
             label2.Text = "LastName:";
             // 
@@ -66,9 +66,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.MenuHighlight;
-            label3.Location = new Point(53, 131);
+            label3.Location = new Point(46, 98);
             label3.Name = "label3";
-            label3.Size = new Size(91, 23);
+            label3.Size = new Size(74, 19);
             label3.TabIndex = 2;
             label3.Text = "Username:";
             label3.Click += label3_Click;
@@ -78,18 +78,19 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.MenuHighlight;
-            label4.Location = new Point(53, 194);
+            label4.Location = new Point(46, 146);
             label4.Name = "label4";
-            label4.Size = new Size(162, 23);
+            label4.Size = new Size(131, 19);
             label4.TabIndex = 4;
             label4.Text = "Client subscriptions:";
             // 
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
-            listView1.Location = new Point(53, 220);
+            listView1.Location = new Point(46, 165);
+            listView1.Margin = new Padding(3, 2, 3, 2);
             listView1.Name = "listView1";
-            listView1.Size = new Size(454, 157);
+            listView1.Size = new Size(398, 119);
             listView1.TabIndex = 5;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -112,14 +113,15 @@
             // 
             // ShowClient
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(listView1);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ShowClient";
             Text = "ShowClient";
             Load += ShowClient_Load;
@@ -127,7 +129,7 @@
             PerformLayout();
         }
 
-       
+
 
         #endregion
 
