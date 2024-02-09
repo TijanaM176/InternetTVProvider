@@ -23,6 +23,8 @@ namespace InternetTvProviderWinApp
             showAllTVPackagesTable();
             showAllInternetPackagesTable();
             showAllCombinedPackagesTable();
+
+            showAllClientsListBox.SelectedIndexChanged += showAllClientsListBox_SelectedIndexChanged;
         }
 
 
@@ -39,6 +41,19 @@ namespace InternetTvProviderWinApp
 
             showAllClientsListBox.SelectedIndex = 0;
         }
+
+
+        public void showAllClientsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedUsername = showAllClientsListBox.SelectedItem.ToString();
+
+            ShowClient showClientForm = new ShowClient(facade, selectedUsername);
+
+            showClientForm.StartPosition = FormStartPosition.CenterScreen;
+
+            showClientForm.Show();
+        }
+
 
         public void showAllTVPackagesTable()
         {

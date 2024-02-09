@@ -18,24 +18,37 @@ namespace InternetTvProviderWinApp
     {
 
         QueryFacade facade;
-        public ShowClient(string username)
+        int cliend_id;
+        public ShowClient(QueryFacade facade, string username)
         {
             InitializeComponent();
+            this.facade = facade;
 
             InternetTVProviderLibrary.Models.Client client = facade.getClientByUsername(username);
 
             if (client != null)
             {
+                cliend_id = client.Id;
                 label1.Text = "First Name: " + client.FirstName;
                 label2.Text = "Last Name: " + client.LastName;
                 label3.Text = "Username: " + client.Username;
+
+                //DisplaySubscriptions();
             }
             else
             {
                 MessageBox.Show("Client not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
+
         }
+
+        /*
+        private void DisplaySubscriptions()
+        {
+
+        }
+        */
 
         private void ShowClient_Load(object sender, EventArgs e)
         {
