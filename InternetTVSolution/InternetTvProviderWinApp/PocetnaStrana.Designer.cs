@@ -36,7 +36,9 @@ namespace InternetTvProviderWinApp
             showAllClientsListBox = new ListBox();
             clientsLabel = new Label();
             packetsPanel = new Panel();
-            deletePackageButton = new Button();
+            deleteCombinedPackageButton = new Button();
+            deleteInternetPackageButton = new Button();
+            deleteTVPackageButton = new Button();
             addNewPackageButton = new Button();
             addNewClientButton = new Button();
             showAllInternetPacketsGrid = new DataGridView();
@@ -124,7 +126,9 @@ namespace InternetTvProviderWinApp
             // packetsPanel
             // 
             packetsPanel.BackColor = SystemColors.ControlLightLight;
-            packetsPanel.Controls.Add(deletePackageButton);
+            packetsPanel.Controls.Add(deleteCombinedPackageButton);
+            packetsPanel.Controls.Add(deleteInternetPackageButton);
+            packetsPanel.Controls.Add(deleteTVPackageButton);
             packetsPanel.Controls.Add(addNewPackageButton);
             packetsPanel.Controls.Add(addNewClientButton);
             packetsPanel.Controls.Add(showAllInternetPacketsGrid);
@@ -140,18 +144,44 @@ namespace InternetTvProviderWinApp
             packetsPanel.TabIndex = 3;
             packetsPanel.Paint += packetsPanel_Paint;
             // 
-            // deletePackageButton
+            // deleteCombinedPackageButton
             // 
-            deletePackageButton.BackColor = SystemColors.GradientActiveCaption;
-            deletePackageButton.ForeColor = SystemColors.HotTrack;
-            deletePackageButton.Location = new Point(497, 355);
-            deletePackageButton.Margin = new Padding(3, 2, 3, 2);
-            deletePackageButton.Name = "deletePackageButton";
-            deletePackageButton.Size = new Size(211, 22);
-            deletePackageButton.TabIndex = 8;
-            deletePackageButton.Text = "Delete Package";
-            deletePackageButton.UseVisualStyleBackColor = false;
-            deletePackageButton.Click += deletePackageButton_Click;
+            deleteCombinedPackageButton.BackColor = SystemColors.GradientActiveCaption;
+            deleteCombinedPackageButton.ForeColor = SystemColors.HotTrack;
+            deleteCombinedPackageButton.Location = new Point(641, 13);
+            deleteCombinedPackageButton.Margin = new Padding(3, 2, 3, 2);
+            deleteCombinedPackageButton.Name = "deleteCombinedPackageButton";
+            deleteCombinedPackageButton.Size = new Size(158, 22);
+            deleteCombinedPackageButton.TabIndex = 10;
+            deleteCombinedPackageButton.Text = "Delete Combined Package";
+            deleteCombinedPackageButton.UseVisualStyleBackColor = false;
+            deleteCombinedPackageButton.Click += deleteCombinedPackageButton_Click_1;
+            // 
+            // deleteInternetPackageButton
+            // 
+            deleteInternetPackageButton.BackColor = SystemColors.GradientActiveCaption;
+            deleteInternetPackageButton.ForeColor = SystemColors.HotTrack;
+            deleteInternetPackageButton.Location = new Point(239, 226);
+            deleteInternetPackageButton.Margin = new Padding(3, 2, 3, 2);
+            deleteInternetPackageButton.Name = "deleteInternetPackageButton";
+            deleteInternetPackageButton.Size = new Size(145, 22);
+            deleteInternetPackageButton.TabIndex = 9;
+            deleteInternetPackageButton.Text = "Delete Internet Package";
+            deleteInternetPackageButton.UseVisualStyleBackColor = false;
+            deleteInternetPackageButton.Click += deleteInternetPackageButton_Click_1;
+            // 
+            // deleteTVPackageButton
+            // 
+            deleteTVPackageButton.BackColor = SystemColors.GradientActiveCaption;
+            deleteTVPackageButton.ForeColor = SystemColors.HotTrack;
+            deleteTVPackageButton.Location = new Point(259, 13);
+            deleteTVPackageButton.Margin = new Padding(3, 2, 3, 2);
+            deleteTVPackageButton.Name = "deleteTVPackageButton";
+            deleteTVPackageButton.Size = new Size(121, 22);
+            deleteTVPackageButton.TabIndex = 8;
+            deleteTVPackageButton.Text = "Delete TV Package";
+            deleteTVPackageButton.UseVisualStyleBackColor = false;
+            deleteTVPackageButton.Click += deleteTVPackageButton_Click;
             // 
             // addNewPackageButton
             // 
@@ -381,5 +411,7 @@ namespace InternetTvProviderWinApp
         private DataGridViewTextBoxColumn descriptionTV;
         private DataGridViewTextBoxColumn priceTV;
         private DataGridViewTextBoxColumn numberOfChannelsTV;
+        private Button deleteInternetPackageButton;
+        private Button deleteCombinedPackageButton;
     }
 }
