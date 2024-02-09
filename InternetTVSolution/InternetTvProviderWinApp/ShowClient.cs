@@ -61,16 +61,19 @@ namespace InternetTvProviderWinApp
             {
                 ListViewItem item = new ListViewItem(subscription.name);
                 item.SubItems.Add(subscription.price.ToString());
-                item.SubItems.Add(subscription.activated ? "Active" : "Inactive");
-
-
+                //item.SubItems.Add(subscription.activated.ToString());
+                
+                string status = (subscription.activated == 1) ? "Active" : "Inactive";
+                item.SubItems.Add(status);
+                
                 listView1.Items.Add(item);
             }
+
             double sum = facade.getAllSubscriptionsPriceByClient(client_id);
             label5.Text = "Total: " + sum.ToString("0.00") + "$";
         }
 
-       
+
 
         private void ShowClient_Load(object sender, EventArgs e)
         {
@@ -95,13 +98,16 @@ namespace InternetTvProviderWinApp
 
                     if (result == DialogResult.OK)
                     {
-                        selectedSubscription.activated = !selectedSubscription.activated;
+                        selectedSubscription.activated = (selectedSubscription.activated == 1) ? 0 : 1;
 
                         facade.updateSubscribedPackageByClientID(selectedSubscription);
 
-                        selectedItem.SubItems[2].Text = selectedSubscription.activated ? "Active" : "Inactive";
+                        selectedItem.SubItems[2].Text = (selectedSubscription.activated == 1) ? "Active" : "Inactive";
+
+                        double sum = facade.getAllSubscriptionsPriceByClient(client_id);
+                        label5.Text = "Total: " + sum.ToString("0.00") + "$";
                     }
-                        
+
                 }
             }
         }
@@ -126,6 +132,12 @@ namespace InternetTvProviderWinApp
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
 
         }
     }

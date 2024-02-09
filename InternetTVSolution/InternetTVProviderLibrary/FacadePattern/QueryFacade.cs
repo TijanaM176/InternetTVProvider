@@ -158,10 +158,15 @@ namespace InternetTVProviderLibrary.FacadePattern
 
             subscriptions = getSubscriptionsByClientId(clientId);
 
-            foreach (Subscriptions subscription in subscriptions) { if (subscription.activated) sum += subscription.price; }
+            foreach (Subscriptions subscription in subscriptions) { if (subscription.activated==1) sum += subscription.price; }
 
             return sum;
 
+        }
+
+        public void insertNewSubscriptionForClientID(Subscriptions subscriptions)
+        {
+            queries.insertNewSubscriptionForClientID(subscriptions);
         }
 
         public void updateSubscribedPackageByClientID(Subscriptions subscriptions)
@@ -184,9 +189,9 @@ namespace InternetTVProviderLibrary.FacadePattern
             queries.removeCombinedPackage(packageID);   
         }
 
-        public void insertNewSubscriptionForClientID(int clientId, int packageId, string name, double price, int packageTypeID, bool activated)
+        public void insertNewSubscriptionForClientID(int clientId, int packageId, string name, double price, int packageTypeID, int activated)
         {
-            Subscriptions sub = new Subscriptions(clientId, packageId, name, price, packageTypeID, activated);
+            Subscriptions sub = new Subscriptions(clientId, name, price, packageId, packageTypeID, activated);
 
             queries.insertNewSubscriptionForClientID(sub);
         }

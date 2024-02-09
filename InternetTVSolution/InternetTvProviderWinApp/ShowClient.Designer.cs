@@ -37,6 +37,7 @@
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             label5 = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -122,11 +123,22 @@
             label5.TabIndex = 6;
             label5.Text = "Total:";
             // 
+            // button1
+            // 
+            button1.Location = new Point(513, 306);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 7;
+            button1.Text = "Add new";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // ShowClient
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(648, 369);
+            Controls.Add(button1);
             Controls.Add(label5);
             Controls.Add(listView1);
             Controls.Add(label4);
@@ -154,5 +166,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private Label label5;
+        private Button button1;
     }
 }

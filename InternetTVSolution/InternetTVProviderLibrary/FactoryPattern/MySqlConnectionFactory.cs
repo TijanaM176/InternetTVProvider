@@ -110,7 +110,7 @@ namespace InternetTVProviderLibrary.FactoryPattern
                             Price DECIMAL(10, 2) NOT NULL,
                             Packet_ID INT NOT NULL,
                             TypeID INT NOT NULL,
-                            Activated BOOL NOT NULL,
+                            Activated INT NOT NULL,
                             FOREIGN KEY (Client_ID) REFERENCES Clients(Id),
                             FOREIGN KEY (Packet_ID) REFERENCES Packages(Id),
                             FOREIGN KEY (TypeID) REFERENCES PackageType(Id)

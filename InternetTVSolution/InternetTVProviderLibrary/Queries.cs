@@ -600,7 +600,7 @@ namespace InternetTVProviderLibrary
 
             while (reader.Read())
             {
-                subscriptions.Add(new Subscriptions(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDouble(3), reader.GetInt32(4), reader.GetBoolean(5)));
+                subscriptions.Add(new Subscriptions(reader.GetInt32(1), reader.GetString(2), reader.GetDouble(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6)));
             }
 
             if (connection.State == ConnectionState.Open)
@@ -901,8 +901,7 @@ namespace InternetTVProviderLibrary
             string query = @"
         UPDATE Subscriptions
         SET Activated = @isActivated
-        WHERE Client_ID = @clientID
-        AND Packet_ID = @packageID
+        WHERE Client_ID = @clientID AND Packet_ID = @packageID
     ";
 
             DbCommand dbCommand = connection.CreateCommand();

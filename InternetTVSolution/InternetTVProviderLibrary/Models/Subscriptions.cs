@@ -22,12 +22,12 @@ namespace InternetTVProviderLibrary.Models
         public double price { get; set; }
         public int packageTypeID { get; set; }
 
-        public bool activated { get; set; }
+        public int activated { get; set; }
         Package package { get; set; }
         
 
 
-        public Subscriptions(int clientId, int packageId, string name, double price, int packageTypeID, bool activated)
+        public Subscriptions(int clientId, string name, double price, int packageId, int packageTypeID, int activated)
         {
             this.clientId = clientId;
             this.packageId = packageId;
