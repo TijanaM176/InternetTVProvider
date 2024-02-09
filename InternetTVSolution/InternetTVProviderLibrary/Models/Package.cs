@@ -16,8 +16,9 @@ namespace InternetTVProviderLibrary.Models
         public double Price { get; set; }
         [ForeignKey("PackageTypeID")]
         public int PackageTypeID { get; set; }
+        public int Id { get; internal set; }
 
-        
+      
         public Package(int ID, string Name, double Price, int PackageTypeID)
         {
             this.ID = ID;

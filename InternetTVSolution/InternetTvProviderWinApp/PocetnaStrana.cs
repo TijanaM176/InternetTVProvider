@@ -23,12 +23,13 @@ namespace InternetTvProviderWinApp
             showAllTVPackagesTable();
             showAllInternetPackagesTable();
             showAllCombinedPackagesTable();
+
+            showAllClientsListBox.SelectedIndexChanged += showAllClientsListBox_SelectedIndexChanged;
         }
 
         public void showAllClientsInList()
         {
-            showAllClientsListBox.Items.Clear();
-
+           
             List<Client> clients = facade.getAllClients();
 
             foreach (Client client in clients)
@@ -39,6 +40,20 @@ namespace InternetTvProviderWinApp
 
             showAllClientsListBox.SelectedIndex = 0;
         }
+
+        
+
+        public void showAllClientsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedUsername = showAllClientsListBox.SelectedItem.ToString();
+
+            ShowClient showClientForm = new ShowClient(selectedUsername,connection);
+
+            showClientForm.StartPosition = FormStartPosition.CenterScreen;
+
+            showClientForm.Show();
+        }
+
 
         public void showAllTVPackagesTable()
         {

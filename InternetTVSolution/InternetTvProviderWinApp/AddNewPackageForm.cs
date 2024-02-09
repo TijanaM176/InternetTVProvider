@@ -25,8 +25,14 @@ namespace InternetTvProviderWinApp
             packageTypeComboBox.SelectedIndex = 0;
             packageTypeComboBox.SelectedIndexChanged += indexChanged;
 
+            internetSpeedForInternetPackageLabel.Visible = false;
+            internetSpeedForInternetPackageTextBox.Visible = false;
+
             internetSpeedLabel.Visible = false;
             internetSpeedTextBox.Visible = false;
+
+            PocetnaStrana pocetnaStrana = new PocetnaStrana(connection);
+            facade = new QueryFacade(connection);
         }
 
         private void indexChanged(object sender, EventArgs e)
@@ -38,6 +44,9 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsLabel.Visible = true;
                 numberOfChannelsNumericUpDown.Visible = true;
 
+                internetSpeedForInternetPackageLabel.Visible = false;
+                internetSpeedForInternetPackageTextBox.Visible = false;
+
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
             }
@@ -46,13 +55,19 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsLabel.Visible = false;
                 numberOfChannelsNumericUpDown.Visible = false;
 
-                internetSpeedLabel.Visible = true;
-                internetSpeedTextBox.Visible = true;
+                internetSpeedForInternetPackageLabel.Visible = true;
+                internetSpeedForInternetPackageTextBox.Visible = true;
+
+                internetSpeedLabel.Visible = false;
+                internetSpeedTextBox.Visible = false;
             }
             else if (selectedIndex == 2)
             {
                 numberOfChannelsLabel.Visible = true;
                 numberOfChannelsNumericUpDown.Visible = true;
+
+                internetSpeedForInternetPackageLabel.Visible = false;
+                internetSpeedForInternetPackageTextBox.Visible = false;
 
                 internetSpeedLabel.Visible = true;
                 internetSpeedTextBox.Visible = true;
@@ -74,7 +89,7 @@ namespace InternetTvProviderWinApp
             }
             else if (packageType == 2)
             {
-                internetSpeed = internetSpeedTextBox.Text;
+                internetSpeed = internetSpeedForInternetPackageTextBox.Text;
                 facade.addNewInternetPackage(name, price, internetSpeed, packageType);
             }
             else
@@ -85,7 +100,7 @@ namespace InternetTvProviderWinApp
                 int tvPackageID = facade.getTVPackageIdByNumOfChannels(numberOfChannels);
                 int internetPackageID = facade.getInternetPackageIdByInternetSpeed(internetSpeed);
 
-                facade.addNewCombinedPackage(name, tvPackageID, internetPackageID, packageType);   
+                facade.addNewCombinedPackage(name, tvPackageID, internetPackageID, packageType);
             }
 
 

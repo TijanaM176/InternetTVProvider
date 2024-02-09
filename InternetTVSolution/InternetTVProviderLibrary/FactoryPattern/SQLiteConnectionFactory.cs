@@ -224,6 +224,12 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         INSERT INTO Provider (Name, ClientId, PackageId) VALUES
                         ('SBB', 2, 2);
                     ";
+                    string insertSubscriptionsQuery = @"
+                        INSERT INTO Subscriptions (Client_ID, Packet_ID, TypeID, Activated) VALUES
+                        (1, 1, 1, 1),
+                        (2, 2, 2, 1),
+                        (3, 3, 3, 1);
+                    ";
                     string checkClientsQuery = "SELECT COUNT(*) FROM Clients;";
                     using (SQLiteCommand command = new SQLiteCommand(checkClientsQuery, connection))
                     {
@@ -307,6 +313,11 @@ namespace InternetTVProviderLibrary.FactoryPattern
                                 command1.ExecuteNonQuery();
                             }
                         }
+                    }
+
+                    using (SQLiteCommand command = new SQLiteCommand(insertSubscriptionsQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
                     }
 
                     Console.WriteLine("Data inserted into SQLite tables.");

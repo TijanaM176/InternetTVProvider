@@ -228,14 +228,18 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         ('SBB ', 2, 2);
                     ";
 
+                    string insertSubscriptionsQuery = @"
+                        INSERT INTO Subscriptions (Client_ID, Packet_ID, TypeID, Activated) VALUES
+                        (1, 1, 1, 1),
+                        (2, 2, 2, 1),
+                        (3, 3, 3, 1);
+                    ";
 
                     string checkClientsQuery = "SELECT COUNT(*) FROM Clients";
                     using (MySqlCommand command = new MySqlCommand(checkClientsQuery, connection))
                     {
                         int clientCount = Convert.ToInt32(command.ExecuteScalar());
-                        if (clientCount == 0)
-                        {
-
+                        if (clientCount == 0) { 
                             using (MySqlCommand command1 = new MySqlCommand(insertClientsQuery, connection))
                             {
                                 command1.ExecuteNonQuery();
@@ -319,9 +323,14 @@ namespace InternetTVProviderLibrary.FactoryPattern
                         }
                     }
 
+                    using (MySqlCommand command = new MySqlCommand(insertSubscriptionsQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
 
 
-                        Console.WriteLine("Data inserted into MySQL tables.");
+
+                    Console.WriteLine("Data inserted into MySQL tables.");
                     }
                 
             }
