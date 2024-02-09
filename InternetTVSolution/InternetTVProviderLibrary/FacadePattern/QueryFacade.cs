@@ -169,6 +169,23 @@ namespace InternetTVProviderLibrary.FacadePattern
             queries.insertNewSubscriptionForClientID(subscriptions);
         }
 
+        public void insertNewSubscriptionForClientID(int clientId, int packageId, string name, double price, int packageTypeID)
+        {
+            Subscriptions newSub = new Subscriptions(clientId, name, price, packageId, packageTypeID, 1);
+
+            List<Subscriptions> subscriptions = new List<Subscriptions>();
+
+            subscriptions = getSubscriptionsByClientId(clientId);
+
+            bool existSub = subscriptions.Any(sub => sub.clientId == clientId && sub.packageId == packageId && sub.name == name && sub.price == price && sub.packageTypeID == packageTypeID);
+
+            if (existSub == null)
+            {
+
+                queries.insertNewSubscriptionForClientID(newSub);
+            }
+        }
+
         public void updateSubscribedPackageByClientID(Subscriptions subscriptions)
         {
             queries.updateSubscribedPackageByClientID(subscriptions);

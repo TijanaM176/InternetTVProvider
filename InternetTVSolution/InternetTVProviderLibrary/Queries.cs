@@ -836,12 +836,12 @@ namespace InternetTVProviderLibrary
                 connection.Open();
             }
 
-            String query = @"INSERT into Subscriptions (Client_ID, Packet_ID, Name, Price, TypeID, Activated) values (@clientID, @packageID, @name, @price, @typePackage, @isActivated)";
+            String query = @"INSERT into Subscriptions (Client_ID, Packet_ID, Name, Price, TypeID, Activated) values (@clientID, @packageID, @name, @price, @typePackage, true)";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
-            DbParameter idClient, idPackage, Name, Price, typeOfPackage, activatedPackage;
+            DbParameter idClient, idPackage, Name, Price, typeOfPackage;
 
             idClient = dbCommand.CreateParameter();
             idClient.ParameterName = "@clientID";
@@ -863,16 +863,11 @@ namespace InternetTVProviderLibrary
             typeOfPackage.ParameterName = "@typePackage";
             typeOfPackage.Value = subscription.packageTypeID;
 
-            activatedPackage = dbCommand.CreateParameter();
-            activatedPackage.ParameterName = "@isActivated";
-            activatedPackage.Value = subscription.activated;
-
             dbCommand.Parameters.Add(idClient);
             dbCommand.Parameters.Add(idPackage);
             dbCommand.Parameters.Add(Name);
             dbCommand.Parameters.Add(Price);
             dbCommand.Parameters.Add(typeOfPackage);
-            dbCommand.Parameters.Add(activatedPackage);
 
             int succes = dbCommand.ExecuteNonQuery();
 
