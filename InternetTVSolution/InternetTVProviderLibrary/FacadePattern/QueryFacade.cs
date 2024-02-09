@@ -164,6 +164,11 @@ namespace InternetTVProviderLibrary.FacadePattern
 
         }
 
+        public void updateSubscribedPackageByClientID(Subscriptions subscriptions)
+        {
+            queries.updateSubscribedPackageByClientID(subscriptions);
+        }
+
         public void removeTVPackage(int packageID)
         {
             queries.removeTVPackage(packageID);

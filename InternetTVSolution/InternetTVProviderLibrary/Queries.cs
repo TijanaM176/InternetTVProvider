@@ -898,25 +898,25 @@ namespace InternetTVProviderLibrary
                 connection.Open();
             }
 
-            String query = @"UPDATE Subscriptions
-                             SET activated = @isActivated
-                             WHERE ClientId = @clientID AND
-                                   PackageId = @packageID";
+            string query = @"
+        UPDATE Subscriptions
+        SET Activated = @isActivated
+        WHERE Client_ID = @clientID
+        AND Packet_ID = @packageID
+    ";
 
             DbCommand dbCommand = connection.CreateCommand();
             dbCommand.CommandText = query;
 
-            DbParameter idClient, idPackage, typeOfPackage, activatedPackage;
-
-            idClient = dbCommand.CreateParameter();
+            DbParameter idClient = dbCommand.CreateParameter();
             idClient.ParameterName = "@clientID";
             idClient.Value = subscription.clientId;
 
-            idPackage = dbCommand.CreateParameter();
+            DbParameter idPackage = dbCommand.CreateParameter();
             idPackage.ParameterName = "@packageID";
             idPackage.Value = subscription.packageId;
 
-            activatedPackage = dbCommand.CreateParameter();
+            DbParameter activatedPackage = dbCommand.CreateParameter();
             activatedPackage.ParameterName = "@isActivated";
             activatedPackage.Value = subscription.activated;
 
@@ -924,15 +924,15 @@ namespace InternetTVProviderLibrary
             dbCommand.Parameters.Add(idPackage);
             dbCommand.Parameters.Add(activatedPackage);
 
-            int succes = dbCommand.ExecuteNonQuery();
+            int success = dbCommand.ExecuteNonQuery();
 
-            if (succes > 0)
+            if (success > 0)
             {
-                Console.WriteLine("Supskripcija paketa je azurirana.");
+                Console.WriteLine("Status pretplate je uspešno ažuriran.");
             }
             else
             {
-                Console.WriteLine("Greska prilikom azuriranja supskripcije u bazi!");
+                Console.WriteLine("Greška prilikom ažuriranja statusa pretplate u bazi!");
             }
 
             if (connection.State == ConnectionState.Open)
@@ -940,6 +940,8 @@ namespace InternetTVProviderLibrary
                 connection.Close();
             }
         }
+
+
 
         public int getInternetPackageIdByInternetSpeed(string internetSpeed)
         {

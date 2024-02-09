@@ -103,12 +103,12 @@
             // 
             // columnHeader2
             // 
-            columnHeader2.Text = "Status";
+            columnHeader2.Text = "Price";
             columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
-            columnHeader3.Text = "Action";
+            columnHeader3.Text = "Status";
             columnHeader3.Width = 200;
             // 
             // label5

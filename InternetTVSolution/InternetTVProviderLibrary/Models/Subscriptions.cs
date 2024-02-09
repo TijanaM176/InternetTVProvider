@@ -21,6 +21,7 @@ namespace InternetTVProviderLibrary.Models
         public string name { get; set; }
         public double price { get; set; }
         public int packageTypeID { get; set; }
+
         public bool activated { get; set; }
         Package package { get; set; }
         

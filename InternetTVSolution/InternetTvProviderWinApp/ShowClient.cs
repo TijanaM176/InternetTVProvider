@@ -40,6 +40,7 @@ namespace InternetTvProviderWinApp
                 label3.Text = "Username: " + client.Username;
 
                 DisplaySubscriptions();
+
             }
             else
             {
@@ -59,6 +60,9 @@ namespace InternetTvProviderWinApp
             foreach (Subscriptions subscription in subscriptions)
             {
                 ListViewItem item = new ListViewItem(subscription.name);
+                item.SubItems.Add(subscription.price.ToString());
+                item.SubItems.Add(subscription.activated ? "Active" : "Inactive");
+
 
                 listView1.Items.Add(item);
             }
@@ -66,13 +70,42 @@ namespace InternetTvProviderWinApp
             label5.Text = "Total: " + sum.ToString("0.00") + "$";
         }
 
-
+       
 
         private void ShowClient_Load(object sender, EventArgs e)
         {
-
+            listView1.ItemActivate += ListView1_ItemActivate;
 
         }
+
+
+        private void ListView1_ItemActivate(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listView1.SelectedItems[0];
+                string selectedSubscriptionName = selectedItem.SubItems[0].Text;
+
+                Subscriptions selectedSubscription = facade.getSubscriptionsByClientId(client_id).Find(subscription => subscription.name == selectedSubscriptionName);
+
+                if (selectedSubscription != null)
+                {
+                    DialogResult result = MessageBox.Show("Are you sure you want to change the subscription status?", "Confirmation", MessageBoxButtons.OKCancel);
+
+
+                    if (result == DialogResult.OK)
+                    {
+                        selectedSubscription.activated = !selectedSubscription.activated;
+
+                        facade.updateSubscribedPackageByClientID(selectedSubscription);
+
+                        selectedItem.SubItems[2].Text = selectedSubscription.activated ? "Active" : "Inactive";
+                    }
+                        
+                }
+            }
+        }
+
 
         private void closeButton_Click(object sender, EventArgs e)
         {
