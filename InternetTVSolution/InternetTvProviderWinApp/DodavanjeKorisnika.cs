@@ -19,6 +19,7 @@ namespace InternetTvProviderWinApp
         public AddNewClient(DbConnection connection)
         {
             InitializeComponent();
+            userFacade = new QueryFacade(connection);
         }
         private void button1_Click(object sender, EventArgs e)
         {
