@@ -19,16 +19,12 @@ namespace InternetTvProviderWinApp
     {
         DbConnection connection;
         QueryFacade facade;
-<<<<<<< HEAD
-        int cliend_id;
-        public ShowClient(QueryFacade facade, string username)
-=======
 
         public ShowClient(string username, DbConnection connection)
->>>>>>> 500e1ab1f40e8a8e2891c513db734b4adae049a4
         {
             this.connection = connection;
             facade = new QueryFacade(connection);
+            int cliend_id;
 
             InitializeComponent();
             this.facade = facade;
