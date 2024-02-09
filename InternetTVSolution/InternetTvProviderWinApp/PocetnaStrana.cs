@@ -12,9 +12,10 @@ namespace InternetTvProviderWinApp
 
         Button addNewPackageButton = new Button();
         Button addNewClientButton = new Button();
-        Button deleteTVPackageButton = new Button();
-        // Button deleteInternetPackageButton = new Button();
-        //Button deleteCombinedPackageButton = new Button();
+
+        private static readonly int TVTypeID = 1;
+        private static readonly int INTERNETTypeID = 2;
+        private static readonly int COMBINEDTypeID = 3;
 
         public PocetnaStrana(DbConnection connection)
         {
@@ -62,7 +63,7 @@ namespace InternetTvProviderWinApp
         {
             showAllTvPacketsGrid.Rows.Clear();
 
-            List<Package> tvPackages = facade.getAllPackages(1);
+            List<Package> tvPackages = facade.getAllPackages(TVTypeID);
             TVPackage tvPackage;
 
             foreach (Package package in tvPackages)
@@ -78,18 +79,13 @@ namespace InternetTvProviderWinApp
                 showAllTvPacketsGrid.Rows[rowIndex].Cells["nameTV"].Tag = tvPackage.ID;
             }
 
-            // ako treba obeleziti neko polje
-            if (showAllTvPacketsGrid.Rows.Count > 0)
-            {
-                showAllTvPacketsGrid.Rows[0].Selected = true;
-            }
         }
 
         public void showAllInternetPackagesTable()
         {
             showAllInternetPacketsGrid.Rows.Clear();
 
-            List<Package> internetPackages = facade.getAllPackages(2);
+            List<Package> internetPackages = facade.getAllPackages(INTERNETTypeID);
             InternetPackage internetPackage;
 
             foreach (Package package in internetPackages)
@@ -106,18 +102,13 @@ namespace InternetTvProviderWinApp
 
             }
 
-            // ako treba obeleziti neko polje
-            if (showAllInternetPacketsGrid.Rows.Count > 0)
-            {
-                showAllInternetPacketsGrid.Rows[0].Selected = true;
-            }
         }
 
         public void showAllCombinedPackagesTable()
         {
             showAllCombinedPacketsGrid.Rows.Clear();
 
-            List<Package> combinedPackages = facade.getAllPackages(3);
+            List<Package> combinedPackages = facade.getAllPackages(COMBINEDTypeID);
             CombinedPackage combinedPackage;
 
             foreach (Package package in combinedPackages)
@@ -132,11 +123,6 @@ namespace InternetTvProviderWinApp
                 showAllCombinedPacketsGrid.Rows[rowIndex].Cells["nameCombined"].Tag = combinedPackage.ID;
             }
 
-            // ako treba obeleziti neko polje
-            if (showAllCombinedPacketsGrid.Rows.Count > 0)
-            {
-                showAllCombinedPacketsGrid.Rows[0].Selected = true;
-            }
         }
 
         private void addNewClientButton_Click(object sender, EventArgs e)
@@ -184,50 +170,17 @@ namespace InternetTvProviderWinApp
             UpdateCombinedPackageView(noviPaket, tipPaketa);
         }
 
-        private void deleteTVPackageButton_Click(object sender, EventArgs e)
-        {
-            if (showAllTvPacketsGrid != null)
-            {
-                DataGridViewRow selectedRow = showAllTvPacketsGrid.SelectedRows[0];
-                if (selectedRow.Cells["nameTv"].Tag != null) // Provera da li je Tag postavljen
-                {
-                    int packageId = (int)selectedRow.Cells["nameTv"].Tag; // Dohvatanje ID-a paketa iz Tag svojstva odgovarajuće ćelije
-                    MessageBox.Show("ID:" + packageId);
-                    CombinedPackage comp = facade.getCombinedPackageByPackageID(packageId);
-                    if (comp != null)
-                    {
-                        facade.removeCombinedPackage(comp.ID);
-                    }
-                    facade.removeTVPackage(packageId); // Poziv funkcije za uklanjanje paketa
-                    showAllTvPacketsGrid.Rows.Remove(selectedRow); // Uklanjanje odabrane vrste iz DataGridView-a
-                }
-                else
-                {
-                    MessageBox.Show("ID paketa nije dostupan za brisanje.");
-                }
-            }
-            else
-            {
-                // Handle the case when no row is selected
-                MessageBox.Show("No row selected.");
-            }
-        }
-       
         private void packetsPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
         private void UpdateUserView(string noviKlijent)
         {
-            // Dodaj novog klijenta u listu klijenata na formi
-            // Ako imate ListBox na formi gde prikazujete klijente, dodajte novog klijenta u tu ListBox
-            // Na primer, ako ListBox zove showAllClientsListBox:
-
             showAllClientsListBox.Items.Add(noviKlijent);
-
-            // Opciono: Postavite novog klijenta kao selektovanog u ListBox-u
             showAllClientsListBox.SelectedItem = noviKlijent;
         }
+
         private void UpdateInternetPackageView(string noviPaket, string tipPaketa, double price, string internetSpeed)
         {
 
@@ -256,39 +209,80 @@ namespace InternetTvProviderWinApp
 
         }
 
-        private void deleteInternetPackageButton_Click_1(object sender, EventArgs e)
+        private void deleteSelectedPackage_Click(object sender, EventArgs e)
         {
-            DataGridViewRow selectedRow = showAllInternetPacketsGrid.SelectedRows[0];
-            if (selectedRow.Cells["nameInternet"].Tag != null) // Provera da li je Tag postavljen
+            if (showAllInternetPacketsGrid.SelectedRows.Count > 0)
             {
-                int packageId = (int)selectedRow.Cells["nameInternet"].Tag; // Dohvatanje ID-a paketa iz Tag svojstva odgovarajuće ćelije
-                CombinedPackage comp = facade.getCombinedPackageByPackageID(packageId);
-                if (comp != null)
+                DataGridViewRow selectedRow = showAllInternetPacketsGrid.SelectedRows[0];
+                int packageId = (int)selectedRow.Cells["nameInternet"].Tag;
+
+                if (packageId != -1)
                 {
-                    facade.removeCombinedPackage(comp.ID);
+                    if (ConfirmDelete())
+                    {
+                        CombinedPackage combinedPackage = facade.getCombinedPackageByPackageID(packageId);
+
+                        if (combinedPackage != null)
+                        {
+                            facade.removeCombinedPackage(combinedPackage.ID);
+                        }
+
+                        facade.removeInternetPackage(packageId);
+                        showAllInternetPacketsGrid.Rows.Remove(selectedRow);
+                    }
                 }
-                facade.removeInternetPackage(packageId); // Poziv funkcije za uklanjanje paketa
-                showAllInternetPacketsGrid.Rows.Remove(selectedRow); // Uklanjanje odabrane vrste iz DataGridView-a
+
+            }
+            else if (showAllCombinedPacketsGrid.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = showAllCombinedPacketsGrid.SelectedRows[0];
+                int packageId = (int)selectedRow.Cells["nameCombined"].Tag;
+
+                if (packageId != -1)
+                {
+                    if (ConfirmDelete())
+                    {
+                        facade.removeCombinedPackage(packageId);
+                        showAllCombinedPacketsGrid.Rows.Remove(selectedRow);
+                    }
+                }
+
+            }
+            else if (showAllTvPacketsGrid.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = showAllTvPacketsGrid.SelectedRows[0];
+                int packageId = (int)selectedRow.Cells["nameTV"].Tag;
+
+                if (packageId != -1)
+                {
+                    if (ConfirmDelete())
+                    {
+                        CombinedPackage combinedPackage = facade.getCombinedPackageByPackageID(packageId);
+
+                        if (combinedPackage != null)
+                        {
+                            facade.removeCombinedPackage(combinedPackage.ID);
+                        }
+
+                        facade.removeTVPackage(packageId);
+                        showAllTvPacketsGrid.Rows.Remove(selectedRow);
+                    }
+                }
             }
             else
             {
-                MessageBox.Show("ID paketa nije dostupan za brisanje.");
+                MessageBox.Show("Nijedan red nije selektovan!");
             }
         }
 
-        private void deleteCombinedPackageButton_Click_1(object sender, EventArgs e)
+        private bool ConfirmDelete()
         {
-            DataGridViewRow selectedRow = showAllCombinedPacketsGrid.SelectedRows[0];
-            if (selectedRow.Cells["nameCombined"].Tag != null) // Provera da li je Tag postavljen
-            {
-                int packageId = (int)selectedRow.Cells["nameCombined"].Tag; // Dohvatanje ID-a paketa iz Tag svojstva odgovarajuće ćelije
-                facade.removeCombinedPackage(packageId); // Poziv funkcije za uklanjanje paketa
-                showAllCombinedPacketsGrid.Rows.Remove(selectedRow); // Uklanjanje odabrane vrste iz DataGridView-a
-            }
+            DialogResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete paket?", "Potvrda brisanja paketa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                return true;
             else
-            {
-                MessageBox.Show("ID paketa nije dostupan za brisanje.");
-            }
+                return false;
         }
     }
 
