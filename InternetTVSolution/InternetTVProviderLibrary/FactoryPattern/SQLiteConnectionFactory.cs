@@ -314,10 +314,17 @@ namespace InternetTVProviderLibrary.FactoryPattern
                             }
                         }
                     }
-
-                    using (SQLiteCommand command = new SQLiteCommand(insertSubscriptionsQuery, connection))
+                    string checkSubsQuery = "SELECT COUNT(*) FROM Subscriptions;";
+                    using (SQLiteCommand command = new SQLiteCommand(checkSubsQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int SubsCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (SubsCount == 0)
+                        {
+                            using (SQLiteCommand command1 = new SQLiteCommand(insertSubscriptionsQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
 
                     Console.WriteLine("Data inserted into SQLite tables.");

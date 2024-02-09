@@ -322,10 +322,17 @@ namespace InternetTVProviderLibrary.FactoryPattern
                             }
                         }
                     }
-
-                    using (MySqlCommand command = new MySqlCommand(insertSubscriptionsQuery, connection))
+                    string checkSubsQuery = "SELECT COUNT(*) FROM Subscriptions;";
+                    using (MySqlCommand command = new MySqlCommand(checkSubsQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        int SubsCount = Convert.ToInt32(command.ExecuteScalar());
+                        if (SubsCount == 0)
+                        {
+                            using (MySqlCommand command1 = new MySqlCommand(insertSubscriptionsQuery, connection))
+                            {
+                                command1.ExecuteNonQuery();
+                            }
+                        }
                     }
 
 
