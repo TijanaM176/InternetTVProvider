@@ -1,14 +1,7 @@
 ﻿using InternetTVProviderLibrary.FacadePattern;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using InternetTVProviderLibrary.Models;
 using System.Data;
 using System.Data.Common;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace InternetTvProviderWinApp
 {
@@ -16,7 +9,7 @@ namespace InternetTvProviderWinApp
     {
         QueryFacade facade;
         ShowClient showClient;
-        int clientID;
+        int clientID, packageTypeID, packageID;
 
         public AddNewSubscription(DbConnection connection, int clientID, ShowClient showClient)
         {
@@ -29,23 +22,60 @@ namespace InternetTvProviderWinApp
 
             HomePage pocetnaStrana = new HomePage(connection);
             facade = new QueryFacade(connection);
+
+            fillAllDropDownFields();
+        }
+
+        public void fillAllDropDownFields()
+        {
+            List<Package> packagesTV = facade.getAllPackages(HomePage.TVTypeID);
+            List<Package> packagesInternet = facade.getAllPackages(HomePage.INTERNETTypeID);
+            List<Package> packagesCombined = facade.getAllPackages(HomePage.COMBINEDTypeID);
+            List<string> allPackageIDsAndNames = new List<string>();
+
+            allPackageIDsAndNames.AddRange(packagesTV.Select(p => $"{p.PackageTypeID} - {p.Name} - {p.ID}"));
+            allPackageIDsAndNames.AddRange(packagesInternet.Select(p => $"{p.PackageTypeID} - {p.Name} - {p.ID}"));
+            allPackageIDsAndNames.AddRange(packagesCombined.Select(p => $"{p.PackageTypeID} - {p.Name} - {p.ID}"));
+            allPackageIDsAndNames = allPackageIDsAndNames.Distinct().ToList();
+
+            foreach (string packageInfo in allPackageIDsAndNames)
+            {
+                dropDownPackageInfo.Items.Add(packageInfo);
+            }
+
         }
 
         public void addNewSub(object sender, EventArgs e)
         {
-            int packageID = Convert.ToInt32(PackageIDTextBox.Text);
-            string name = NameTextBox.Text;
-            double price = Convert.ToDouble(priceNumericUpDown.Value);
-            int type = Convert.ToInt32(packageTypeTextBox.Text);
+            string packageInfo = dropDownPackageInfo.Text;
 
-            if (int.TryParse(PackageIDTextBox.Text, out packageID))
+            if (packageInfo != null)
             {
-                facade.insertNewSubscriptionForClientID(clientID, packageID, name, price, type);
-                showClient.DisplaySubscriptions();
+                string[] infoParts = packageInfo.Split('-');
+
+                for (int i = 0; i < infoParts.Length; i++)
+                {
+                    infoParts[i] = infoParts[i].Trim();
+                }
+
+                int packageTypeID = int.TryParse(infoParts[0].ToString(), out int resultType) ? resultType : -1;
+                int packageID = int.TryParse(infoParts[2].ToString(), out int resultID) ? resultID : -1;
+
+                Package package = facade.getPackageByTypeID(packageTypeID, packageID);
+
+                if (package != null)
+                {
+                    facade.insertNewSubscriptionForClientID(clientID, package.ID, package.Name, package.Price, package.PackageTypeID);
+                    showClient.DisplaySubscriptions();
+                }
+                else
+                {
+                    MessageBox.Show("Ne postoji taj paket u listi svih paketa!");
+                }
             }
             else
             {
-                MessageBox.Show("Ne postoji paket sa ID = " + PackageIDTextBox + "!");
+                MessageBox.Show("Niste popunili sva polja!");
             }
 
             this.Close();

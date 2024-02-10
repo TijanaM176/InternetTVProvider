@@ -14,9 +14,9 @@ namespace InternetTvProviderWinApp
         Button addNewPackageButton = new Button();
         Button addNewClientButton = new Button();
 
-        private static readonly int TVTypeID = 1;
-        private static readonly int INTERNETTypeID = 2;
-        private static readonly int COMBINEDTypeID = 3;
+        public static readonly int TVTypeID = 1;
+        public static readonly int INTERNETTypeID = 2;
+        public static readonly int COMBINEDTypeID = 3;
 
         public HomePage(DbConnection connection)
         {

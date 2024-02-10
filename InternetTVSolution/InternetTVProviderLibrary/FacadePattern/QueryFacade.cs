@@ -28,21 +28,21 @@ namespace InternetTVProviderLibrary.FacadePattern
             switch (PackageTypeID)
             {
                 case 1:
-                    List<TVPackage> tvPackages;
+                    List<TVPackage> tvPackages = new List<TVPackage>();
                     tvPackages = queries.getAllTVPackages();
 
                     foreach (TVPackage tvPackage in tvPackages) { packages.Add(tvPackage); }
 
                     return packages;
                 case 2:
-                    List<InternetPackage> internetPackages;
+                    List<InternetPackage> internetPackages = new List<InternetPackage>(); ;
                     internetPackages = queries.getAllInternetPackages();
 
                     foreach (InternetPackage internetPackage in internetPackages) { packages.Add(internetPackage); }
 
                     return packages;
                 case 3:
-                    List<CombinedPackage> combinedPackages;
+                    List<CombinedPackage> combinedPackages = new List<CombinedPackage>(); ;
                     combinedPackages = queries.getAllCombinedPackages();
 
                     foreach (CombinedPackage combinedPackage in combinedPackages) { packages.Add(combinedPackage); }
