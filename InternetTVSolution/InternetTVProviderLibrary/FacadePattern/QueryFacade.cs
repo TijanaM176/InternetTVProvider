@@ -73,7 +73,7 @@ namespace InternetTVProviderLibrary.FacadePattern
             clients = getAllClients();
             bool existClient = clients.Any(cl => cl.Username == username && cl.FirstName == firstname && cl.LastName == lastname);
 
-            if(existClient)
+            if(existClient == false)
             {
                 queries.insertNewClient(cl);
 
@@ -99,7 +99,7 @@ namespace InternetTVProviderLibrary.FacadePattern
 
             bool existPackage = tvPackages.Any(pack => pack.Name == name && pack.Price == price && pack.NumberOfChannels == numberOfChannels && pack.PackageTypeID == packageTypeId);
 
-            if(existPackage)
+            if(existPackage == false)
                 queries.addNewTVPackage(tvPackage);
         }
 
@@ -125,7 +125,7 @@ namespace InternetTVProviderLibrary.FacadePattern
 
             bool existPackage = internetPackages.Any(pack => pack.Name == name && pack.Price == price && pack.InternetSpeed == internetSpeed && pack.PackageTypeID == packageTypeId);
 
-            if (existPackage)
+            if (existPackage == false)
                 queries.addNewInternetPackage(internetPackage);
         }
 
@@ -156,7 +156,7 @@ namespace InternetTVProviderLibrary.FacadePattern
 
             bool existPackage = combinedPackages.Any(pack => pack.Name == name && pack.Price == price && pack.TVPackageId == tvPackageId && pack.InternetPackageId == internetPackageId && pack.PackageTypeID == packageTypeId);
 
-            if (existPackage)
+            if (existPackage == false)
                 queries.addNewCombinedPackage(combinedPackage);
         }
 
