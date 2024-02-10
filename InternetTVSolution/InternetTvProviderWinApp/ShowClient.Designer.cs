@@ -38,6 +38,7 @@
             columnHeader3 = new ColumnHeader();
             label5 = new Label();
             addNewSubscriptionButton = new Button();
+            undoButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -132,11 +133,23 @@
             addNewSubscriptionButton.UseVisualStyleBackColor = false;
             addNewSubscriptionButton.Click += addNewSubscriptionButton_Click;
             // 
+            // undoButton
+            // 
+            undoButton.BackColor = SystemColors.GradientActiveCaption;
+            undoButton.ForeColor = SystemColors.HotTrack;
+            undoButton.Location = new Point(413, 341);
+            undoButton.Name = "undoButton";
+            undoButton.Size = new Size(94, 29);
+            undoButton.TabIndex = 8;
+            undoButton.Text = "Undo ";
+            undoButton.UseVisualStyleBackColor = false;
+            // 
             // ShowClient
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(715, 369);
+            ClientSize = new Size(715, 383);
+            Controls.Add(undoButton);
             Controls.Add(addNewSubscriptionButton);
             Controls.Add(label5);
             Controls.Add(listView1);
@@ -166,5 +179,6 @@
         private ColumnHeader columnHeader3;
         private Label label5;
         private Button addNewSubscriptionButton;
+        private Button undoButton;
     }
 }

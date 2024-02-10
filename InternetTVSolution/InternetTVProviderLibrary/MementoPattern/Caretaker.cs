@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InternetTVProviderLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,22 +7,33 @@ using System.Threading.Tasks;
 
 namespace InternetTVProviderLibrary.Memento
 {
+    // Caretaker
     public class Caretaker
     {
-        private Stack<SubscriptionMemento> subscriptionHistory = new Stack<SubscriptionMemento>();
+        private Stack<SubscriptionMemento> mementoStack;
+
+        public Caretaker()
+        {
+            mementoStack = new Stack<SubscriptionMemento>();
+        }
 
         public void AddSubscriptionMemento(SubscriptionMemento memento)
         {
-            subscriptionHistory.Push(memento);
+            mementoStack.Push(memento);
         }
 
         public SubscriptionMemento UndoSubscriptionChanges()
         {
-            if (subscriptionHistory.Count > 0)
+            if (mementoStack.Count > 0)
             {
-                return subscriptionHistory.Pop();
+                return mementoStack.Pop();
             }
-            return null; // Nema više istorije
+            else
+            {
+                return null;
+            }
         }
     }
+
 }
+

@@ -1,4 +1,5 @@
 ﻿using InternetTVProviderLibrary.FacadePattern;
+using InternetTVProviderLibrary.Memento;
 using InternetTVProviderLibrary.Models;
 using MySqlX.XDevAPI;
 using System;
@@ -21,12 +22,13 @@ namespace InternetTvProviderWinApp
         DbConnection connection;
         QueryFacade facade;
         int client_id;
+        Caretaker caretaker;
 
         public ShowClient(string username, DbConnection connection)
         {
             this.connection = connection;
             facade = new QueryFacade(connection);
-
+            caretaker = new Caretaker();
 
             InitializeComponent();
 
@@ -38,7 +40,7 @@ namespace InternetTvProviderWinApp
                 label1.Text = "First Name: " + client.FirstName;
                 label2.Text = "Last Name: " + client.LastName;
                 label3.Text = "Username: " + client.Username;
-
+                undoButton.Click += undoButton_Click;
                 DisplaySubscriptions();
 
             }
@@ -73,12 +75,9 @@ namespace InternetTvProviderWinApp
             label5.Text = "Total: " + sum.ToString("0.00") + "$";
         }
 
-
-
         private void ShowClient_Load(object sender, EventArgs e)
         {
             listView1.ItemActivate += ListView1_ItemActivate;
-
         }
 
 
@@ -95,11 +94,14 @@ namespace InternetTvProviderWinApp
                 {
                     DialogResult result = MessageBox.Show("Are you sure you want to change the subscription status?", "Confirmation", MessageBoxButtons.OKCancel);
 
-
                     if (result == DialogResult.OK)
                     {
-                        selectedSubscription.activated = (selectedSubscription.activated == 1) ? 0 : 1;
+                        // Čuvanje trenutnog stanja pre promene
+                        SubscriptionMemento memento = new SubscriptionMemento(facade.getSubscriptionsByClientId(client_id));
+                        caretaker.AddSubscriptionMemento(memento);
 
+                        // Promena statusa pretplate
+                        selectedSubscription.activated = (selectedSubscription.activated == 1) ? 0 : 1;
                         facade.updateSubscribedPackageByClientID(selectedSubscription);
 
                         selectedItem.SubItems[2].Text = (selectedSubscription.activated == 1) ? "Active" : "Inactive";
@@ -107,10 +109,26 @@ namespace InternetTvProviderWinApp
                         double sum = facade.getAllSubscriptionsPriceByClient(client_id);
                         label5.Text = "Total: " + sum.ToString("0.00") + "$";
                     }
-
                 }
             }
         }
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            SubscriptionMemento memento = caretaker.UndoSubscriptionChanges();
+            if (memento != null)
+            {
+                List<Subscriptions> subscriptions = memento.GetSubscriptions();
+
+                foreach (var subscription in subscriptions)
+                {
+                    facade.updateSubscribedPackageByClientID(subscription);
+                }
+
+                DisplaySubscriptions();
+            }
+        }
+
+
 
 
         private void closeButton_Click(object sender, EventArgs e)
