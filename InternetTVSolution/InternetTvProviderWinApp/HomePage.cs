@@ -98,7 +98,7 @@ namespace InternetTvProviderWinApp
                 showAllInternetPacketsGrid.Rows[rowIndex].Cells["descriptionInternet"].Value = "opis";
                 showAllInternetPacketsGrid.Rows[rowIndex].Cells["priceInternet"].Value = internetPackage.Price;
                 showAllInternetPacketsGrid.Rows[rowIndex].Cells["internetSpeed"].Value = internetPackage.InternetSpeed;
-                showAllInternetPacketsGrid.Rows[rowIndex].Cells["nameInternet"].Tag = internetPackage.ID; 
+                showAllInternetPacketsGrid.Rows[rowIndex].Cells["nameInternet"].Tag = internetPackage.ID;
 
             }
 
@@ -265,13 +265,13 @@ namespace InternetTvProviderWinApp
             }
             else
             {
-                MessageBox.Show("Nijedan red nije selektovan!");
+                MessageBox.Show("No row selected!");
             }
         }
 
         private bool ConfirmDelete()
         {
-            DialogResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete paket?", "Potvrda brisanja paketa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you want to delete the package?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
                 return true;

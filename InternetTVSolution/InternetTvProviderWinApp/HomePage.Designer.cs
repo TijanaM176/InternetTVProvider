@@ -8,7 +8,7 @@ namespace InternetTvProviderWinApp
         ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        
+
         /// <summary>
         ///  Clean up any resources being used.
         /// </summary>
@@ -288,9 +288,9 @@ namespace InternetTvProviderWinApp
             combinePacketsLabel.ForeColor = Color.IndianRed;
             combinePacketsLabel.Location = new Point(472, 23);
             combinePacketsLabel.Name = "combinePacketsLabel";
-            combinePacketsLabel.Size = new Size(128, 20);
+            combinePacketsLabel.Size = new Size(137, 20);
             combinePacketsLabel.TabIndex = 2;
-            combinePacketsLabel.Text = "Combine packets";
+            combinePacketsLabel.Text = "Combined packets";
             // 
             // internetPacketsLabel
             // 
@@ -314,7 +314,7 @@ namespace InternetTvProviderWinApp
             tvPacketsLabel.TabIndex = 0;
             tvPacketsLabel.Text = "TV packets";
             // 
-            // PocetnaStrana
+            // HomePage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -322,7 +322,7 @@ namespace InternetTvProviderWinApp
             Controls.Add(packetsPanel);
             Controls.Add(clientsPanel);
             Controls.Add(providerPanel);
-            Name = "PocetnaStrana";
+            Name = "HomePage";
             Text = "PocetnaStrana";
             providerPanel.ResumeLayout(false);
             providerPanel.PerformLayout();
