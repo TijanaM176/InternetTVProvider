@@ -1,5 +1,6 @@
 ﻿using InternetTVProviderLibrary.FacadePattern;
 using InternetTVProviderLibrary.Models;
+using InternetTvProviderWinApp.MediatorPattern;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,10 +18,9 @@ namespace InternetTvProviderWinApp
     public partial class AddNewPackageForm : Form
     {
         QueryFacade facade;
-        public event EventHandler<DodavanjeInternetPaketaEventArgs> NoviInternetPaketDodat;
-        public event EventHandler<DodavanjeTVPaketaEventArgs> NoviTVPaketDodat;
-        public event EventHandler<DodavanjeCombinedPaketaEventArgs> NoviCombinedPaketDodat;
-        public AddNewPackageForm(DbConnection connection)
+        HomePageMediator mediator;
+
+        public AddNewPackageForm(DbConnection connection, HomePageMediator mediator)
         {
             InitializeComponent();
 
@@ -38,19 +38,10 @@ namespace InternetTvProviderWinApp
 
             HomePage pocetnaStrana = new HomePage(connection);
             facade = new QueryFacade(connection);
+            this.mediator = mediator;
         }
-        private void OnNoviPaketDodatInternet(string nazivPaketa,string tipPaketa,double price, string internetSpeed )
-        {
-            NoviInternetPaketDodat?.Invoke(this, new DodavanjeInternetPaketaEventArgs(nazivPaketa,tipPaketa,price,internetSpeed));
-        }
-        private void OnNoviPaketDodatTV(string nazivPaketa, string tipPaketa, double price, int numOfChanels)
-        {
-            NoviTVPaketDodat?.Invoke(this, new DodavanjeTVPaketaEventArgs(nazivPaketa, tipPaketa, price, numOfChanels));
-        }
-        private void OnNoviPaketDodatCombined(string nazivPaketa, string tipPaketa)
-        {
-            NoviCombinedPaketDodat?.Invoke(this, new DodavanjeCombinedPaketaEventArgs(nazivPaketa, tipPaketa));
-        }
+        
+
         private void indexChanged(object sender, EventArgs e)
         {
             int selectedIndex = packageTypeComboBox.SelectedIndex;
@@ -101,14 +92,14 @@ namespace InternetTvProviderWinApp
             if (packageType == 1)
             {
                 numberOfChannels = Convert.ToInt32(numberOfChannelsNumericUpDown.Value);
-                facade.addNewTVPackage(name, price, numberOfChannels, packageType);
-                OnNoviPaketDodatTV(name,"TV",price,numberOfChannels);
+                TVPackage package = facade.addNewTVPackage(name, price, numberOfChannels, packageType);
+                mediator.NotifyNewPackage(this, package);
             }
             else if (packageType == 2)
             {
                 internetSpeed = internetSpeedForInternetPackageTextBox.Text;
-                facade.addNewInternetPackage(name, price, internetSpeed, packageType);
-                OnNoviPaketDodatInternet(name,"Internet",price,internetSpeed);
+                InternetPackage package = facade.addNewInternetPackage(name, price, internetSpeed, packageType);
+                mediator.NotifyNewPackage(this, package);
             }
             else
             {
@@ -118,8 +109,8 @@ namespace InternetTvProviderWinApp
                 int tvPackageID = facade.getTVPackageIdByNumOfChannels(numberOfChannels);
                 int internetPackageID = facade.getInternetPackageIdByInternetSpeed(internetSpeed);
 
-                facade.addNewCombinedPackage(name, tvPackageID, internetPackageID, packageType);
-                OnNoviPaketDodatCombined(name,"Combined");
+                CombinedPackage package = facade.addNewCombinedPackage(name, tvPackageID, internetPackageID, packageType);
+                mediator.NotifyNewPackage(this, package);
             }
 
 

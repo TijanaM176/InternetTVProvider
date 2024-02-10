@@ -5,38 +5,39 @@ using System.Data;
 using System.Data.Common;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InternetTVProviderLibrary.FacadePattern;
 using InternetTVProviderLibrary.Models;
+using InternetTvProviderWinApp.MediatorPattern;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InternetTvProviderWinApp
 {
     public partial class AddNewClient : Form
     {
+        
         QueryFacade userFacade;
         HomePage pocetna;
-        public event EventHandler<DodavanjeKlijentaEventArgs> NoviKlijentDodat;
-        public AddNewClient(HomePage pocetna,DbConnection connection)
+        HomePageMediator mediator;
+
+    public AddNewClient(HomePage pocetna,DbConnection connection, HomePageMediator mediator)
         {
             InitializeComponent();
             this.pocetna = pocetna;
             userFacade = new QueryFacade(connection);
+            this.mediator = mediator;
         }
-        private void OnNoviKlijentDodat(string noviKlijent)
-        {
-            NoviKlijentDodat?.Invoke(this, new DodavanjeKlijentaEventArgs(noviKlijent));
-        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
             // Implementacija funkcionalnosti za čuvanje korisnika
             userFacade.addNewClient(textBox4.Text, textBox1.Text, textBox3.Text);
-            
-            this.Close(); // Zatvaranje trenutnog overlay prozora
-            OnNoviKlijentDodat(textBox4.Text);
+            mediator.NotifyNewClient(this, textBox4.Text);
+            this.Close();
         }
 
         // Event handler za klik na dugme "Otkaži"

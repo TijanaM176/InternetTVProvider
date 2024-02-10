@@ -82,7 +82,7 @@ namespace InternetTVProviderLibrary.FacadePattern
             return null;
         }
 
-        public void addNewTVPackage(string name, double price, int numberOfChannels, int packageTypeId)
+        public TVPackage addNewTVPackage(string name, double price, int numberOfChannels, int packageTypeId)
         {
             TVPackageBuilder packageBuilder = new TVPackageBuilder();
 
@@ -99,8 +99,13 @@ namespace InternetTVProviderLibrary.FacadePattern
 
             bool existPackage = tvPackages.Any(pack => pack.Name == name && pack.Price == price && pack.NumberOfChannels == numberOfChannels && pack.PackageTypeID == packageTypeId);
 
-            if(existPackage == false)
+            if (existPackage == false)
+            {
                 queries.addNewTVPackage(tvPackage);
+                return tvPackage;
+            }
+            else
+                return null;
         }
 
         public TVPackage getTVPackageByPackageID(int id)
@@ -108,7 +113,7 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getTVPackageByPackageID(id);
         }
 
-        public void addNewInternetPackage(string name, double price, string internetSpeed, int packageTypeId)
+        public InternetPackage addNewInternetPackage(string name, double price, string internetSpeed, int packageTypeId)
         {
             InternetPackageBuilder packageBuilder = new InternetPackageBuilder();
 
@@ -126,7 +131,12 @@ namespace InternetTVProviderLibrary.FacadePattern
             bool existPackage = internetPackages.Any(pack => pack.Name == name && pack.Price == price && pack.InternetSpeed == internetSpeed && pack.PackageTypeID == packageTypeId);
 
             if (existPackage == false)
+            {
                 queries.addNewInternetPackage(internetPackage);
+                return internetPackage;
+            }
+            else
+                return null;
         }
 
         public InternetPackage getInternetPackageByPackageID(int id)
@@ -134,7 +144,7 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getInternetPackageByPackageID(id);
         }
 
-        public void addNewCombinedPackage(string name, int tvPackageId, int internetPackageId, int packageTypeId)
+        public CombinedPackage addNewCombinedPackage(string name, int tvPackageId, int internetPackageId, int packageTypeId)
         {
             CombinedPackageBuilder packageBuilder = new CombinedPackageBuilder();
 
@@ -157,7 +167,12 @@ namespace InternetTVProviderLibrary.FacadePattern
             bool existPackage = combinedPackages.Any(pack => pack.Name == name && pack.Price == price && pack.TVPackageId == tvPackageId && pack.InternetPackageId == internetPackageId && pack.PackageTypeID == packageTypeId);
 
             if (existPackage == false)
+            {
                 queries.addNewCombinedPackage(combinedPackage);
+                return combinedPackage;
+            }
+            else
+                return null;
         }
 
         public CombinedPackage getCombinedPackageByPackageID(int id)

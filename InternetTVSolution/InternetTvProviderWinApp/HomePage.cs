@@ -1,6 +1,7 @@
 ﻿using InternetTVProviderLibrary.FacadePattern;
 using InternetTVProviderLibrary.Models;
 using InternetTVProviderLibrary.StrategyPattern;
+using InternetTvProviderWinApp.MediatorPattern;
 using System.Data.Common;
 using System.Windows.Forms.VisualStyles;
 
@@ -10,6 +11,11 @@ namespace InternetTvProviderWinApp
     {
         DbConnection connection;
         QueryFacade facade;
+
+        AddNewClient addNewClient;
+        AddNewPackageForm addNewPackage;
+
+        HomePageMediator mediator;
 
         Button addNewPackageButton = new Button();
         Button addNewClientButton = new Button();
@@ -22,7 +28,9 @@ namespace InternetTvProviderWinApp
         {
             this.connection = connection;
             InitializeComponent();
+
             facade = new QueryFacade(connection);
+            mediator = new HomePageMediator(this, addNewClient, addNewPackage);
 
             providerName.Text = ScanConfiguration.providerName;
             showAllClientsInList();
@@ -35,6 +43,7 @@ namespace InternetTvProviderWinApp
 
         public void showAllClientsInList()
         {
+            showAllClientsListBox.Items.Clear();
 
             List<Client> clients = facade.getAllClients();
 
@@ -42,12 +51,8 @@ namespace InternetTvProviderWinApp
             {
                 showAllClientsListBox.Items.Add(client.Username);
             }
-
-
             showAllClientsListBox.SelectedIndex = 0;
         }
-
-
 
         public void showAllClientsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -126,80 +131,48 @@ namespace InternetTvProviderWinApp
 
         private void addNewClientButton_Click(object sender, EventArgs e)
         {
-            AddNewClient addNewClient = new AddNewClient(this, connection);
-            addNewClient.NoviKlijentDodat += AddNewClient_NoviKlijentDodat;
+            addNewClient = new AddNewClient(this, connection, mediator);
             addNewClient.ShowDialog();
         }
 
         private void addNewPackageButton_Click(object sender, EventArgs e)
         {
-            AddNewPackageForm addNewPackage = new AddNewPackageForm(connection);
-            addNewPackage.NoviTVPaketDodat += AddNewPackage_NoviTVPaketDodat;
-            addNewPackage.NoviInternetPaketDodat += AddNewPackage_NoviInternetPaketDodat;
-            addNewPackage.NoviCombinedPaketDodat += AddNewPackage_NoviCombinedPaketDodat;
+            addNewPackage = new AddNewPackageForm(connection, mediator);
             addNewPackage.ShowDialog();
         }
-        private void AddNewClient_NoviKlijentDodat(object sender, DodavanjeKlijentaEventArgs e)
-        {
-            // Osvežavanje liste klijenata na osnovu informacija o novom klijentu
-            string noviKlijent = e.NoviKlijent;
-            UpdateUserView(noviKlijent);
-        }
-        private void AddNewPackage_NoviTVPaketDodat(object sender, DodavanjeTVPaketaEventArgs e)
-        {
-            string noviPaket = e.NazivPaketa;
-            string tipPaketa = e.TipPaketa;
-            double price = e.Price;
-            int numOfChanels = e.NumberOfChanels;
-            UpdateTVPackageView(noviPaket, tipPaketa, price, numOfChanels);
+       
 
-        }
-        private void AddNewPackage_NoviInternetPaketDodat(object sender, DodavanjeInternetPaketaEventArgs e)
-        {
-            string noviPaket = e.NazivPaketa;
-            string tipPaketa = e.TipPaketa;
-            double price = e.Price;
-            string internetspeed = e.InternetSpeed;
-            UpdateInternetPackageView(noviPaket, tipPaketa, price, internetspeed);
-        }
-        private void AddNewPackage_NoviCombinedPaketDodat(object sender, DodavanjeCombinedPaketaEventArgs e)
-        {
-            string noviPaket = e.NazivPaketa;
-            string tipPaketa = e.TipPaketa;
-            UpdateCombinedPackageView(noviPaket, tipPaketa);
-        }
-
-        private void UpdateUserView(string noviKlijent)
+        public void UpdateUserView(string noviKlijent)
         {
             showAllClientsListBox.Items.Add(noviKlijent);
             showAllClientsListBox.SelectedItem = noviKlijent;
         }
 
-        private void UpdateInternetPackageView(string noviPaket, string tipPaketa, double price, string internetSpeed)
+        public void UpdateInternetPackageView(InternetPackage package)
         {
 
             int rowIndexTV = showAllInternetPacketsGrid.Rows.Add();
-            showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["nameInternet"].Value = noviPaket;
+            showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["nameInternet"].Value = package.Name;
             showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["descriptionInternet"].Value = "opis";
-            showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["priceInternet"].Value = price;
-            showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["internetSpeed"].Value = internetSpeed;
+            showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["priceInternet"].Value = package.Price;
+            showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["internetSpeed"].Value = package.InternetSpeed;
         }
-        private void UpdateCombinedPackageView(string noviPaket, string tipPaketa)
+        public void UpdateCombinedPackageView(CombinedPackage package)
         {
 
             int rowIndexTV = showAllCombinedPacketsGrid.Rows.Add();
-            showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["nameCombined"].Value = noviPaket;
+            showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["nameCombined"].Value = package.Name;
             showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["descriptionCombined"].Value = "opis";
         }
 
-        private void UpdateTVPackageView(string noviPaket, string tipPaketa, double price, int numOfChanels)
+        public void UpdateTVPackageView(TVPackage package)
         {
 
             int rowIndexTV = showAllTvPacketsGrid.Rows.Add();
-            showAllTvPacketsGrid.Rows[rowIndexTV].Cells["nameTV"].Value = noviPaket;
+            showAllTvPacketsGrid.Rows[rowIndexTV].Cells["nameTV"].Value = package.Name;
             showAllTvPacketsGrid.Rows[rowIndexTV].Cells["descriptionTV"].Value = "opis";
-            showAllTvPacketsGrid.Rows[rowIndexTV].Cells["priceTV"].Value = price;
-            showAllTvPacketsGrid.Rows[rowIndexTV].Cells["numberOfChannelsTV"].Value = numOfChanels;
+            showAllTvPacketsGrid.Rows[rowIndexTV].Cells["priceTV"].Value = package.Price;
+            showAllTvPacketsGrid.Rows[rowIndexTV].Cells["numberOfChannelsTV"].Value = package.NumberOfChannels;
 
         }
 
