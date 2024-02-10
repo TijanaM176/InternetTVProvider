@@ -222,6 +222,27 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getInternetPackageIdByInternetSpeed(internetSpeed);
         }
 
-       
+        public Package getPackageByTypeID(int packageTypeID, int packageID)
+        {
+            Package package = null;
+
+            switch (packageTypeID)
+            {
+                case 1:
+                    package = queries.getTVPackageByPackageID(packageID);
+
+                    return package;
+                case 2:
+                    package = queries.getInternetPackageByPackageID(packageID);
+
+                    return package;
+                case 3:
+                    package = queries.getCombinedPackageByPackageID(packageID);
+
+                    return package;
+            }
+
+            return package;
+        }
     }
 }
