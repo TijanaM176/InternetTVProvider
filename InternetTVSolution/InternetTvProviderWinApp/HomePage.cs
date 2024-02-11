@@ -163,6 +163,7 @@ namespace InternetTvProviderWinApp
             int rowIndexTV = showAllCombinedPacketsGrid.Rows.Add();
             showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["nameCombined"].Value = package.Name;
             showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["descriptionCombined"].Value = "opis";
+            showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["priceCombined"].Value = package.Price;
         }
 
         public void UpdateTVPackageView(TVPackage package)

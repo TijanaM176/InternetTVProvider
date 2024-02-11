@@ -43,6 +43,10 @@
             internetSpeedTextBox = new TextBox();
             internetSpeedForInternetPackageLabel = new Label();
             internetSpeedForInternetPackageTextBox = new TextBox();
+            TVPackageComboBox = new ComboBox();
+            TVPackageLabel = new Label();
+            InternetPackageLabel = new Label();
+            InternetPackageComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)priceNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numberOfChannelsNumericUpDown).BeginInit();
             SuspendLayout();
@@ -52,9 +56,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.DeepSkyBlue;
-            label1.Location = new Point(82, 30);
+            label1.Location = new Point(72, 22);
             label1.Name = "label1";
-            label1.Size = new Size(236, 32);
+            label1.Size = new Size(182, 25);
             label1.TabIndex = 0;
             label1.Text = "Add new package";
             label1.Click += label1_Click;
@@ -64,18 +68,19 @@
             label2.AutoSize = true;
             label2.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.DeepSkyBlue;
-            label2.Location = new Point(49, 87);
+            label2.Location = new Point(43, 65);
             label2.Name = "label2";
-            label2.Size = new Size(54, 24);
+            label2.Size = new Size(44, 20);
             label2.TabIndex = 1;
             label2.Text = "Name";
             label2.Click += label2_Click;
             // 
             // nameTextBox
             // 
-            nameTextBox.Location = new Point(49, 114);
+            nameTextBox.Location = new Point(43, 86);
+            nameTextBox.Margin = new Padding(3, 2, 3, 2);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new Size(284, 27);
+            nameTextBox.Size = new Size(249, 23);
             nameTextBox.TabIndex = 2;
             // 
             // label4
@@ -83,17 +88,18 @@
             label4.AutoSize = true;
             label4.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.DodgerBlue;
-            label4.Location = new Point(49, 161);
+            label4.Location = new Point(43, 121);
             label4.Name = "label4";
-            label4.Size = new Size(49, 24);
+            label4.Size = new Size(41, 20);
             label4.TabIndex = 4;
             label4.Text = "Price";
             // 
             // priceNumericUpDown
             // 
-            priceNumericUpDown.Location = new Point(49, 188);
+            priceNumericUpDown.Location = new Point(43, 141);
+            priceNumericUpDown.Margin = new Padding(3, 2, 3, 2);
             priceNumericUpDown.Name = "priceNumericUpDown";
-            priceNumericUpDown.Size = new Size(284, 27);
+            priceNumericUpDown.Size = new Size(248, 23);
             priceNumericUpDown.TabIndex = 5;
             // 
             // label5
@@ -101,9 +107,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.DodgerBlue;
-            label5.Location = new Point(49, 237);
+            label5.Location = new Point(43, 178);
             label5.Name = "label5";
-            label5.Size = new Size(119, 24);
+            label5.Size = new Size(95, 20);
             label5.TabIndex = 6;
             label5.Text = "Package Type";
             // 
@@ -111,9 +117,10 @@
             // 
             packageTypeComboBox.FormattingEnabled = true;
             packageTypeComboBox.Items.AddRange(new object[] { "TV package", "Internet package", "Combined package" });
-            packageTypeComboBox.Location = new Point(49, 264);
+            packageTypeComboBox.Location = new Point(43, 198);
+            packageTypeComboBox.Margin = new Padding(3, 2, 3, 2);
             packageTypeComboBox.Name = "packageTypeComboBox";
-            packageTypeComboBox.Size = new Size(284, 28);
+            packageTypeComboBox.Size = new Size(249, 23);
             packageTypeComboBox.TabIndex = 7;
             // 
             // internetSpeedLabel
@@ -121,9 +128,9 @@
             internetSpeedLabel.AutoSize = true;
             internetSpeedLabel.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             internetSpeedLabel.ForeColor = Color.DodgerBlue;
-            internetSpeedLabel.Location = new Point(49, 386);
+            internetSpeedLabel.Location = new Point(43, 290);
             internetSpeedLabel.Name = "internetSpeedLabel";
-            internetSpeedLabel.Size = new Size(122, 24);
+            internetSpeedLabel.Size = new Size(99, 20);
             internetSpeedLabel.TabIndex = 8;
             internetSpeedLabel.Text = "Internet Speed";
             // 
@@ -132,17 +139,18 @@
             numberOfChannelsLabel.AutoSize = true;
             numberOfChannelsLabel.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             numberOfChannelsLabel.ForeColor = Color.DodgerBlue;
-            numberOfChannelsLabel.Location = new Point(49, 310);
+            numberOfChannelsLabel.Location = new Point(43, 232);
             numberOfChannelsLabel.Name = "numberOfChannelsLabel";
-            numberOfChannelsLabel.Size = new Size(172, 24);
+            numberOfChannelsLabel.Size = new Size(138, 20);
             numberOfChannelsLabel.TabIndex = 10;
             numberOfChannelsLabel.Text = "Number Of Channels";
             // 
             // numberOfChannelsNumericUpDown
             // 
-            numberOfChannelsNumericUpDown.Location = new Point(49, 338);
+            numberOfChannelsNumericUpDown.Location = new Point(43, 254);
+            numberOfChannelsNumericUpDown.Margin = new Padding(3, 2, 3, 2);
             numberOfChannelsNumericUpDown.Name = "numberOfChannelsNumericUpDown";
-            numberOfChannelsNumericUpDown.Size = new Size(284, 27);
+            numberOfChannelsNumericUpDown.Size = new Size(248, 23);
             numberOfChannelsNumericUpDown.TabIndex = 11;
             // 
             // addPackageButton
@@ -150,9 +158,10 @@
             addPackageButton.BackColor = Color.DeepSkyBlue;
             addPackageButton.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             addPackageButton.ForeColor = Color.GhostWhite;
-            addPackageButton.Location = new Point(49, 476);
+            addPackageButton.Location = new Point(43, 357);
+            addPackageButton.Margin = new Padding(3, 2, 3, 2);
             addPackageButton.Name = "addPackageButton";
-            addPackageButton.Size = new Size(122, 48);
+            addPackageButton.Size = new Size(107, 36);
             addPackageButton.TabIndex = 12;
             addPackageButton.Text = "Add Package";
             addPackageButton.UseVisualStyleBackColor = false;
@@ -161,43 +170,86 @@
             // 
             cancelButton.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             cancelButton.ForeColor = Color.DodgerBlue;
-            cancelButton.Location = new Point(205, 476);
+            cancelButton.Location = new Point(179, 357);
+            cancelButton.Margin = new Padding(3, 2, 3, 2);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(128, 48);
+            cancelButton.Size = new Size(112, 36);
             cancelButton.TabIndex = 13;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
             // 
             // internetSpeedTextBox
             // 
-            internetSpeedTextBox.Location = new Point(49, 413);
+            internetSpeedTextBox.Location = new Point(43, 310);
+            internetSpeedTextBox.Margin = new Padding(3, 2, 3, 2);
             internetSpeedTextBox.Name = "internetSpeedTextBox";
-            internetSpeedTextBox.Size = new Size(284, 27);
+            internetSpeedTextBox.Size = new Size(249, 23);
             internetSpeedTextBox.TabIndex = 14;
             // 
             // internetSpeedForInternetPackageLabel
             // 
             internetSpeedForInternetPackageLabel.AutoSize = true;
             internetSpeedForInternetPackageLabel.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            internetSpeedForInternetPackageLabel.Location = new Point(49, 310);
+            internetSpeedForInternetPackageLabel.Location = new Point(43, 232);
             internetSpeedForInternetPackageLabel.Name = "internetSpeedForInternetPackageLabel";
-            internetSpeedForInternetPackageLabel.Size = new Size(122, 24);
+            internetSpeedForInternetPackageLabel.Size = new Size(99, 20);
             internetSpeedForInternetPackageLabel.TabIndex = 15;
             internetSpeedForInternetPackageLabel.Text = "Internet Speed";
             // 
             // internetSpeedForInternetPackageTextBox
             // 
-            internetSpeedForInternetPackageTextBox.Location = new Point(49, 337);
+            internetSpeedForInternetPackageTextBox.Location = new Point(43, 253);
+            internetSpeedForInternetPackageTextBox.Margin = new Padding(3, 2, 3, 2);
             internetSpeedForInternetPackageTextBox.Name = "internetSpeedForInternetPackageTextBox";
-            internetSpeedForInternetPackageTextBox.Size = new Size(284, 27);
+            internetSpeedForInternetPackageTextBox.Size = new Size(249, 23);
             internetSpeedForInternetPackageTextBox.TabIndex = 16;
+            // 
+            // TVPackageComboBox
+            // 
+            TVPackageComboBox.FormattingEnabled = true;
+            TVPackageComboBox.Location = new Point(43, 253);
+            TVPackageComboBox.Name = "TVPackageComboBox";
+            TVPackageComboBox.Size = new Size(248, 23);
+            TVPackageComboBox.TabIndex = 17;
+            // 
+            // TVPackageLabel
+            // 
+            TVPackageLabel.AutoSize = true;
+            TVPackageLabel.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            TVPackageLabel.Location = new Point(43, 232);
+            TVPackageLabel.Name = "TVPackageLabel";
+            TVPackageLabel.Size = new Size(82, 20);
+            TVPackageLabel.TabIndex = 18;
+            TVPackageLabel.Text = "TV Package";
+            // 
+            // InternetPackageLabel
+            // 
+            InternetPackageLabel.AutoSize = true;
+            InternetPackageLabel.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            InternetPackageLabel.Location = new Point(43, 290);
+            InternetPackageLabel.Name = "InternetPackageLabel";
+            InternetPackageLabel.Size = new Size(112, 20);
+            InternetPackageLabel.TabIndex = 19;
+            InternetPackageLabel.Text = "Internet Package";
+            // 
+            // InternetPackageComboBox
+            // 
+            InternetPackageComboBox.FormattingEnabled = true;
+            InternetPackageComboBox.Location = new Point(43, 310);
+            InternetPackageComboBox.Name = "InternetPackageComboBox";
+            InternetPackageComboBox.Size = new Size(248, 23);
+            InternetPackageComboBox.TabIndex = 20;
             // 
             // AddNewPackageForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(381, 541);
+            ClientSize = new Size(333, 406);
+            Controls.Add(InternetPackageComboBox);
+            Controls.Add(InternetPackageLabel);
+            Controls.Add(TVPackageLabel);
+            Controls.Add(TVPackageComboBox);
             Controls.Add(internetSpeedForInternetPackageTextBox);
             Controls.Add(internetSpeedForInternetPackageLabel);
             Controls.Add(internetSpeedTextBox);
@@ -214,6 +266,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             ForeColor = Color.DodgerBlue;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AddNewPackageForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add New Package";
@@ -240,5 +293,9 @@
         private TextBox internetSpeedTextBox;
         private Label internetSpeedForInternetPackageLabel;
         private TextBox internetSpeedForInternetPackageTextBox;
+        private ComboBox TVPackageComboBox;
+        private Label TVPackageLabel;
+        private Label InternetPackageLabel;
+        private ComboBox InternetPackageComboBox;
     }
 }
