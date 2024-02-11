@@ -33,7 +33,6 @@
             cancelButton = new Button();
             addSubButton = new Button();
             dropDownPackageInfo = new ComboBox();
-            packageInfoLabel = new Label();
             SuspendLayout();
             // 
             // label1
@@ -41,9 +40,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.DeepSkyBlue;
-            label1.Location = new Point(58, 60);
+            label1.Location = new Point(51, 45);
             label1.Name = "label1";
-            label1.Size = new Size(281, 32);
+            label1.Size = new Size(216, 25);
             label1.TabIndex = 1;
             label1.Text = "Add new subscription";
             // 
@@ -52,19 +51,20 @@
             internetSpeedLabel.AutoSize = true;
             internetSpeedLabel.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             internetSpeedLabel.ForeColor = Color.DodgerBlue;
-            internetSpeedLabel.Location = new Point(58, 159);
+            internetSpeedLabel.Location = new Point(51, 124);
             internetSpeedLabel.Name = "internetSpeedLabel";
-            internetSpeedLabel.Size = new Size(110, 24);
+            internetSpeedLabel.Size = new Size(112, 20);
             internetSpeedLabel.TabIndex = 15;
-            internetSpeedLabel.Text = "Package Info";
+            internetSpeedLabel.Text = "Choose Package";
             // 
             // cancelButton
             // 
             cancelButton.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             cancelButton.ForeColor = Color.DodgerBlue;
-            cancelButton.Location = new Point(211, 340);
+            cancelButton.Location = new Point(185, 255);
+            cancelButton.Margin = new Padding(3, 2, 3, 2);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(128, 64);
+            cancelButton.Size = new Size(112, 48);
             cancelButton.TabIndex = 24;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
@@ -74,9 +74,10 @@
             addSubButton.BackColor = Color.DeepSkyBlue;
             addSubButton.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
             addSubButton.ForeColor = Color.GhostWhite;
-            addSubButton.Location = new Point(58, 340);
+            addSubButton.Location = new Point(51, 255);
+            addSubButton.Margin = new Padding(3, 2, 3, 2);
             addSubButton.Name = "addSubButton";
-            addSubButton.Size = new Size(129, 64);
+            addSubButton.Size = new Size(113, 48);
             addSubButton.TabIndex = 23;
             addSubButton.Text = "Add Subscription";
             addSubButton.UseVisualStyleBackColor = false;
@@ -84,33 +85,22 @@
             // dropDownPackageInfo
             // 
             dropDownPackageInfo.FormattingEnabled = true;
-            dropDownPackageInfo.Location = new Point(58, 216);
+            dropDownPackageInfo.Location = new Point(51, 158);
+            dropDownPackageInfo.Margin = new Padding(3, 2, 3, 2);
             dropDownPackageInfo.Name = "dropDownPackageInfo";
-            dropDownPackageInfo.Size = new Size(281, 28);
+            dropDownPackageInfo.Size = new Size(246, 23);
             dropDownPackageInfo.TabIndex = 25;
-            // 
-            // packageInfoLabel
-            // 
-            packageInfoLabel.AutoSize = true;
-            packageInfoLabel.ForeColor = SystemColors.ControlDarkDark;
-            packageInfoLabel.Location = new Point(56, 183);
-            packageInfoLabel.Name = "packageInfoLabel";
-            packageInfoLabel.Size = new Size(112, 20);
-            packageInfoLabel.TabIndex = 26;
-            packageInfoLabel.Text = "(type, name, id)";
             // 
             // AddNewSubscription
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(406, 536);
-            Controls.Add(packageInfoLabel);
+            ClientSize = new Size(355, 402);
             Controls.Add(dropDownPackageInfo);
             Controls.Add(cancelButton);
             Controls.Add(addSubButton);
             Controls.Add(internetSpeedLabel);
             Controls.Add(label1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "AddNewSubscription";
             Text = "AddNewSubscription";
             ResumeLayout(false);
@@ -124,6 +114,5 @@
         private Button cancelButton;
         private Button addSubButton;
         private ComboBox dropDownPackageInfo;
-        private Label packageInfoLabel;
     }
 }

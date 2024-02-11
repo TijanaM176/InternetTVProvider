@@ -28,44 +28,54 @@ namespace InternetTvProviderWinApp
 
         public void fillAllDropDownFields()
         {
+            Dictionary<string, KeyValuePair<int, int>> allPackageInfo = new Dictionary<string, KeyValuePair<int, int>>();
+
             List<Package> packagesTV = facade.getAllPackages(HomePage.TVTypeID);
             List<Package> packagesInternet = facade.getAllPackages(HomePage.INTERNETTypeID);
             List<Package> packagesCombined = facade.getAllPackages(HomePage.COMBINEDTypeID);
-            List<string> allPackageIDsAndNames = new List<string>();
 
-            allPackageIDsAndNames.AddRange(packagesTV.Select(p => $"{p.PackageTypeID} - {p.Name} - {p.ID}"));
-            allPackageIDsAndNames.AddRange(packagesInternet.Select(p => $"{p.PackageTypeID} - {p.Name} - {p.ID}"));
-            allPackageIDsAndNames.AddRange(packagesCombined.Select(p => $"{p.PackageTypeID} - {p.Name} - {p.ID}"));
-            allPackageIDsAndNames = allPackageIDsAndNames.Distinct().ToList();
-
-            foreach (string packageInfo in allPackageIDsAndNames)
+            foreach (Package package in packagesTV)
             {
-                dropDownPackageInfo.Items.Add(packageInfo);
+                allPackageInfo.Add(package.Name, new KeyValuePair<int, int>(package.ID, package.PackageTypeID));
             }
 
+            foreach (Package package in packagesInternet)
+            {
+                allPackageInfo.Add(package.Name, new KeyValuePair<int, int>(package.ID, package.PackageTypeID));
+            }
+
+            foreach (Package package in packagesCombined)
+            {
+                allPackageInfo.Add(package.Name, new KeyValuePair<int, int>(package.ID, package.PackageTypeID));
+            }
+
+            dropDownPackageInfo.DataSource = new BindingSource(allPackageInfo, null);
+            dropDownPackageInfo.DisplayMember = "Key";
+            dropDownPackageInfo.ValueMember = "Value";
         }
+
 
         public void addNewSub(object sender, EventArgs e)
         {
-            string packageInfo = dropDownPackageInfo.Text;
-
-            if (packageInfo != null)
+            // Proveravamo da li je odabrani element u drop-down listi
+            if (dropDownPackageInfo.SelectedItem != null)
             {
-                string[] infoParts = packageInfo.Split('-');
+                // Dobijamo odabrani element (ime paketa) iz drop-down liste
+                string packageName = dropDownPackageInfo.SelectedItem.ToString();
 
-                for (int i = 0; i < infoParts.Length; i++)
-                {
-                    infoParts[i] = infoParts[i].Trim();
-                }
+                // Dobijamo ID paketa i ID tipa paketa iz odabrane vrednosti u drop-down listi
+                KeyValuePair<int, int> packageInfo = (KeyValuePair<int, int>)dropDownPackageInfo.SelectedValue;
+                int packageID = packageInfo.Key;
+                int packageTypeID = packageInfo.Value;
 
-                int packageTypeID = int.TryParse(infoParts[0].ToString(), out int resultType) ? resultType : -1;
-                int packageID = int.TryParse(infoParts[2].ToString(), out int resultID) ? resultID : -1;
-
+                // Dobijamo informacije o paketu na osnovu ID-ja paketa
                 Package package = facade.getPackageByTypeID(packageTypeID, packageID);
 
                 if (package != null)
                 {
+                    // Ubacujemo novu pretplatu za datog klijenta
                     facade.insertNewSubscriptionForClientID(clientID, package.ID, package.Name, package.Price, package.PackageTypeID);
+                    // Osvežavamo prikaz pretplata
                     showClient.DisplaySubscriptions();
                 }
                 else
@@ -75,16 +85,21 @@ namespace InternetTvProviderWinApp
             }
             else
             {
-                MessageBox.Show("Niste popunili sva polja!");
+                MessageBox.Show("Niste odabrali paket!");
             }
 
             this.Close();
         }
+
 
         public void closeAddNewSub(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        private void packageInfoLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
