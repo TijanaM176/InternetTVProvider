@@ -156,6 +156,8 @@ namespace InternetTvProviderWinApp
             showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["descriptionInternet"].Value = "opis";
             showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["priceInternet"].Value = package.Price;
             showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["internetSpeed"].Value = package.InternetSpeed;
+            showAllInternetPacketsGrid.Rows[rowIndexTV].Cells["nameInternet"].Tag = package.ID;
+            showAllInternetPacketsGrid.Refresh();
         }
         public void UpdateCombinedPackageView(CombinedPackage package)
         {
@@ -164,6 +166,8 @@ namespace InternetTvProviderWinApp
             showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["nameCombined"].Value = package.Name;
             showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["descriptionCombined"].Value = "opis";
             showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["priceCombined"].Value = package.Price;
+            showAllCombinedPacketsGrid.Rows[rowIndexTV].Cells["nameCombined"].Tag = package.ID;
+            showAllCombinedPacketsGrid.Refresh();
         }
 
         public void UpdateTVPackageView(TVPackage package)
@@ -174,6 +178,8 @@ namespace InternetTvProviderWinApp
             showAllTvPacketsGrid.Rows[rowIndexTV].Cells["descriptionTV"].Value = "opis";
             showAllTvPacketsGrid.Rows[rowIndexTV].Cells["priceTV"].Value = package.Price;
             showAllTvPacketsGrid.Rows[rowIndexTV].Cells["numberOfChannelsTV"].Value = package.NumberOfChannels;
+            showAllTvPacketsGrid.Rows[rowIndexTV].Cells["nameTV"].Tag = package.ID;
+            showAllTvPacketsGrid.Refresh();
 
         }
 
