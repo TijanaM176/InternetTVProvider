@@ -896,7 +896,7 @@ namespace InternetTVProviderLibrary
             string query = @"
         UPDATE Subscriptions
         SET Activated = @isActivated
-        WHERE Client_ID = @clientID AND Packet_ID = @packageID
+        WHERE Client_ID = @clientID AND Packet_ID = @packageID AND TypeID = @typeID
     ";
 
             DbCommand dbCommand = connection.CreateCommand();
@@ -914,9 +914,14 @@ namespace InternetTVProviderLibrary
             activatedPackage.ParameterName = "@isActivated";
             activatedPackage.Value = subscription.activated;
 
+            DbParameter typeId = dbCommand.CreateParameter();
+            typeId.ParameterName = "@typeID";
+            typeId.Value = subscription.packageTypeID;
+
             dbCommand.Parameters.Add(idClient);
             dbCommand.Parameters.Add(idPackage);
             dbCommand.Parameters.Add(activatedPackage);
+            dbCommand.Parameters.Add(typeId);
 
             int success = dbCommand.ExecuteNonQuery();
 

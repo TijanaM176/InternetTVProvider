@@ -91,33 +91,51 @@ namespace InternetTvProviderWinApp
         {
             if (listView1.SelectedItems.Count > 0)
             {
-                ListViewItem selectedItem = listView1.SelectedItems[0];
-                string selectedSubscriptionName = selectedItem.SubItems[0].Text;
-
-                Subscriptions selectedSubscription = facade.getSubscriptionsByClientId(client_id).Find(subscription => subscription.name == selectedSubscriptionName);
-
-                if (selectedSubscription != null)
+                try
                 {
-                    DialogResult result = MessageBox.Show("Are you sure you want to change the subscription status?", "Confirmation", MessageBoxButtons.OKCancel);
+                    // Dohvati odabrani element iz ListView-a
+                    ListViewItem selectedItem = listView1.SelectedItems[0];
+                    string selectedSubscriptionName = selectedItem.SubItems[0].Text;
 
-                    if (result == DialogResult.OK)
+                    // Pronađi odgovarajuću pretplatu na osnovu imena
+                    Subscriptions selectedSubscription = facade.getSubscriptionsByClientId(client_id)
+                        .Find(subscription => subscription.name == selectedSubscriptionName);
+
+                    if (selectedSubscription != null)
                     {
-                        // Čuvanje trenutnog stanja pre promene
-                        SubscriptionMemento memento = new SubscriptionMemento(facade.getSubscriptionsByClientId(client_id));
-                        caretaker.AddSubscriptionMemento(memento);
+                        // Pitaj korisnika za potvrdu promjene statusa pretplate
+                        DialogResult result = MessageBox.Show("Are you sure you want to change the subscription status?",
+                            "Confirmation", MessageBoxButtons.OKCancel);
 
-                        // Promena statusa pretplate
-                        selectedSubscription.activated = (selectedSubscription.activated == 1) ? 0 : 1;
-                        facade.updateSubscribedPackageByClientID(selectedSubscription);
+                        if (result == DialogResult.OK)
+                        {
+                            // Čuvanje trenutnog stanja pretplata prije promjene
+                            SubscriptionMemento memento = new SubscriptionMemento(facade.getSubscriptionsByClientId(client_id));
+                            caretaker.AddSubscriptionMemento(memento);
 
-                        selectedItem.SubItems[2].Text = (selectedSubscription.activated == 1) ? "Active" : "Inactive";
+                            // Promjena statusa pretplate
+                            selectedSubscription.activated = (selectedSubscription.activated == 1) ? 0 : 1;
 
-                        double sum = facade.getAllSubscriptionsPriceByClient(client_id);
-                        label5.Text = "Total: " + sum.ToString("0.00") + "$";
+                            // Poziv funkcije za ažuriranje pretplate
+                            facade.updateSubscribedPackageByClientID(selectedSubscription);
+
+                            // Ažuriranje prikaza u ListView-u nakon promjene statusa pretplate
+                            selectedItem.SubItems[2].Text = (selectedSubscription.activated == 1) ? "Active" : "Inactive";
+
+                            // Ažuriranje ukupne sume nakon promjene statusa pretplate
+                            double sum = facade.getAllSubscriptionsPriceByClient(client_id);
+                            label5.Text = "Total: " + sum.ToString("0.00") + "$";
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    // Rukovanje greškama prilikom izvršavanja funkcije
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
         private void undoButton_Click(object sender, EventArgs e)
         {
             SubscriptionMemento memento = caretaker.UndoSubscriptionChanges();
