@@ -38,11 +38,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Arial", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.DeepSkyBlue;
-            label1.Location = new Point(51, 45);
+            label1.Font = new Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.DarkCyan;
+            label1.Location = new Point(51, 28);
             label1.Name = "label1";
-            label1.Size = new Size(216, 25);
+            label1.Size = new Size(235, 26);
             label1.TabIndex = 1;
             label1.Text = "Add new subscription";
             // 
@@ -50,8 +50,8 @@
             // 
             internetSpeedLabel.AutoSize = true;
             internetSpeedLabel.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            internetSpeedLabel.ForeColor = Color.DodgerBlue;
-            internetSpeedLabel.Location = new Point(51, 124);
+            internetSpeedLabel.ForeColor = Color.DarkCyan;
+            internetSpeedLabel.Location = new Point(51, 117);
             internetSpeedLabel.Name = "internetSpeedLabel";
             internetSpeedLabel.Size = new Size(112, 20);
             internetSpeedLabel.TabIndex = 15;
@@ -59,27 +59,29 @@
             // 
             // cancelButton
             // 
-            cancelButton.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            cancelButton.ForeColor = Color.DodgerBlue;
-            cancelButton.Location = new Point(185, 255);
+            cancelButton.FlatStyle = FlatStyle.Popup;
+            cancelButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            cancelButton.ForeColor = Color.DarkCyan;
+            cancelButton.Location = new Point(222, 269);
             cancelButton.Margin = new Padding(3, 2, 3, 2);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(112, 48);
+            cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 24;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
             // 
             // addSubButton
             // 
-            addSubButton.BackColor = Color.DeepSkyBlue;
-            addSubButton.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            addSubButton.ForeColor = Color.GhostWhite;
-            addSubButton.Location = new Point(51, 255);
+            addSubButton.BackColor = Color.DarkCyan;
+            addSubButton.FlatStyle = FlatStyle.Popup;
+            addSubButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            addSubButton.ForeColor = Color.LightCyan;
+            addSubButton.Location = new Point(123, 269);
             addSubButton.Margin = new Padding(3, 2, 3, 2);
             addSubButton.Name = "addSubButton";
-            addSubButton.Size = new Size(113, 48);
+            addSubButton.Size = new Size(75, 23);
             addSubButton.TabIndex = 23;
-            addSubButton.Text = "Add Subscription";
+            addSubButton.Text = "Add";
             addSubButton.UseVisualStyleBackColor = false;
             // 
             // dropDownPackageInfo
@@ -95,6 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightCyan;
             ClientSize = new Size(355, 402);
             Controls.Add(dropDownPackageInfo);
             Controls.Add(cancelButton);
@@ -102,6 +105,7 @@
             Controls.Add(internetSpeedLabel);
             Controls.Add(label1);
             Name = "AddNewSubscription";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AddNewSubscription";
             ResumeLayout(false);
             PerformLayout();

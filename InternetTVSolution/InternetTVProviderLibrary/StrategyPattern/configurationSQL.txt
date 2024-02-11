@@ -1,2 +1,2 @@
-ArenaTV
+MTS
 server=localhost;user=root;password=;database=InternetTVProvider;

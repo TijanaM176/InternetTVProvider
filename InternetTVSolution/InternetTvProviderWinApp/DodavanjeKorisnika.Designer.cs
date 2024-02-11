@@ -49,11 +49,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.MenuHighlight;
-            label1.Location = new Point(88, 9);
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.DarkCyan;
+            label1.Location = new Point(78, 9);
             label1.Name = "label1";
-            label1.Size = new Size(173, 32);
+            label1.Size = new Size(185, 32);
             label1.TabIndex = 1;
             label1.Text = "Add new client";
             label1.Click += label1_Click;
@@ -81,9 +81,10 @@
             // 
             // button1
             // 
-            button1.BackColor = SystemColors.MenuHighlight;
+            button1.BackColor = Color.DarkCyan;
             button1.FlatStyle = FlatStyle.Popup;
-            button1.ForeColor = SystemColors.ControlLight;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.LightCyan;
             button1.Location = new Point(152, 268);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
@@ -95,10 +96,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.ForeColor = SystemColors.MenuHighlight;
-            label2.Location = new Point(142, 69);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.DarkCyan;
+            label2.Location = new Point(131, 69);
             label2.Name = "label2";
-            label2.Size = new Size(64, 15);
+            label2.Size = new Size(67, 15);
             label2.TabIndex = 7;
             label2.Text = "First Name";
             label2.Click += label2_Click;
@@ -106,10 +108,11 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.ForeColor = SystemColors.MenuHighlight;
-            label3.Location = new Point(142, 133);
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.DarkCyan;
+            label3.Location = new Point(133, 133);
             label3.Name = "label3";
-            label3.Size = new Size(63, 15);
+            label3.Size = new Size(65, 15);
             label3.TabIndex = 8;
             label3.Text = "Last Name";
             label3.Click += label3_Click;
@@ -117,10 +120,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.ForeColor = SystemColors.MenuHighlight;
-            label4.Location = new Point(146, 198);
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.DarkCyan;
+            label4.Location = new Point(131, 198);
             label4.Name = "label4";
-            label4.Size = new Size(60, 15);
+            label4.Size = new Size(64, 15);
             label4.TabIndex = 9;
             label4.Text = "Username";
             label4.Click += label4_Click;
@@ -128,7 +132,8 @@
             // button2
             // 
             button2.FlatStyle = FlatStyle.Popup;
-            button2.ForeColor = SystemColors.MenuHighlight;
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = Color.DarkCyan;
             button2.Location = new Point(248, 268);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
@@ -141,6 +146,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightCyan;
             ClientSize = new Size(347, 324);
             Controls.Add(button2);
             Controls.Add(label4);

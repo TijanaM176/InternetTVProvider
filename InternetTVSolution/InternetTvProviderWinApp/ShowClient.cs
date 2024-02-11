@@ -40,6 +40,12 @@ namespace InternetTvProviderWinApp
                 label1.Text = "First Name: " + client.FirstName;
                 label2.Text = "Last Name: " + client.LastName;
                 label3.Text = "Username: " + client.Username;
+                label1.ForeColor = Color.DarkCyan;
+                label2.ForeColor = Color.DarkCyan;
+                label3.ForeColor = Color.DarkCyan;
+                label1.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                label2.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                label3.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                 undoButton.Click += undoButton_Click;
                 DisplaySubscriptions();
 

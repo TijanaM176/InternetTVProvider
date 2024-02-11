@@ -140,7 +140,7 @@ namespace InternetTvProviderWinApp
             addNewPackage = new AddNewPackageForm(connection, mediator);
             addNewPackage.ShowDialog();
         }
-       
+
 
         public void UpdateUserView(string noviKlijent)
         {
@@ -256,6 +256,11 @@ namespace InternetTvProviderWinApp
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void clientsLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
