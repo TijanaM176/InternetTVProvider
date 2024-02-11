@@ -322,33 +322,33 @@ namespace InternetTvProviderWinApp
             // combinePacketsLabel
             // 
             combinePacketsLabel.AutoSize = true;
-            combinePacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            combinePacketsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             combinePacketsLabel.ForeColor = Color.DarkCyan;
             combinePacketsLabel.Location = new Point(413, 17);
             combinePacketsLabel.Name = "combinePacketsLabel";
-            combinePacketsLabel.Size = new Size(109, 15);
+            combinePacketsLabel.Size = new Size(151, 21);
             combinePacketsLabel.TabIndex = 2;
             combinePacketsLabel.Text = "Combined packets";
             // 
             // internetPacketsLabel
             // 
             internetPacketsLabel.AutoSize = true;
-            internetPacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            internetPacketsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             internetPacketsLabel.ForeColor = Color.DarkCyan;
             internetPacketsLabel.Location = new Point(16, 226);
             internetPacketsLabel.Name = "internetPacketsLabel";
-            internetPacketsLabel.Size = new Size(100, 15);
+            internetPacketsLabel.Size = new Size(133, 21);
             internetPacketsLabel.TabIndex = 1;
             internetPacketsLabel.Text = "Internet packets";
             // 
             // tvPacketsLabel
             // 
             tvPacketsLabel.AutoSize = true;
-            tvPacketsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            tvPacketsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             tvPacketsLabel.ForeColor = Color.DarkCyan;
             tvPacketsLabel.Location = new Point(16, 17);
             tvPacketsLabel.Name = "tvPacketsLabel";
-            tvPacketsLabel.Size = new Size(68, 15);
+            tvPacketsLabel.Size = new Size(92, 21);
             tvPacketsLabel.TabIndex = 0;
             tvPacketsLabel.Text = "TV packets";
             // 
