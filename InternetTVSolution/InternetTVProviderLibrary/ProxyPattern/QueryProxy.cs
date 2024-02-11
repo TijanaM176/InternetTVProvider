@@ -143,12 +143,12 @@ namespace InternetTVProviderLibrary.ProxyPattern
             queries.insertNewSubscriptionForClientID(subscription);
         }
 
-        public int getPriceTVPackage(int packageID)
+        public double getPriceTVPackage(int packageID)
         {
             return queries.getPriceTVPackage(packageID);
         }
 
-        public int getPriceInternetPackage(int packageID)
+        public double getPriceInternetPackage(int packageID)
         {
             return queries.getPriceInternetPackage(packageID);
         }

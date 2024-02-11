@@ -29,8 +29,8 @@ namespace InternetTVProviderLibrary.ProxyPattern
         public List<Subscriptions> getSubscriptionsByClientId(int clientId);
         void updateSubscribedPackageByClientID(Subscriptions subscription);
         void insertNewSubscriptionForClientID(Subscriptions subscription);
-        int getPriceTVPackage(int packageID);
-        int getPriceInternetPackage(int packageID);
+        double getPriceTVPackage(int packageID);
+        double getPriceInternetPackage(int packageID);
         int getTVPackageIdByNumOfChannels(int numOfChannels);
         int getInternetPackageIdByInternetSpeed(string internetSpeed);
 

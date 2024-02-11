@@ -160,8 +160,7 @@ namespace InternetTvProviderWinApp
                 int tvPackageId = (int)TVPackageComboBox.SelectedValue;
                 int internetPackageId = (int)InternetPackageComboBox.SelectedValue;
 
-                CombinedPackage package = facade.addNewCombinedPackage(name, tvPackageId, internetPackageId, packageType);
-                package.Price = price;
+                CombinedPackage package = facade.addNewCombinedPackage(name, price, tvPackageId, internetPackageId, packageType);
                 mediator.NotifyNewPackage(this, package);
             }
 

@@ -144,13 +144,15 @@ namespace InternetTVProviderLibrary.FacadePattern
             return queries.getInternetPackageByPackageID(id);
         }
 
-        public CombinedPackage addNewCombinedPackage(string name, int tvPackageId, int internetPackageId, int packageTypeId)
+        public CombinedPackage addNewCombinedPackage(string name, double price, int tvPackageId, int internetPackageId, int packageTypeId)
         {
             CombinedPackageBuilder packageBuilder = new CombinedPackageBuilder();
 
-            double price = 0.0;
-            price += queries.getPriceTVPackage(tvPackageId);
-            price += queries.getPriceInternetPackage(internetPackageId);
+            if (price == 0.0)
+            {
+                price += queries.getPriceTVPackage(tvPackageId);
+                price += queries.getPriceInternetPackage(internetPackageId);
+            }
 
             packageBuilder.SetName(name);
             packageBuilder.SetPrice(price);

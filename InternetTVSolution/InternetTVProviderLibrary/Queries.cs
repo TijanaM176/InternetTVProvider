@@ -612,9 +612,9 @@ namespace InternetTVProviderLibrary
 
         }
 
-        public int getPriceTVPackage(int packageID)
+        public double getPriceTVPackage(int packageID)
         {
-            int priceTVPackage = 0;
+            double priceTVPackage = 0.0;
 
             if (connection.State != ConnectionState.Open)
             {
@@ -639,7 +639,7 @@ namespace InternetTVProviderLibrary
 
             while (reader.Read())
             {
-                priceTVPackage = reader.GetInt32(0);
+                priceTVPackage = reader.GetDouble(0);
 	        }
 
             if (connection.State == ConnectionState.Open)
@@ -650,9 +650,9 @@ namespace InternetTVProviderLibrary
             return priceTVPackage;
         }
 
-        public int getPriceInternetPackage(int packageID)
+        public double getPriceInternetPackage(int packageID)
         {
-            int priceInternetPackage = 0;
+            double priceInternetPackage = 0.0;
 
             if (connection.State != ConnectionState.Open)
             {
@@ -676,7 +676,7 @@ namespace InternetTVProviderLibrary
 
             while (reader.Read())
             {
-                priceInternetPackage = reader.GetInt32(0);
+                priceInternetPackage = reader.GetDouble(0);
             }
 
             if (connection.State == ConnectionState.Open)
