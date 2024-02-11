@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InternetTVProviderLibrary.FactoryPattern
 {
-    internal interface IDatabaseConnectionFactory
+    public interface IDatabaseConnectionFactory
     {
         DbConnection CreateConnection();
         void InitializeTables();

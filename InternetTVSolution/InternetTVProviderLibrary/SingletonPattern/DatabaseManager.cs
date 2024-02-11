@@ -38,18 +38,7 @@ namespace InternetTVProviderLibrary.SingletonPattern
         {
             _connectionString = connectionString;
 
-            switch (databaseType.ToLower())
-            {
-                case "mysql":
-                    _factory = new MySqlConnectionFactory(connectionString);
-                    break;
-                case "sqlite":
-                    _factory = new SQLiteConnectionFactory(connectionString);
-                    break;
-                default:
-                    Console.WriteLine("Nepodržana vrsta baze podataka.");
-                    return;
-            }
+            _factory = DatabaseConnectionFactory.getConnection(databaseType, connectionString);
 
             ConnectToDatabase();
         }
@@ -58,15 +47,13 @@ namespace InternetTVProviderLibrary.SingletonPattern
         {
             try
             {
-                //using (DbConnection connection = _factory.CreateConnection())
-                //{
                     DbConnection connection = _factory.CreateConnection();
                     connection.Open();
                     Connection = connection;
                     Console.WriteLine($"Connected to {_factory.GetType().Name} database.");
                     _factory.InitializeTables();
                     _factory.InsertDataInTables();
-                //}
+             
             }
             catch (Exception ex)
             {
