@@ -44,11 +44,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.DarkCyan;
-            label1.Location = new Point(53, 35);
+            label1.Location = new Point(46, 26);
             label1.Name = "label1";
-            label1.Size = new Size(94, 23);
+            label1.Size = new Size(81, 19);
             label1.TabIndex = 0;
             label1.Text = "FirstName:";
             // 
@@ -57,9 +57,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.DarkCyan;
-            label2.Location = new Point(53, 69);
+            label2.Location = new Point(46, 52);
             label2.Name = "label2";
-            label2.Size = new Size(94, 23);
+            label2.Size = new Size(79, 19);
             label2.TabIndex = 1;
             label2.Text = "LastName:";
             // 
@@ -68,9 +68,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.DarkCyan;
-            label3.Location = new Point(53, 105);
+            label3.Location = new Point(46, 79);
             label3.Name = "label3";
-            label3.Size = new Size(94, 23);
+            label3.Size = new Size(80, 19);
             label3.TabIndex = 2;
             label3.Text = "Username:";
             // 
@@ -79,18 +79,19 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.DarkCyan;
-            label4.Location = new Point(53, 149);
+            label4.Location = new Point(46, 112);
             label4.Name = "label4";
-            label4.Size = new Size(191, 25);
+            label4.Size = new Size(150, 20);
             label4.TabIndex = 4;
             label4.Text = "Client subscriptions:";
             // 
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
-            listView1.Location = new Point(53, 179);
+            listView1.Location = new Point(46, 134);
+            listView1.Margin = new Padding(3, 2, 3, 2);
             listView1.Name = "listView1";
-            listView1.Size = new Size(454, 157);
+            listView1.Size = new Size(398, 119);
             listView1.TabIndex = 5;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -115,9 +116,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = Color.Firebrick;
-            label5.Location = new Point(527, 35);
+            label5.Location = new Point(461, 26);
             label5.Name = "label5";
-            label5.Size = new Size(58, 28);
+            label5.Size = new Size(45, 21);
             label5.TabIndex = 6;
             label5.Text = "Total:";
             // 
@@ -127,9 +128,10 @@
             addNewSubscriptionButton.FlatStyle = FlatStyle.Popup;
             addNewSubscriptionButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             addNewSubscriptionButton.ForeColor = Color.LightCyan;
-            addNewSubscriptionButton.Location = new Point(527, 307);
+            addNewSubscriptionButton.Location = new Point(461, 230);
+            addNewSubscriptionButton.Margin = new Padding(3, 2, 3, 2);
             addNewSubscriptionButton.Name = "addNewSubscriptionButton";
-            addNewSubscriptionButton.Size = new Size(176, 29);
+            addNewSubscriptionButton.Size = new Size(154, 22);
             addNewSubscriptionButton.TabIndex = 7;
             addNewSubscriptionButton.Text = "Add new Subscription";
             addNewSubscriptionButton.UseVisualStyleBackColor = false;
@@ -141,19 +143,20 @@
             undoButton.FlatStyle = FlatStyle.Popup;
             undoButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             undoButton.ForeColor = Color.LightCyan;
-            undoButton.Location = new Point(413, 341);
+            undoButton.Location = new Point(361, 256);
+            undoButton.Margin = new Padding(3, 2, 3, 2);
             undoButton.Name = "undoButton";
-            undoButton.Size = new Size(94, 29);
+            undoButton.Size = new Size(82, 22);
             undoButton.TabIndex = 8;
             undoButton.Text = "Undo ";
             undoButton.UseVisualStyleBackColor = false;
             // 
             // ShowClient
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
-            ClientSize = new Size(715, 383);
+            ClientSize = new Size(626, 287);
             Controls.Add(undoButton);
             Controls.Add(addNewSubscriptionButton);
             Controls.Add(label5);
@@ -163,6 +166,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             ForeColor = SystemColors.ActiveCaptionText;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ShowClient";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ShowClient";
