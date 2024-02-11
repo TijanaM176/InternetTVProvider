@@ -93,36 +93,30 @@ namespace InternetTvProviderWinApp
             {
                 try
                 {
-                    // Dohvati odabrani element iz ListView-a
                     ListViewItem selectedItem = listView1.SelectedItems[0];
                     string selectedSubscriptionName = selectedItem.SubItems[0].Text;
 
-                    // Pronađi odgovarajuću pretplatu na osnovu imena
                     Subscriptions selectedSubscription = facade.getSubscriptionsByClientId(client_id)
                         .Find(subscription => subscription.name == selectedSubscriptionName);
 
                     if (selectedSubscription != null)
                     {
-                        // Pitaj korisnika za potvrdu promjene statusa pretplate
+                       
                         DialogResult result = MessageBox.Show("Are you sure you want to change the subscription status?",
                             "Confirmation", MessageBoxButtons.OKCancel);
 
                         if (result == DialogResult.OK)
                         {
-                            // Čuvanje trenutnog stanja pretplata prije promjene
+                          
                             SubscriptionMemento memento = new SubscriptionMemento(facade.getSubscriptionsByClientId(client_id));
                             caretaker.AddSubscriptionMemento(memento);
 
-                            // Promjena statusa pretplate
                             selectedSubscription.activated = (selectedSubscription.activated == 1) ? 0 : 1;
 
-                            // Poziv funkcije za ažuriranje pretplate
                             facade.updateSubscribedPackageByClientID(selectedSubscription);
 
-                            // Ažuriranje prikaza u ListView-u nakon promjene statusa pretplate
                             selectedItem.SubItems[2].Text = (selectedSubscription.activated == 1) ? "Active" : "Inactive";
 
-                            // Ažuriranje ukupne sume nakon promjene statusa pretplate
                             double sum = facade.getAllSubscriptionsPriceByClient(client_id);
                             label5.Text = "Total: " + sum.ToString("0.00") + "$";
                         }
@@ -130,7 +124,6 @@ namespace InternetTvProviderWinApp
                 }
                 catch (Exception ex)
                 {
-                    // Rukovanje greškama prilikom izvršavanja funkcije
                     MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

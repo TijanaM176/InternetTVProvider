@@ -258,16 +258,6 @@ namespace InternetTVProviderLibrary.FacadePattern
             queries.insertNewSubscriptionForClientID(sub);
         }
 
-        public int getTVPackageIdByNumOfChannels(int numOfChannels)
-        {
-            return queries.getTVPackageIdByNumOfChannels(numOfChannels);
-        }
-
-        public int getInternetPackageIdByInternetSpeed(string internetSpeed)
-        {
-            return queries.getInternetPackageIdByInternetSpeed(internetSpeed);
-        }
-
         public Package getPackageByTypeID(int packageTypeID, int packageID)
         {
             Package package = null;
