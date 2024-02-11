@@ -236,14 +236,38 @@ namespace InternetTVProviderLibrary.FacadePattern
             queries.updateSubscribedPackageByClientID(subscriptions);
         }
 
-        public void removeTVPackage(int packageID)
+        public CombinedPackage removeTVPackage(int packageID)
         {
             queries.removeTVPackage(packageID);
+
+            List<CombinedPackage> combinedPackages = queries.getAllCombinedPackages();
+
+            CombinedPackage foundPackage = combinedPackages.FirstOrDefault(pack => pack.TVPackageId == packageID);
+
+            if (foundPackage != null)
+            {
+                queries.removeCombinedPackage(foundPackage.ID);
+                return foundPackage;
+            }
+            else
+                return null;
         }
 
-        public void removeInternetPackage(int packageID)
+        public CombinedPackage removeInternetPackage(int packageID)
         {
             queries.removeInternetPackage(packageID);
+
+            List<CombinedPackage> combinedPackages = queries.getAllCombinedPackages();
+
+            CombinedPackage foundPackage = combinedPackages.FirstOrDefault(pack => pack.InternetPackageId == packageID);
+
+            if (foundPackage != null)
+            {
+                queries.removeCombinedPackage(foundPackage.ID);
+                return foundPackage;
+            }
+            else
+                return null;
         }
 
         public void removeCombinedPackage(int packageID)

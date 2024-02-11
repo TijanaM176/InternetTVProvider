@@ -14,19 +14,7 @@ namespace InternetTVProviderLibrary
     {
         static void Main()
         {
-            StrategyContext context = new StrategyContext();
-
-            ScanConfiguration scanConfig = new ScanConfiguration();
-            context.setStrategy(scanConfig);
-            context.ExecuteStrategy();
-
-            ConnectToDatabase connection = new ConnectToDatabase();
-            context.setStrategy(connection);
-            context.ExecuteStrategy();
-
-            //QueryFacade facade = new QueryFacade(DatabaseManager.Instance.Connection);
-
-            //Console.ReadLine();
+           
         }
 
     }

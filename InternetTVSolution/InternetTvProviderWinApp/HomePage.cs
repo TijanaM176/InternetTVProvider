@@ -194,15 +194,10 @@ namespace InternetTvProviderWinApp
                 {
                     if (ConfirmDelete())
                     {
-                        CombinedPackage combinedPackage = facade.getCombinedPackageByPackageID(packageId);
-
-                        if (combinedPackage != null)
-                        {
-                            facade.removeCombinedPackage(combinedPackage.ID);
-                        }
-
-                        facade.removeInternetPackage(packageId);
+                        CombinedPackage combinedPackage = facade.removeInternetPackage(packageId);
                         showAllInternetPacketsGrid.Rows.Remove(selectedRow);
+                        if (combinedPackage != null)
+                            selectCombinedRowToRemove(combinedPackage.Name);
                     }
                 }
 
@@ -231,21 +226,29 @@ namespace InternetTvProviderWinApp
                 {
                     if (ConfirmDelete())
                     {
-                        CombinedPackage combinedPackage = facade.getCombinedPackageByPackageID(packageId);
-
-                        if (combinedPackage != null)
-                        {
-                            facade.removeCombinedPackage(combinedPackage.ID);
-                        }
-
-                        facade.removeTVPackage(packageId);
+                        CombinedPackage combinedPackage = facade.removeTVPackage(packageId);
                         showAllTvPacketsGrid.Rows.Remove(selectedRow);
+                        if (combinedPackage != null)
+                            selectCombinedRowToRemove(combinedPackage.Name);
+
                     }
                 }
             }
             else
             {
                 MessageBox.Show("No row selected!");
+            }
+        }
+
+        private void selectCombinedRowToRemove(string name)
+        {
+            foreach (DataGridViewRow row in showAllCombinedPacketsGrid.Rows)
+            {
+                if (row.Cells["nameCombined"].Value != null && row.Cells["nameCombined"].Value.ToString() == name)
+                {
+                    showAllCombinedPacketsGrid.Rows.Remove(row);
+                    break;
+                }
             }
         }
 
