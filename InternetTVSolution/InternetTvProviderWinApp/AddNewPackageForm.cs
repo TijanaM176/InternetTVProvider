@@ -35,12 +35,16 @@ namespace InternetTvProviderWinApp
 
             internetSpeedLabel.Visible = false;
             internetSpeedTextBox.Visible = false;
+            TVPackageLabel.Visible = false;
+            TVPackageComboBox.Visible = false;
+            InternetPackageLabel.Visible = false;
+            InternetPackageComboBox.Visible = false;
 
             HomePage pocetnaStrana = new HomePage(connection);
             facade = new QueryFacade(connection);
             this.mediator = mediator;
         }
-        
+
 
         private void indexChanged(object sender, EventArgs e)
         {
@@ -56,6 +60,12 @@ namespace InternetTvProviderWinApp
 
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
+
+              
+                TVPackageLabel.Visible = false;
+                TVPackageComboBox.Visible = false;
+                InternetPackageLabel.Visible = false;
+                InternetPackageComboBox.Visible = false;
             }
             else if (selectedIndex == 1)
             {
@@ -67,19 +77,63 @@ namespace InternetTvProviderWinApp
 
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
+
+            
+                TVPackageLabel.Visible = false;
+                TVPackageComboBox.Visible = false;
+                InternetPackageLabel.Visible = false;
+                InternetPackageComboBox.Visible = false;
             }
             else if (selectedIndex == 2)
             {
-                numberOfChannelsLabel.Visible = true;
-                numberOfChannelsNumericUpDown.Visible = true;
+                numberOfChannelsLabel.Visible = false;
+                numberOfChannelsNumericUpDown.Visible = false;
 
                 internetSpeedForInternetPackageLabel.Visible = false;
                 internetSpeedForInternetPackageTextBox.Visible = false;
 
-                internetSpeedLabel.Visible = true;
-                internetSpeedTextBox.Visible = true;
+                internetSpeedLabel.Visible = false;
+                internetSpeedTextBox.Visible = false;
+
+              
+                TVPackageLabel.Visible = true;
+                TVPackageComboBox.Visible = true;
+                InternetPackageLabel.Visible = true;
+                InternetPackageComboBox.Visible = true;
+
+            
+                FillComboBoxes();
             }
         }
+
+        private void FillComboBoxes()
+        {
+            TVPackageComboBox.Items.Clear();
+            InternetPackageComboBox.Items.Clear();
+
+            Dictionary<int, string> tvPackages = new Dictionary<int, string>();
+            List<Package> allTvPackages = facade.getAllPackages(1);
+            foreach (Package package in allTvPackages)
+            {
+                tvPackages.Add(package.ID, package.Name);
+            }
+
+            Dictionary<int, string> internetPackages = new Dictionary<int, string>();
+            List<Package> allInternetPackages = facade.getAllPackages(2);
+            foreach (Package package in allInternetPackages)
+            {
+                internetPackages.Add(package.ID, package.Name);
+            }
+
+            TVPackageComboBox.DataSource = new BindingSource(tvPackages, null);
+            TVPackageComboBox.DisplayMember = "Value";
+            TVPackageComboBox.ValueMember = "Key";
+
+            InternetPackageComboBox.DataSource = new BindingSource(internetPackages, null);
+            InternetPackageComboBox.DisplayMember = "Value";
+            InternetPackageComboBox.ValueMember = "Key";
+        }
+
 
         private void addNewPackage(object sender, EventArgs e)
         {
@@ -103,19 +157,17 @@ namespace InternetTvProviderWinApp
             }
             else
             {
-                numberOfChannels = Convert.ToInt32(numberOfChannelsNumericUpDown.Value);
-                internetSpeed = internetSpeedTextBox.Text;
+                int tvPackageId = (int)TVPackageComboBox.SelectedValue;
+                int internetPackageId = (int)InternetPackageComboBox.SelectedValue;
 
-                int tvPackageID = facade.getTVPackageIdByNumOfChannels(numberOfChannels);
-                int internetPackageID = facade.getInternetPackageIdByInternetSpeed(internetSpeed);
-
-                CombinedPackage package = facade.addNewCombinedPackage(name, tvPackageID, internetPackageID, packageType);
+                CombinedPackage package = facade.addNewCombinedPackage(name, tvPackageId, internetPackageId, packageType);
+                package.Price = price;
                 mediator.NotifyNewPackage(this, package);
             }
 
-
             this.Close();
         }
+
 
         private void closeAddNewPackage(object sender, EventArgs e)
         {
@@ -132,5 +184,9 @@ namespace InternetTvProviderWinApp
 
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
