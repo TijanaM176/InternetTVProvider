@@ -61,7 +61,7 @@ namespace InternetTvProviderWinApp
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
 
-              
+
                 TVPackageLabel.Visible = false;
                 TVPackageComboBox.Visible = false;
                 InternetPackageLabel.Visible = false;
@@ -78,7 +78,7 @@ namespace InternetTvProviderWinApp
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
 
-            
+
                 TVPackageLabel.Visible = false;
                 TVPackageComboBox.Visible = false;
                 InternetPackageLabel.Visible = false;
@@ -95,13 +95,13 @@ namespace InternetTvProviderWinApp
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
 
-              
+
                 TVPackageLabel.Visible = true;
                 TVPackageComboBox.Visible = true;
                 InternetPackageLabel.Visible = true;
                 InternetPackageComboBox.Visible = true;
 
-            
+
                 FillComboBoxes();
             }
         }
