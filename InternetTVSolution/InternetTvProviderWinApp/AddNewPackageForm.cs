@@ -31,7 +31,7 @@ namespace InternetTvProviderWinApp
             packageTypeComboBox.SelectedIndexChanged += indexChanged;
 
             internetSpeedForInternetPackageLabel.Visible = false;
-            internetSpeedForInternetPackageTextBox.Visible = false;
+            internetSpeedNumericUpDown.Visible = false;
 
             internetSpeedLabel.Visible = false;
             internetSpeedTextBox.Visible = false;
@@ -56,7 +56,7 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsNumericUpDown.Visible = true;
 
                 internetSpeedForInternetPackageLabel.Visible = false;
-                internetSpeedForInternetPackageTextBox.Visible = false;
+                internetSpeedNumericUpDown.Visible = false;
 
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
@@ -73,7 +73,7 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsNumericUpDown.Visible = false;
 
                 internetSpeedForInternetPackageLabel.Visible = true;
-                internetSpeedForInternetPackageTextBox.Visible = true;
+                internetSpeedNumericUpDown.Visible = true;
 
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
@@ -90,7 +90,7 @@ namespace InternetTvProviderWinApp
                 numberOfChannelsNumericUpDown.Visible = false;
 
                 internetSpeedForInternetPackageLabel.Visible = false;
-                internetSpeedForInternetPackageTextBox.Visible = false;
+                internetSpeedNumericUpDown.Visible = false;
 
                 internetSpeedLabel.Visible = false;
                 internetSpeedTextBox.Visible = false;
@@ -151,7 +151,7 @@ namespace InternetTvProviderWinApp
             }
             else if (packageType == 2)
             {
-                internetSpeed = internetSpeedForInternetPackageTextBox.Text;
+                internetSpeed = internetSpeedNumericUpDown.Value + " Mbps";
                 InternetPackage package = facade.addNewInternetPackage(name, price, internetSpeed, packageType);
                 mediator.NotifyNewPackage(this, package);
             }
